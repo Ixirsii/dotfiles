@@ -1,0 +1,22 @@
+# Main configuration based on http://www.physics.drexel.edu/liki/index.php/Mutt
+
+set folder = ~/.mail
+source ~/.mutt/mailboxes
+set spoolfile = +"personal/Inbox"
+
+source ~/.mutt/common
+source ~/.mutt/colors
+source ~/.mutt/pgp
+set query_command="lbdbq '%s'"
+
+# If we are in any directory starting with the following, pull specific
+# settings from somewhere else
+folder-hook +personal/.* "source ~/.mutt/personal"
+folder-hook +school/.* "source ~/.mutt/school"
+folder-hook +gmail/.* "source ~/.mutt/gmail"
+
+# Mutt will mark emails from these addresses as having been sent by you
+alternates Ryan@RyanPorterfield.com RyanPorterfield@my.unt.edu RedRaider92@gmail.cofm
+
+# Macros
+#source ~/.mutt/macros

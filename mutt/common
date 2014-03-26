@@ -1,0 +1,24 @@
+#------------------------------------------------------#
+# ~/.mutt/common
+
+set check_new               = yes
+set beep_new                = yes
+set realname                = "Ryan Porterfield"
+set mail_check              = 900       # Check for new mail every 15 minutes
+
+set timeout                 = 30
+set use_from                = yes       # Required for msmtp
+
+# Defaults for how to open attachments
+set mailcap_path            = ~/.mutt/mailcap
+auto_view text/html
+
+set sort                    = 'threads'
+set sort_aux                = 'last-date-received'
+set imap_check_subscribed   = yes
+
+set header_cache            = ~/.mutt/cache/headers
+set message_cachedir        = ~/.mutt/cache/bodies
+set certificate_file        = ~/.mutt/certificates
+
+set move                    = no    # Don't move mail from the spool
