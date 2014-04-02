@@ -14,7 +14,7 @@ set mailcap_path            = ~/.mutt/mailcap
 auto_view text/html
 
 set sort                    = 'threads'
-set sort_aux                = 'last-date-received'
+set sort_aux                = 'reverse-last-date-received'
 set imap_check_subscribed   = yes
 
 set header_cache            = ~/.mutt/cache/headers
