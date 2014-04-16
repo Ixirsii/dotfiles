@@ -1,0 +1,31 @@
+short_units yes
+background yes
+out_to_console yes
+out_to_x no
+
+update_interval 1
+update_interval_on_battery 60
+
+#^fg(\#1692d0) ^i(/home/ryan/.xmonad/dzen2/arch_10x10.xbm) ^fg(\#828a8c)${exec uname -r} ^ca() \
+TEXT
+^ca(1,/home/ryan/.xmonad/scripts/dzen_vol.sh)  ^fg(\#1692d0) ^i(/home/ryan/.xmonad/dzen2/spkr_01.xbm) ^fg(\#828a8c)${exec amixer get Master| egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"}%^ca()\
+^ca(1,/home/ryan/.xmonad/scripts/dzen_battery.sh)   ^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_battery.sh}^fg(\#828a8c)^ca()\
+^ca(1,/home/ryan/.xmonad/scripts/dzen_hardware.sh)  ^fg(\#1692d0) ^i(/home/ryan/.xmonad/dzen2/cpu.xbm) ^fg(\#828a8c)${cpu cpu0}^ca()\
+^ca(1,/home/ryan/.xmonad/scripts/dzen_hardware.sh) ^fg(\#1692d0) ^i(/home/ryan/.xmonad/dzen2/mem.xbm) ^fg(\#828a8c)${mem}^ca()\
+^ca(1,/home/ryan/.xmonad/scripts/dzen_date.sh) ^fg(\#1692d0) ^i(/home/ryan/.xmonad/dzen2/clock.xbm) ^fg(\#cdcdcd)${time %a, %b %d %Y %H:%M:%S} ^ca()\
+^ca(1,/home/ryan/.xmonad/scripts/dzen_log.sh) ^fg(\#1692d0)^i(/home/ryan/.xmonad/dzen2/info_03.xbm)^fg(\#828a8c)  ^ca()
+
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_hardware.sh)  ^fg(\#1692d0)^i(/home/ryan/.xmonad/dzen2/pacman.xbm) ^fg(\#828a8c)${exec pacman -Qu | wc -l}^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_music.sh)$if_mpd_playing^fg(\#1692d0)^i(/home/ryan/.xmonad/dzen2/note.xbm) ^fg(\#828a8c)${mpd_artist}   ^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_vol.sh)   ^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_vol.sh}^fg(\#828a8c)   ^ca()\
+#TEXT
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_network.sh)   ^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_wifi.sh} ^fg(\#828a8c)${wireless_essid wlp2s0}^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_hardware.sh) ^fg(\#1692d0) ^i(/home/ryan/.xmonad/dzen2/net_up_01.xbm) ^fg(\#828a8c)$uptime\
+#^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_vpn.sh} ^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_network.sh)   ^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_wifi.sh} ^fg(\#828a8c)${wireless_essid wlan0}   ^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_battery.sh)  ^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_battery2.sh} ^fg(\#828a8c)${battery_percent}%^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_vol.sh)   ^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_vol.sh}^fg(\#828a8c)   ^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_hardware.sh)   ^fg(\#1692d0)${execi 2 /home/ryan/.xmonad/scripts/bar_ram.sh}^fg(\#828a8c)   ^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_date.sh)   ^fg(\#1692d0)^i(/home/ryan/.xmonad/dzen2/clock.xbm) ^fg(\#828a8c)${time %I:%M %P}   ^ca()\
+#^ca(1,/home/ryan/.xmonad/scripts/dzen_log.sh)^fg(\#1692d0)^i(/home/ryan/.xmonad/dzen2/info_03.xbm)^fg(\#828a8c)^ca()
+

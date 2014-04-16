@@ -66,7 +66,7 @@ maxsyncaccounts = 3
 #
 # You can override this with a command-line option -u.
 
-ui = Noninteractive.Basic
+ui = quiet
 
 # If you try to synchronize messages to a read-only folder,
 # OfflineIMAP will generate a warning. If you want to suppress these
@@ -85,7 +85,7 @@ ignore-readonly = no
 # source file and call them from this config file. You can find
 # an example of this in the manual.
 #
-pythonfile = ~/.offlineimap/offlineimap.py
+pythonfile = ~/.offlineimap.py
 #
 
 # By default, OfflineIMAP will not exit due to a network error until
