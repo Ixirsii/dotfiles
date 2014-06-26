@@ -16,11 +16,6 @@
 
 " }}}
 
-" Reload vimrc {{{ ============================================================
-map <silent><leader>sv :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
-" }}}
-"
 " NEOBUNDLE {{{ ===============================================================
 
 set nocompatible             " No to the total compatibility with the ancient vi
@@ -156,7 +151,7 @@ NeoBundleLazy 'vim-scripts/hexman.vim', { 'autoload' :
 " Autocompletion
 NeoBundle 'Shougo/neocomplete.vim'
 " A Python plugin
-NeoBundleLazy 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
+"NeoBundleLazy 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
 " Admin virtualenvs
 NeoBundleLazy 'jmcantrell/vim-virtualenv', {'autoload': {'filetypes': ['python']}}
 " Show indent lines
@@ -282,6 +277,9 @@ NeoBundle 'mattn/webapi-vim'
 
 " }}}
 
+" Hex Highlighter "{{{
+NeoBundle 'vim-scripts/hexHighlight.vim'
+" }}}
 " END BUNDLES }}}
 
 " Auto install the plugins {{{
@@ -310,6 +308,12 @@ filetype plugin indent on      " Indent and plugins by filetype
 let mapleader=','
 let maplocalleader= ' '
 
+" }}}
+
+" Edit/reload vimrc {{{ ============================================================
+map <silent><leader>ev :edit ~/.vimrc<CR>
+
+map <silent><leader>sv :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " }}}
 
 " Basic options {{{
@@ -460,18 +464,18 @@ inoremap <right> <nop>
 
 syntax enable                  " enable the syntax highlight
 if has('gui_running')
-    colorscheme solarized
+    colorscheme saolight
 else
     colorscheme molokai256
 endif
 set t_Co=256                   " 256 colors for the terminal
-set background=dark            " set a dark background
+set background=light           " set a light background
 
 " }}}
 
 " Font {{{
 
-set guifont=Dejavu\ Sans\ Mono\ 8
+set guifont=Ubuntu\ Mono\ 9
 
 " }}}
 
@@ -737,6 +741,16 @@ nnoremap Y y$
 
 " }}}
 
+" Show Highlighting Groups for Selected Word "{{{
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+" }}}
+
 " END VIM SETUP }}}
 
 " PLUGINS Setup {{{ ===========================================================
@@ -913,11 +927,15 @@ let g:pymode_rope_always_show_complete_menu = 1
 
 let g:syntastic_python_pylint_exe = "pylint2"
 
+" Error and Warning symbols
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol  = '⚡'
 let g:syntastic_style_warning_symbol  = '⚡'
 
+" C++ settings
+let g:syntastic_cpp_check_header=1
+let g:syntastic_cpp_compiler_options="-std=c++11 -Wall -Werror -Wextra -Wpedantic"
 " }}}
 
 " Unite {{{

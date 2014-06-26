@@ -1,0 +1,33 @@
+#!/bin/bash
+
+card=""
+
+if [[ $1 == "up" ]]; then
+    card="-c 0"
+    cmd="3+"
+elif [[ $1 == "down" ]]; then
+    card="-c 0"
+    cmd="3-"
+elif [[ $1 == "mute" ]]; then
+    cmd="off"
+elif [[ $1 == "unmute" ]]; then
+    cmd="on"
+elif [[ $1 == "toggle" ]]; then
+    cmd="toggle"
+else
+    echo -e "Usage: $0 <command>\n"
+    echo -e "Commands:"
+    echo -e "\tup\t- Increase volume by 3%"
+    echo -e "\tdown\t- Decrease volume by 3%"
+    echo -e "\tmute\t- Mute the volume"
+    echo -e "\tunmute\t- Un-mute the volume"
+    echo -e "\ttoggle\t- Mute the volume if unmuted, or un-mute if muted.\n"
+    exit 1
+fi
+
+# Increase Volume
+amixer -q $card set Master $cmd
+
+# Get volume
+vol=`amixer -c 0 get Master | egrep -o "[0-9]+%"`
+notify-send -c Sound "Volume is $vol"

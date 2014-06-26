@@ -1,4 +1,4 @@
-! urxvt ----------------------------------------------------------------------
+! URxvt ----------------------------------------------------------------------
 
 ! color themes
 !#include "/home/ryan/.colors/ancient"
@@ -18,36 +18,29 @@
 !#include "/home/ryan/.colors/gohucolor"
 !#include "/home/ryan/.colors/nebula"
 !#include "/home/ryan/.colors/ok100"
+#include "/home/ryan/.colors/saolight"
 !#include "/home/ryan/.colors/solarized"
 !#include "/home/ryan/.colors/space"
 !#include "/home/ryan/.colors/thaw"
 !#include "/home/ryan/.colors/vintage"
 !#include "/home/ryan/.colors/vintage2"
+!#include "/home/ryan/.colors/vivid"
 !#include "/home/ryan/.colors/wei011@linuxremote1.eg.bucknell.edu"
 !#include "/home/ryan/.colors/xmas"
 
-URxvt*font:                 xft:Ubuntu Mono:pixelsize=12
-URxvt*boldFont:             xft:Ubuntu Mono:pixelsize=12:style=bold
-URxvt*italicFont:           xft:Ubuntu Mono:pixelsize=12:style=italic
-URxvt*bolditalicFont:       xft:Ubuntu Mono:pixelsize=12:style=bolditalic
+URxvt*font:                 xft:Ubuntu Mono:pixelsize=11
+URxvt*boldFont:             xft:Ubuntu Mono:pixelsize=11:style=bold
+URxvt*italicFont:           xft:Ubuntu Mono:pixelsize=11:style=italic
+URxvt*bolditalicFont:       xft:Ubuntu Mono:pixelsize=11:style=bolditalic
 
-URxvt.termName:             rxvt-unicode-256color
-!URxvt.geometry:            80x54
-!URxvt*transparent:          true
+URxvt*termName:             rxvt-unicode-256color
+URxvt*geometry:             80x24
 
-URxvt*depth:                32
-URxvt*foreground:           #AAAAAA
-URxvt*background:           rgba:1111/1111/1111/dddd
-URxvt*inheritPixmap:        true
 URxvt*cursorBlink:          true
 URxvt*scrollBar:            false
-URxvt*tintColor:            gray30
-URxvt*fading: 			    20	
-URxvt*fadeColor: 		    #000000
-!urxvt*shading:			    20
 URxvt.internalBorder:       0
 URxvt.jumpScroll:           true
-! URxvt.loginShell:         true
+!URxvt.loginShell:           true
 URxvt.pointerBlank:         true
 URxvt.saveLines:            4000
 URxvt.secondaryScroll:      true
@@ -61,8 +54,6 @@ URxvt.perl-ext-common:	default,matcher
 URxvt.matcher.button:	1
 URxvt.urlLauncher:	/usr/bin/firefox
 
-! Overwrite all default settings with theme-specific settings
-#include "/home/ryan/.colors/vivid"
 
 ! Xft settings ---------------------------------------------------------------
 
@@ -91,14 +82,18 @@ xterm*toolBar:            false
 
 ! xscreensaver ---------------------------------------------------------------
 
+!lock settings
+xscreensaver.timeout:               0:15:00
+xscreensaver.lockTimeout:           0:00:30
+
 !font settings
-xscreensaver.Dialog.headingFont:  -*-tamsyn-medium-*-normal-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.bodyFont:     -*-tamsyn-medium-*-normal-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.labelFont:    -*-tamsyn-medium-*-normal-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.unameFont:    -*-tamsyn-medium-*-normal-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.buttonFont:   -*-tamsyn-medium-*-bold-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.dateFont:     -*-tamsyn-medium-*-normal-*-12-*-*-*-*-*-*-*
-xscreensaver.passwd.passwdFont:   -*-tamsyn-medium-*-bold-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.headingFont:  xft:Ubuntu Mono:pixelsize=11
+xscreensaver.Dialog.bodyFont:     xft:Ubuntu Mono:pixelsize=11
+xscreensaver.Dialog.labelFont:    xft:Ubuntu Mono:pixelsize=11
+xscreensaver.Dialog.unameFont:    xft:Ubuntu Mono:pixelsize=11
+xscreensaver.Dialog.buttonFont:   xft:Ubuntu Mono:pixelsize=11
+xscreensaver.Dialog.dateFont:     xft:Ubuntu Mono:pixelsize=11
+xscreensaver.passwd.passwdFont:   xft:Ubuntu Mono:pixelsize=11
 
 !general dialog box (affects main hostname, username, password text)
 xscreensaver.Dialog.foreground:         #ffffff

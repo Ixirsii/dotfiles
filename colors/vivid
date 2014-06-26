@@ -1,33 +1,32 @@
 ! Stuff
-urxvt*background:             #121212
-urxvt*foreground:             #bcbcbc
-urxvt*tintColor:			  #424647
+URxvt*background:               rgba:1111/1111/1111/dddd
+URxvt*foreground:               #888888
 
 ! Black
-urxvt*color0:                 #080808
-urxvt*color8:                 #4e4e4e
+URxvt*color0:                   #080808
+URxvt*color8:                   #4e4e4e
 ! Red
-urxvt*color1:                 #870000
-urxvt*color9:                 #af005f
+URxvt*color1:                   #870000
+URxvt*color9:                   #af005f
 ! Green
-urxvt*color2:                 #00af00
-urxvt*color10:                #00d75f
+URxvt*color2:                   #00af00
+URxvt*color10:                  #00d75f
 ! Yellow
-urxvt*color3:                 #d7f500
-urxvt*color11:                #ffd700
+URxvt*color3:                   #d7f500
+URxvt*color11:                  #ffd700
 !blue
-urxvt*color4:                 #005fd7
-urxvt*color12:                #0087ff
+URxvt*color4:                   #005fd7
+URxvt*color12:                  #0087ff
 ! Magenta
-urxvt*color5:                 #8700ff
-urxvt*color13:                #ff5fff
+URxvt*color5:                   #8700ff
+URxvt*color13:                  #ff5fff
 ! Cyan
-urxvt*color6:                 #00d7ff
-urxvt*color14:                #5fffff
+URxvt*color6:                   #00d7ff
+URxvt*color14:                  #5fffff
 ! White
-urxvt*color7:                 #808080
-urxvt*color15:                #dadada
+URxvt*color7:                   #808080
+URxvt*color15:                  #dadada
 ! Cursor
-urxvt*cursorColor:            #b5d2dd
+URxvt*cursorColor:              #b5d2dd
 
-! vim: filetype=XDEFAULTS :
+! vim: filetype=xdefaults:

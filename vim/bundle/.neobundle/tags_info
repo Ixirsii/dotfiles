@@ -9,6 +9,7 @@ emmet-vim
 gitv
 gundo.vim
 harlequin
+hexHighlight.vim
 hexman.vim
 html5.vim
 indentLine
@@ -19,7 +20,6 @@ molokai
 neobundle.vim
 neocomplete.vim
 po.vim--gray
-python-mode
 summerfruit256.vim
 syntastic
 ultisnips
