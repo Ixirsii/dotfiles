@@ -1,5 +1,5 @@
 "
-"                       __   _(_)_ __ ___  _ __ ___
+"                        __   _(_)_ __ ___  _ __ ___
 "                       \ \ / / | '_ ` _ \| '__/ __|
 "                        \ V /| | | | | | | | | (__
 "                       (_)_/ |_|_| |_| |_|_|  \___|
@@ -112,9 +112,15 @@ NeoBundleLazy 'godlygeek/csapprox', { 'autoload' :
 
 " Solarized
 NeoBundle 'altercation/vim-colors-solarized'
+" SAO Light
+NeoBundle 'https://bitbucket.org/ShadowHawk54/saolight-vim.git'
 
 " }}}
 
+" C/CPP "{{{
+NeoBundle 'octol/vim-cpp-enhanced-highlight'
+"}}}
+"
 " DCVS {{{
 "
 " Admin Git
@@ -127,6 +133,10 @@ NeoBundleLazy 'gregsexton/gitv', {'depends':['tpope/vim-fugitive'],
 
 " }}}
 
+" HiLinkTrace "{{{
+NeoBundleLazy 'gerw/vim-HiLinkTrace'
+" }}}
+"
 " Markdown {{{
 
 " Markdown Syntax
@@ -158,13 +168,6 @@ NeoBundleLazy 'jmcantrell/vim-virtualenv', {'autoload': {'filetypes': ['python']
 NeoBundleLazy 'Yggdroot/indentLine', {'autoload': {'filetypes': ['python']}}
 " Show reports from coverage.py
 NeoBundleLazy 'alfredodeza/coveragepy.vim', {'autoload': {'filetypes': ['python']}}
-
-" }}}
-
-" Code Snippets {{{
-
-" Powerful and advanced Snippets tool
-NeoBundle 'SirVer/ultisnips'
 
 " }}}
 
@@ -253,7 +256,7 @@ NeoBundleLazy 'mattn/emmet-vim', {'autoload':
 " Better Buffer handling
 NeoBundle 'fholgado/minibufexpl.vim'
 " A better looking status line
-NeoBundle 'joedicastro/vim-powerline'
+NeoBundle 'Lokaltog/powerline'
 " Zooms a window
 NeoBundleLazy 'vim-scripts/zoomwintab.vim', {'autoload' :
             \{'commands' : 'ZoomWinTabToggle'}}
@@ -268,12 +271,6 @@ NeoBundle 'jimsei/winresizer'
 NeoBundle 'benmills/vimux'
 " Tmux config file syntax
 NeoBundleLazy 'vimez/vim-tmux', { 'autoload' : { 'filetypes' : 'conf'}}
-
-" }}}
-
-" API Web {{{
-
-NeoBundle 'mattn/webapi-vim'
 
 " }}}
 
@@ -311,9 +308,9 @@ let maplocalleader= ' '
 " }}}
 
 " Edit/reload vimrc {{{ ============================================================
-map <silent><leader>ev :edit ~/.vimrc<CR>
+map <silent><leader>ev :edit ~/.vim/vimrc<CR>
 
-map <silent><leader>sv :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent><leader>sv :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " }}}
 
 " Basic options {{{
@@ -463,13 +460,15 @@ inoremap <right> <nop>
 " Colorscheme {{{
 
 syntax enable                  " enable the syntax highlight
+set t_Co=256                   " 256 colors for the terminal
+set background=light           " set a light background
+" Currently redundant, but allows us to set different colorschemes for terminal
+" and console
 if has('gui_running')
     colorscheme saolight
 else
-    colorscheme molokai256
+    colorscheme saolight
 endif
-set t_Co=256                   " 256 colors for the terminal
-set background=light           " set a light background
 
 " }}}
 
@@ -561,7 +560,7 @@ map <Leader>P :set invpaste<CR>
 " Autoload configuration when this file changes ($MYVIMRC) {{{
 
 " also reload the Powerline colorscheme to avoid artifacts
-autocmd! BufWritePost vimrc source % | call Pl#Load()
+autocmd! BufWritePost vimrc source %
 
 " }}}
 
@@ -897,14 +896,13 @@ let g:po_translator = "joe di castro <joe@joedicastro.com>"
 " }}}
 
 " Powerline {{{ --------------------------------------------------------------
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+"let g:Powerline_symbols = 'fancy'
+"let g:Powerline_cache_file = $HOME.'/.vim/tmp/Powerline.cache'
 
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_cache_file = $HOME.'/.vim/tmp/Powerline.cache'
-
-set noshowmode
-
-call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
-
+"set noshowmode
 " }}}
 
 " PythonMode {{{ -------------------------------------------------------------
@@ -935,7 +933,7 @@ let g:syntastic_style_warning_symbol  = '⚡'
 
 " C++ settings
 let g:syntastic_cpp_check_header=1
-let g:syntastic_cpp_compiler_options="-std=c++11 -Wall -Werror -Wextra -Wpedantic"
+let g:syntastic_cpp_compiler_options="-std=c++11 -Wall -Werror -Wextra -Wpedantic -Iinclude/"
 " }}}
 
 " Unite {{{

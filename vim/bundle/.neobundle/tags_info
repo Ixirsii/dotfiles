@@ -20,9 +20,10 @@ molokai
 neobundle.vim
 neocomplete.vim
 po.vim--gray
+powerline
+saolight-vim
 summerfruit256.vim
 syntastic
-ultisnips
 unite-colorscheme
 unite-filetype
 unite-fold
@@ -34,9 +35,11 @@ unite-quickfix
 unite-session
 unite.vim
 utl.vim
+vim-HiLinkTrace
 vim-characterize
 vim-colors-solarized
 vim-commentary
+vim-cpp-enhanced-highlight
 vim-fugitive
 vim-gitgutter
 vim-github256
@@ -46,7 +49,6 @@ vim-molokai256
 vim-multiple-cursors
 vim-pentadactyl
 vim-plugin-minibufexpl
-vim-powerline
 vim-repeat
 vim-signature
 vim-smartinput
@@ -66,6 +68,5 @@ vim-virtualenv
 vimfiler
 vimproc
 vimux
-webapi-vim
 winresizer
 zoomwintab.vim

@@ -52,7 +52,7 @@ URxvt.scrollWithBuffer:     true
 URxvt*perl-lib: /usr/lib/urxvt/perl
 URxvt.perl-ext-common:	default,matcher
 URxvt.matcher.button:	1
-URxvt.urlLauncher:	/usr/bin/firefox
+URxvt.urlLauncher:	/usr/bin/iceweasel
 
 
 ! Xft settings ---------------------------------------------------------------
@@ -83,8 +83,8 @@ xterm*toolBar:            false
 ! xscreensaver ---------------------------------------------------------------
 
 !lock settings
-xscreensaver.timeout:               0:15:00
-xscreensaver.lockTimeout:           0:00:30
+xscreensaver.timeout:               0:09:00
+xscreensaver.lockTimeout:           0:01:00
 
 !font settings
 xscreensaver.Dialog.headingFont:  xft:Ubuntu Mono:pixelsize=11
