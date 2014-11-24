@@ -475,6 +475,8 @@ endif
 " Font {{{
 
 set guifont=Ubuntu\ Mono\ 9
+"set guifont=Monaco\ 7
+"set guifont=Monofur\ 9
 
 " }}}
 
@@ -511,18 +513,10 @@ nnoremap <silent><Leader>K :bd<CR>
 
 nnoremap <silent><Leader>l :call ToggleRelativeAbsoluteNumber()<CR>
 function! ToggleRelativeAbsoluteNumber()
-  if !&number && !&relativenumber
-      set number
+  if &relativenumber
       set norelativenumber
-  elseif &number && !&relativenumber
-      set nonumber
+  else 
       set relativenumber
-  elseif !&number && &relativenumber
-      set number
-      set relativenumber
-  elseif &number && &relativenumber
-      set nonumber
-      set norelativenumber
   endif
 endfunction
 
@@ -933,7 +927,7 @@ let g:syntastic_style_warning_symbol  = '⚡'
 
 " C++ settings
 let g:syntastic_cpp_check_header=1
-let g:syntastic_cpp_compiler_options="-std=c++11 -Wall -Werror -Wextra -Wpedantic -Iinclude/"
+let g:syntastic_cpp_compiler_options="-std=c++11 -Wall -Werror -Wextra -pedantic -Iinclude/"
 " }}}
 
 " Unite {{{
