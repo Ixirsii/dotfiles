@@ -12,7 +12,7 @@
 
 " Setup language {{{ ==========================================================
 
-" language en_US.UTF-8           " Solve some plugins incompatibilities
+language en_US.UTF-8           " Solve some plugins incompatibilities
 
 " }}}
 
@@ -446,38 +446,37 @@ nmap <silent><Leader>ew :call ToggleWrap()<CR>
 
 " Ok, a vim for men, get off the cursor keys {{{
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
 
 " }}}
 
 " Colorscheme {{{
 
-syntax enable                  " enable the syntax highlight
-set t_Co=256                   " 256 colors for the terminal
-set background=light           " set a light background
+syntax enable                   " enable the syntax highlight
+set t_Co=256                    " 256 colors for the terminal
 " Currently redundant, but allows us to set different colorschemes for terminal
 " and console
 if has('gui_running')
-    colorscheme saolight
+    set background=light        " set a light background
+    colorscheme solarized
 else
-    colorscheme saolight
+    set background=dark         " set a dark background
+    colorscheme molokai256
 endif
 
 " }}}
 
 " Font {{{
-
-set guifont=Ubuntu\ Mono\ 9
-"set guifont=Monaco\ 7
-"set guifont=Monofur\ 9
-
+if has("gui_gtk2")
+    set guifont=Droid\ Sans\ Mono\ 8,Oxygen\ Mono\ 8,Ubuntu\ Mono\ 9
+endif
 " }}}
 
 " Resize the divisions if the Vim window size changes {{{
@@ -543,8 +542,8 @@ vnoremap \ za
 " Cut/Paste {{{
 
 " to/from the clipboard
-map <Leader>y "*y
-map <Leader>p "*p
+map <Leader>y "*y<CR>
+map <Leader>p "*p<CR>
 
 " toggle paste mode
 map <Leader>P :set invpaste<CR>
@@ -927,7 +926,7 @@ let g:syntastic_style_warning_symbol  = '⚡'
 
 " C++ settings
 let g:syntastic_cpp_check_header=1
-let g:syntastic_cpp_compiler_options="-std=c++11 -Wall -Werror -Wextra -pedantic -Iinclude/"
+let g:syntastic_cpp_compiler_options="-std=c++14 -Wall -Werror -Wextra -pedantic -Iinclude/"
 " }}}
 
 " Unite {{{

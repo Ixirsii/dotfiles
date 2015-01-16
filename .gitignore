@@ -1,2 +1,7 @@
-# Vim tmp directory
+## ViM
+# Plugins bundle
+vim/bundle
+# ViM tmp directory
 vim/tmp
+# ???
+vim.netrwhist
