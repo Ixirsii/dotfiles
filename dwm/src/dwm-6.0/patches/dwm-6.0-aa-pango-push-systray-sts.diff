@@ -1,0 +1,46 @@
+--- dwm.c.orig	2014-07-22 16:49:13.515660555 -0500
++++ dwm.c	2014-07-22 17:11:34.672153659 -0500
+@@ -200,6 +200,7 @@
+ static void arrange(Monitor *m);
+ static void arrangemon(Monitor *m);
+ static void attach(Client *c);
++static void attachaside(Client *c);
+ static void attachclients(Monitor *m);
+ static void attachstack(Client *c);
+ static void buttonpress(XEvent *e);
+@@ -507,6 +508,18 @@
+ }
+ 
+ void
++attachaside(Client *c) {
++	if(c->mon->sel == NULL || c->mon->sel == c->mon->cl->clients || c->mon->sel->isfloating) {
++		attach(c);
++		return;
++	}
++    Client *at;
++    for(at = c->mon->cl->clients; at->next != c->mon->sel; at = at->next);
++	c->next = at->next;
++	at->next = c;
++}
++
++void
+ attachstack(Client *c) {
+ 	c->snext = c->mon->cl->stack;
+ 	c->mon->cl->stack = c;
+@@ -1319,7 +1332,7 @@
+ 		c->isfloating = c->oldstate = trans != None || c->isfixed;
+ 	if(c->isfloating)
+ 		XRaiseWindow(dpy, c->win);
+-	attach(c);
++	attachaside(c);
+ 	attachstack(c);
+ 	XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
+ 	setclientstate(c, NormalState);
+@@ -1751,6 +1764,7 @@
+ 	detachstack(c);
+ 	c->mon = m;
+ 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
++	attachaside(c);
+ 	attachstack(c);
+ 	focus(NULL);
+ 	arrange(NULL);

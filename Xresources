@@ -16,9 +16,10 @@
 !#include "/home/ryan/.colors/fallac"
 !#include "/home/ryan/.colors/form"
 !#include "/home/ryan/.colors/gohucolor"
+!#include "/home/ryan/.colors/klk-vivid"
 !#include "/home/ryan/.colors/nebula"
 !#include "/home/ryan/.colors/ok100"
-#include "/home/ryan/.colors/saolight"
+!#include "/home/ryan/.colors/saolight"
 !#include "/home/ryan/.colors/solarized"
 !#include "/home/ryan/.colors/space"
 !#include "/home/ryan/.colors/thaw"
@@ -27,6 +28,7 @@
 !#include "/home/ryan/.colors/vivid"
 !#include "/home/ryan/.colors/wei011@linuxremote1.eg.bucknell.edu"
 !#include "/home/ryan/.colors/xmas"
+!#include "/home/ryan/.colors/YokoLight"
 
 URxvt*font:                 xft:Ubuntu Mono:pixelsize=11
 URxvt*boldFont:             xft:Ubuntu Mono:pixelsize=11:style=bold
@@ -47,6 +49,41 @@ URxvt.secondaryScroll:      true
 URxvt.scrollBar:            false
 URxvt.scrollTtyKeypress:    true
 URxvt.scrollWithBuffer:     true
+
+!! Copied in from colors file because gdm doesnt #include files by default
+! Background
+URxvt*depth:            32
+URxvt*background:       rgba:ff00/ff00/ff00/dd00
+URxvt*foreground:       #64626d
+URxvt*fading:           0
+
+! Black
+URxvt*color0:           #373f4c
+URxvt*color8:           #64626d
+! Red
+URxvt*color1:           #aa3e64
+URxvt*color9:           #f9afd2
+! Green
+URxvt*color2:           #39acaa
+URxvt*color10:          #96c7be
+! Yellow
+URxvt*color3:           #9a8e70
+URxvt*color11:          #f2ecba
+!blue
+URxvt*color4:           #29529c
+URxvt*color12:          #86b7df
+! Magenta
+URxvt*color5:           #714161
+URxvt*color13:          #af9098
+! Cyan
+URxvt*color6:           #83cbbf
+URxvt*color14:          #a7e8df
+! White
+URxvt*color7:           #c0c4c5
+URxvt*color15:          #ffffff
+! Cursor
+URxvt*cursorColor:      #64626d
+
 
 ! clickable links
 URxvt*perl-lib: /usr/lib/urxvt/perl

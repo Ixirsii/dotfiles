@@ -20,7 +20,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id "compton -b"
 
 # Set wallpaper
-exec --no-startup-id "feh --bg-scale ~/Pictures/Wallpapers/Siren.jpg"
+exec --no-startup-id "feh --bg-scale ~/Pictures/Pictures/Vocaloid/Miku_Hatsune_01.png"
 
 # Start dropbox
 exec --no-startup-id "dropbox start"
@@ -40,7 +40,7 @@ set $mod Mod1
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
-font pango:Ubuntu Mono 10
+font pango:Droid Sans Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -82,16 +82,16 @@ assign [class="Uzbl-tabbed"] 2
 # ########################################################################### #
 
 # start a terminal
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec st
 
 # launch htop
-bindsym $mod+c exec urxvtc -e htop
+bindsym $mod+c exec st -e htop
 
 # launch vim from a terminal
-bindsym $mod+v exec urxvtc -e vim
+bindsym $mod+v exec st -e vim
 
 # launch firefox
-bindsym $mod+w exec uzbl-tabbed
+bindsym $mod+w exec chromium
 
 # kill focused window
 bindsym $mod+Shift+q kill
