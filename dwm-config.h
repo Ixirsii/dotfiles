@@ -4,15 +4,15 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const char font[]            = "Monaco 8";
-static const char normbordercolor[] = "#404040";
-static const char normbgcolor[]     = "#404040";
-static const char normfgcolor[]     = "#f6f6f6";
-static const char selbordercolor[]  = "#98a7ba";
-static const char selbgcolor[]      = "#404040";
-static const char selfgcolor[]      = "#a7d1cf";
-static const char floatnormbordercolor[] = "#9edb8f";
-static const char floatselbordercolor[]  = "#4f7b60";
+static const char font[]            = "Droid Sans Mono 10";
+static const char normbordercolor[] = "#373f4c";
+static const char normbgcolor[]     = "#373f4c";
+static const char normfgcolor[]     = "#64626d";
+static const char selbordercolor[]  = "#373f4c";
+static const char selbgcolor[]      = "#373f4c";
+static const char selfgcolor[]      = "#86b7df";
+static const char floatnormbordercolor[] = "#ffffff";
+static const char floatselbordercolor[]  = "#373f4c";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gap pixel between windows */
 static const unsigned int snap      = 5;        /* snap pixel */
@@ -23,19 +23,19 @@ static const Bool topbar            = True;     /* False means bottom bar */
 static const Bool statusmarkup      = True;     /* True means use pango markup in status message */
 
 /* tagging */
-static const char *tags[] = { "Dev", "Web", "Media", "Misc" };
+static const char *tags[] = { "Dev", "Web", "Social", "Media" };
 
 static const Rule rules[] = {
 	/* class        instance    title       tags mask     isfloating   monitor */
-	{ "Chromium",   NULL,       NULL,       1 << 1,       False,       -1 },
-	{ "Gimp",       NULL,       NULL,       0,            True,        -1 },
+	{ "Chromium",   NULL,       NULL,       1 << 1,       True,        -1 },
+	{ "Gimp",       NULL,       NULL,       1 << 3,       True,        -1 },
 	{ "Firefox",    NULL,       NULL,       1 << 1,       True,        -1 },
 	{ "net-minecraft-bootstrap-Bootstrap", 
-                    NULL,       NULL,       1 << 2,       True,        -1 },
+                    NULL,       NULL,       1 << 3,       True,        -1 },
 	{ "Pwsafe",     NULL,       NULL,       0,            True,        -1 },
 	{ "Transmission-gtk",  
                     NULL,       NULL,       1 << 1,       True,        -1 },
-	{ "Vlc",        NULL,       NULL,       1 << 2,       True,        -1 },
+	{ "Vlc",        NULL,       NULL,       1 << 3,       True,        -1 },
 };
 
 /* layout(s) */
@@ -63,9 +63,9 @@ static const Layout layouts[] = {
 
 /* commands */
 
-#define TERMCMD "urxvtc"
+#define TERMCMD "st"
 
-static const char *archeycmd[] = { TERMCMD, "--hold", "-e", "archey3", NULL };
+static const char *archeycmd[] = { TERMCMD, "-e", "/bin/bash", "-c", "archey3; read -s -n 1", NULL };
 static const char *chromiumcmd[] = { "chromium", NULL };
 static const char *brightup[] = { "xbacklight", "-inc", "20", NULL };
 static const char *brightdown[] = { "xbacklight", "-dec", "20", NULL };

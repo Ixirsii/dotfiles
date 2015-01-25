@@ -13,17 +13,17 @@ xset dpms 0 0 600
 # Start DWM status bar
 $HOME/.dwm/dwmstatus.py
 
-# Start Network Manager
-nm-applet &
-
 # Start Screensaver
-cinnamon-screensaver &
+xscreensaver -no-splash &
 
 # Start Compositing Manager
 compton -b
 
 # Set Wallpaper
-feh --bg-scale /home/ryan/Pictures/Pictures/Vocaloid/Miku_Hatsune_01.png
+feh --bg-fill $HOME/Pictures/Wallpaper/Miku_Hatsune_01.png
+
+# Start Network Manager
+nm-applet &
 
 # Start Dropbox
 dropboxd &

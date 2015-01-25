@@ -23,6 +23,7 @@ compinit
 alias arm='sudo -u tor arm'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
+alias fuck='sudo $(history -p \!\!)'
 alias egrep='egrep --color=auto'
 alias ls='ls --color=auto'
 

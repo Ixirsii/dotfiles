@@ -11,24 +11,22 @@ from subprocess import call,check_output
 
 
 address = ('127.0.0.1', 17926)
-# Dark Colors
-color_black = '#404040'
-color_red = '#ffb191'
-color_green = '#9edb8f'
-color_yellow = '#da9667'
-color_blue = '#98a7ba'
-color_magenta = '#e2c2c5'
-color_cyan = '#a7d1cf'
-color_white = '#ababab'
-# Light Colors
-color_light_black = '#606060'
-color_light_red = '#992f3a'
-color_light_green = '#4f7b60'
-color_light_yellow = '#993c15'
-color_light_blue = '#383c57'
-color_light_magenta = '#ad7381'
-color_light_cyan = '#5f8282'
-color_light_white = '#f6f6f6'
+color_black = '#373f4c'
+color_light_black = '#64626d'
+color_red = '#aa3e64'
+color_light_red = '#f9afd2'
+color_green = '#39acaa'
+color_light_green = '#96c7be'
+color_yellow = '#9a8e70'
+color_light_yellow = '#f2ecba'
+color_blue = '#29529c'
+color_light_blue = '#86b7df'
+color_magenta = '#714161'
+color_light_magenta = '#af9098'
+color_cyan = '#83cbbf'
+color_light_cyan = '#a7e8df'
+color_white = '#c0c4c5'
+color_light_white = '#ffffff'
 
 
 class StatusBar(threading.Thread):
@@ -47,39 +45,36 @@ class StatusBar(threading.Thread):
     def _get_battery(self):
         acpi = check_output("acpi", universal_newlines=True)
         battery = acpi.split()[3].strip()[:-1]
-        status = acpi.split()[2].strip()[:-1]
+        status = acpi.split()[2].strip()[:-1].lower()
         if battery[-1] == '%':
             battery = battery[:-1]
         battery = int(battery)
-        bat_format = '[Bat: <span foreground="'
-        bat_format += self._get_battery_color(battery)
-        bat_format += '">' + self._get_battery_str(battery) + '%'
-        if status.lower() == 'charging':
+        bat_format = '[<span foreground="' + color_blue + '">Bat:</span>'
+        bat_format += ' <span foreground="'
+        bat_format += self._get_battery_color(battery, status)
+        bat_format += "\">%3d%%" % battery
+        if status == 'charging':
             bat_format += '+'
-        elif status.lower() == 'discharging':
+        elif status == 'discharging':
             bat_format += '-'
-        else:
+        elif status == 'full':
             bat_format += '='
+        else:
+            bat_format += '?'
         bat_format += '</span>]'
         return bat_format
 
-    def _get_battery_color(self, battery):
-        if battery > 50:
-            return color_green
+    def _get_battery_color(self, battery, status):
+        if status == 'full':
+            return color_light_green
+        elif battery > 50:
+            if not status == 'discharging':
+                return color_green
+            return color_light_yellow
         elif battery < 50 and battery > 20:
             return color_yellow
         else:
             return color_red
-
-    def _get_battery_str(self, battery):
-        if battery == 100:
-            return str(battery)
-        elif battery > 90:
-            return ' ' + str(battery)
-        elif battery > 10:
-            return ' ' + str(battery)
-        else:
-            return '  ' + str(battery)
 
     def _get_uptime(self):
         with open("/proc/uptime") as upfile:
@@ -92,8 +87,9 @@ class StatusBar(threading.Thread):
             fuptime = fuptime % 3600
             minute = int(fuptime / 60)
 
-            return "[Up: " + ("%02d" % day) + ":" + ("%02d" % hour) + ":" + \
-                    ("%02d" % minute) + "]"
+        return "[<span foreground=\"" + color_blue + "\">Up:</span> " + \
+                ("%02d" % day) + "d " + ("%02d" % hour) + "h " + \
+                ("%02dm" % minute) + "]"
 
     def run(self):
         battery = self._get_battery()
@@ -101,15 +97,18 @@ class StatusBar(threading.Thread):
         while (self._server.is_running()):
             self._counter += 1
             c = call(['xsetroot', '-name', self._get_status(battery, uptime)],
+            #c = call(['echo', self._get_status(battery, uptime)],
                     shell=False)
+
             if c != 0:
                 self._server.stop()
             if self._counter >= 30:
                 battery = self._get_battery()
                 uptime = self._get_uptime()
                 self._counter = 0
-            # end while
             time.sleep(1)
+            # end while
+
 
 class Server():
     def __init__(self):
