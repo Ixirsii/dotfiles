@@ -8,7 +8,7 @@ max_peers = 100
  
 # Same as above but for seeding completed torrents (-1 = same as downloading)
 min_peers_seed = 1
-max_peers_seed = 50
+max_peers_seed = -1
  
 # Maximum number of uploads single torrent may use
 max_uploads = 10
@@ -23,7 +23,7 @@ download_rate = 32955
 upload_rate = 3340
  
 # Default directory to save the downloaded torrents.
-directory = /shared/Torrents
+directory = /home/ryan/Torrents
  
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
@@ -32,7 +32,7 @@ session = /home/ryan/.session
  
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
-schedule = watch_directory,5,5,load_start=/shared/Torrents/*.torrent
+schedule = watch_directory,5,5,load_start=/home/ryan/Torrents/torrent/*.torrent
 schedule = tied_directory,6,5,start_tied=
 schedule = untied_directory,7,5,stop_untied=
  
