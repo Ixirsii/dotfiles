@@ -65,7 +65,7 @@ static const Layout layouts[] = {
 
 #define TERMCMD "st"
 
-static const char *archeycmd[] = { TERMCMD, "-e", "/bin/bash", "-c", "archey3; read -s -n 1", NULL };
+static const char *archeycmd[] = { TERMCMD, "-t", "screenfetch", "-e", "/bin/bash", "-c", "screenfetch; read -s -n 1", NULL };
 static const char *chromiumcmd[] = { "chromium", NULL };
 static const char *brightup[] = { "xbacklight", "-inc", "20", NULL };
 static const char *brightdown[] = { "xbacklight", "-dec", "20", NULL };
