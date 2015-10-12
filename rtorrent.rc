@@ -22,19 +22,33 @@ max_uploads_global = 20
 download_rate = 32955
 upload_rate = 3340
  
+log.open_file = "rtorrent_log","~/.rtorrent/rtorrent.log"
+log.add_output = "notice","rtorrent_log" 
+
 # Default directory to save the downloaded torrents.
-directory = /home/ryan/Torrents
+directory = ~/Torrents
  
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
-session = /home/ryan/.session
+session = ~/.rtorrent/session
  
-# Watch a directory for new torrents, and stop those that have been
-# deleted.
-schedule = watch_directory,5,5,load_start=/home/ryan/Torrents/torrent/*.torrent
-schedule = tied_directory,6,5,start_tied=
-schedule = untied_directory,7,5,stop_untied=
+## Get torrent directory
+# execute full command in bash
+system.method.insert = get_rel_path,simple,"execute_capture=relpath,$d.get_loaded_file="
+# Get full path
+system.method.insert = get_path,simple,"cat=~/,$get_rel_path="
+#system.method.insert = get_path,simple,"print=$get_path_="
+
+# Watch a directory for new torrents, and stop those that have been deleted.
+schedule = watch_directory_0,5,5,"load_start=~/Torrents/Music/*.torrent,d.set_directory=$get_path="
+schedule = watch_directory_1,5,5,"load_start=~/Torrents/Music/*/*.torrent,d.set_directory=$get_path="
+schedule = watch_directory_2,5,5,"load_start=~/Torrents/Videos/*.torrent,d.set_directory=$get_path="
+schedule = watch_directory_3,5,5,"load_start=~/Torrents/Videos/*/*.torrent,d.set_directory=$get_path="
+schedule = watch_directory_4,5,5,"load_start=~/Torrents/Books/*.torrent,d.set_directory=$get_path="
+schedule = watch_directory_5,5,5,"load_start=~/Torrents/Books/*/*.torrent,d.set_directory=$get_path="
+#schedule = tied_directory,6,5,start_tied=
+#schedule = untied_directory,7,5,stop_untied=
  
 # Close torrents when diskspace is low.
 schedule = low_diskspace,5,60,close_low_diskspace=2000M
@@ -55,15 +69,19 @@ ratio.upload.set=250M
 # When seeding ratio is reached close the torrent
 system.method.set = group.seeding.ratio.command, d.close=
  
-# Move files to ./unsorted when download completes
-#system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,./unsorted/;d.set_directory=./unsorted/"
+# Move files when download completes
+#system.method.set_key = event.download.finished,move_complete,"d.set_directory=$get_path=;execute=mv,-u,$d.get_base_path=,$get_path="
  
 # Port range to use for listening.
-port_range = 49164-49164
+port_range = 6890-6999
  
 # Start opening ports at a random position within the port range.
 port_random = yes
  
+# Check hash for finished torrents. Might be usefull until the bug is
+# fixed that causes lack of diskspace not to be properly reported.
+check_hash = yes
+
 # Encryption options, set to none (default) or any combination of the following:
 # allow_incoming, try_outgoing, require, require_RC4, enable_retry
 #
@@ -105,7 +123,7 @@ schedule = sort_active,14,5,view.sort=active
 # "auto" (start and stop DHT as needed), or "on" (start DHT immediately).
 # The default is "off". For DHT to work, a session directory must be defined.
 #
-dht = auto
+dht = off
  
 # UDP port to use for DHT.
 #

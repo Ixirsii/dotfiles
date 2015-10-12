@@ -38,7 +38,7 @@ endif
 if has('vim_starting')
     set rtp+=$HOME/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand($HOME.'/.vim/bundle/'))
+call neobundle#begin(expand($HOME.'/.vim/bundle/'))
 
 " is better if NeoBundle rules NeoBundle (needed!)
 NeoBundle 'Shougo/neobundle.vim'
@@ -256,7 +256,7 @@ NeoBundleLazy 'mattn/emmet-vim', {'autoload':
 " Better Buffer handling
 NeoBundle 'fholgado/minibufexpl.vim'
 " A better looking status line
-NeoBundle 'Lokaltog/powerline'
+NeoBundle 'powerline/powerline'
 " Zooms a window
 NeoBundleLazy 'vim-scripts/zoomwintab.vim', {'autoload' :
             \{'commands' : 'ZoomWinTabToggle'}}
@@ -291,8 +291,11 @@ endif
 " Check if all of the plugins are already installed, in other case ask if we
 " want to install them (useful to add plugins in the .vimrc)
 NeoBundleCheck
+"NeoBundleCheckUpdate
 
 " }}}
+
+call neobundle#end()
 
 filetype plugin indent on      " Indent and plugins by filetype
 
@@ -889,9 +892,9 @@ let g:po_translator = "joe di castro <joe@joedicastro.com>"
 " }}}
 
 " Powerline {{{ --------------------------------------------------------------
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
 "let g:Powerline_symbols = 'fancy'
 "let g:Powerline_cache_file = $HOME.'/.vim/tmp/Powerline.cache'
 

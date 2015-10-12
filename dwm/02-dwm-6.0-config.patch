@@ -1,0 +1,13 @@
+--- config.mk.orig	2015-02-03 09:50:28.766033847 -0600
++++ config.mk	2015-02-03 10:45:37.073865410 -0600
+@@ -15,8 +15,8 @@
+ XINERAMAFLAGS = -DXINERAMA
+ 
+ # includes and libs
+-INCS = -I.  -I${X11INC}
+-LIBS =  -lc -L${X11LIB} -lX11 ${XINERAMALIBS}
++INCS = -I. -I/usr/include -I${X11INC} `pkg-config --cflags xft pango pangoxft`
++LIBS =  -lc -L${X11LIB} -lX11 ${XINERAMALIBS} `pkg-config --libs xft pango pangoxft`
+ 
+ # flags
+ CPPFLAGS = -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}

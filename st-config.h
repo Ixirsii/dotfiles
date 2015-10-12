@@ -7,10 +7,10 @@
  */
 /*static char font[] = "Ubuntu Mono-11:antialias=true";*/
 static char font[] = "Droid Sans Mono-10:antialias=true";
-static int borderxpx = 2;
-static int borderypx = 0;
+static int borderpx = 1;
+/*static int borderypx = 0;*/
 
-static char shell[] = "/usr/bin/zsh";
+static char shell[] = "/bin/zsh";
 
 /* Kerning / character bounding-box mutlipliers */
 float cwscale = 1.0;

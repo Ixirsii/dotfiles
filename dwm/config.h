@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#include "selfrestart.c"
 #include <X11/XF86keysym.h>
+#include "moveresize.c"
 
 /* appearance */
 static const char font[]            = "Droid Sans Mono 10";
@@ -65,7 +65,7 @@ static const Layout layouts[] = {
 
 #define TERMCMD "st"
 
-static const char *archeycmd[] = { TERMCMD, "-t", "screenfetch", "-e", "/bin/bash", "-c", "screenfetch; read -s -n 1", NULL };
+static const char *armcmd[] = { TERMCMD, "sudo", "-u", "tor", "arm", NULL };
 static const char *chromiumcmd[] = { "chromium", NULL };
 static const char *brightup[] = { "xbacklight", "-inc", "20", NULL };
 static const char *brightdown[] = { "xbacklight", "-dec", "20", NULL };
@@ -74,7 +74,9 @@ static const char *firefoxcmd[] = { "firefox", NULL };
 static const char *irssicmd[]   = { TERMCMD, "-e", "usewithtor", "irssi", NULL };
 static const char *htopcmd[] = { TERMCMD, "-e", "htop", NULL };
 static const char *rangercmd[] = { TERMCMD, "-e", "ranger", NULL };
-static const char *rtorrentcmd[] = { TERMCMD, "-e", "tmux", "new-session", "-t", "rt", NULL };
+static const char *rtorrentcmd[] = { TERMCMD, "-e", "tmux", "new-session", "-t", "rtorrent", NULL };
+static const char *screenfetchcmd[] = { TERMCMD, "-t", "screenfetch", "-e", "/bin/bash", "-c", "screenfetch; read -s -n 1", NULL };
+static const char *surfcmd[] = { "tabbed", "-c", "surf", "-e", NULL };
 static const char *termcmd[]  = { TERMCMD, NULL };
 static const char *volumedown[] = { "chvol", "down", NULL };
 static const char *volumeup[]   = { "chvol", "up", NULL };
@@ -103,12 +105,13 @@ static Key keys[] = {
     { MODKEY,                       XK_Up,      moveresize,     {.v = (int []){ 0, -25, 0, 0 }}},
     { MODKEY,                       XK_Right,   moveresize,     {.v = (int []){ 25, 0, 0, 0 }}},
     { MODKEY,                       XK_Left,    moveresize,     {.v = (int []){ -25, 0, 0, 0 }}},
-	{ MODKEY|ShiftMask,             XK_a,       spawn,          {.v = archeycmd } },
-	{ MODKEY|ShiftMask,             XK_f,       spawn,          {.v = firefoxcmd } },
+	{ MODKEY|ShiftMask,             XK_a,       spawn,          {.v = armcmd } },
+	{ MODKEY|ShiftMask,             XK_g,       spawn,          {.v = screenfetchcmd } },
 	{ MODKEY|ShiftMask,             XK_h,       spawn,          {.v = htopcmd } },
+	{ MODKEY|ShiftMask,             XK_i,       spawn,          {.v = irssicmd } },
 	{ MODKEY|ShiftMask,             XK_r,       spawn,          {.v = rangercmd } },
+	{ MODKEY|ShiftMask,             XK_s,       spawn,          {.v = surfcmd } },
 	{ MODKEY|ShiftMask,             XK_t,       spawn,          {.v = rtorrentcmd } },
-	{ MODKEY|ShiftMask,             XK_w,       spawn,          {.v = chromiumcmd } },
     { MODKEY|ShiftMask,             XK_Down,    moveresize,     {.v = (int []){ 0, 0, 0, 25 }}},
     { MODKEY|ShiftMask,             XK_Up,      moveresize,     {.v = (int []){ 0, 0, 0, -25 }}},
     { MODKEY|ShiftMask,             XK_Right,   moveresize,     {.v = (int []){ 0, 0, 25, 0 }}},
@@ -135,7 +138,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-    { MODKEY|ControlMask,           XK_r,      self_restart,   {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 

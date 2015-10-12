@@ -20,10 +20,10 @@ xscreensaver -no-splash &
 compton -b
 
 # Set Wallpaper
-feh --bg-fill $HOME/Pictures/Wallpaper/Miku_Hatsune_01.png
+feh --bg-fill $HOME/Pictures/Vocaloid/Hatsune_Miku_01.png
 
 # Start Network Manager
 nm-applet &
 
 # Start Dropbox
-dropboxd &
+#dropboxd &
