@@ -1,13 +1,19 @@
 # Phil!'s ZSH prompt
 function precmd {
+    local TERMWIDTH
+    (( TERMWIDTH = ${COLUMNS} - 1 ))
+
     # Truncate the path if it's too long.
-    PR_PWDLEN=""
+    FILLBAR=""
+    PWDLEN=""
     
-    local promptsize=${#${(%):-(%n@%m:%l)--()-- }}
+    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
     local pwdsize=${#${(%):-%~}}
-    
-    if [[ "$promptsize + $pwdsize" -gt ${COLUMNS} ]]; then
-	    ((PR_PWDLEN=${COLUMNS} - $promptsize))
+
+    if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
+        ((PWDLEN=$TERMWIDTH - $promptsize))
+    else
+        FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${HBAR}.)}"
     fi
 }
 
@@ -17,13 +23,15 @@ function setprompt () {
     setopt prompt_subst
 
     #load colors
-    autoload colors && colors
-    for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-        #wrap colours between %{ %} to avoid weird gaps in autocomplete
-        eval $COLOR='%{$fg_no_bold[${(L)COLOR}]%}'  
-        eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+    autoload colors zsh/terminfo
+    for color in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+        eval BOLD_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+        eval $color='%{$fg[${(L)color}]%}'
+
+        #eval $COLOR='%{$fg_no_bold[${(L)COLOR}]%}'  
+        #eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
     done
-    eval RESET='%{$reset_color%}'
+    eval NO_COLOUR='%{$terminfo[sgr0]%}'
 
     # See if we can use extended characters to look nicer.
     typeset -A altchar
@@ -32,23 +40,23 @@ function setprompt () {
     SHIFT_IN="%{$terminfo[smacs]%}"
     SHIFT_OUT="%{$terminfo[rmacs]%}"
     HBAR=${altchar[q]:--}
-    #PR_ULCORNER=${altchar[l]:--}
-    #PR_LLCORNER=${altchar[m]:--}
-    #PR_LRCORNER=${altchar[j]:--}
-    #PR_URCORNER=${altchar[k]:--}
+    ULCORNER=${altchar[l]:--}
+    LLCORNER=${altchar[m]:--}
+    LRCORNER=${altchar[j]:--}
+    URCORNER=${altchar[k]:--}
 
     # Decide if we need to set titlebar text.
     case $TERM in
 	xterm*)
-	    PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | 
+	    TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | 
 %y\a%}'
 	    ;;
 	screen)
-	    PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m:%~ | 
+	    TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m:%~ | 
 ${COLUMNS}x${LINES} | %y\e\\%}'
 	    ;;
 	*)
-	    PR_TITLEBAR=''
+	    TITLEBAR=''
 	    ;;
     esac
     
@@ -56,9 +64,9 @@ ${COLUMNS}x${LINES} | %y\e\\%}'
     ###
     # Decide whether to set a screen title
     if [[ "$TERM" == "screen" ]]; then
-	PR_STITLE=$'%{\ekzsh\e\\%}'
+	STITLE=$'%{\ekzsh\e\\%}'
     else
-	PR_STITLE=''
+	STITLE=''
     fi
     
     
@@ -67,13 +75,26 @@ ${COLUMNS}x${LINES} | %y\e\\%}'
 	CB="]"
 
     # Finally, the prompt.
-    PROMPT='$SET_CHARSET$BLACK$OB$BLUE%n$BLACK@$BLUE%m\
-$BLACK:$BLUE%l$BLACK$CB$CYAN$SHIFT_IN$HBAR$HBAR$SHIFT_OUT\
-$BLACK($BLUE%$PR_PWDLEN<...<%~%<<$BLACK)\
-$CYAN$SHIFT_IN$HBAR$HBAR$SHIFT_OUT$RESET '
+    PROMPT='$SET_CHARSET$STITLE${(e)TITLEBAR}\
+$CYAN$SHIFT_IN$ULCORNER$BLUE$HBAR$SHIFT_OUT$BLACK$OB\
+$BLUE%(!.%SROOT%s.%n)$BLACK@$BLUE%m$BLACK:$BLUE%l\
+$BLACK$CB$BLUE$SHIFT_IN$HBAR$CYAN$HBAR${(e)FILLBAR}$BLUE$HBAR$SHIFT_OUT$BLACK(\
+$MAGENTA%$PWDLEN<...<%~%<<\
+$BLACK)$BLUE$SHIFT_IN$HBAR$CYAN$URCORNER$SHIFT_OUT\
 
-    PS2='$CYAN$SHIFT_IN$HBAR$SHIFT_OUT$BLUE$SHIFT_IN$HBAR$SHIFT_OUT(\
-$BLUE%_$BLUE)$SHIFT_IN$HBAR$SHIFT_OUT$CYAN$SHIFT_IN$HBAR$SHIFT_OUT$NO_COLOUR '
+$CYAN$SHIFT_IN$LLCORNER$BLUE$HBAR$SHIFT_OUT(\
+%(?..$LIGHT_RED%?$BLUE:)\
+${(e)APM}$MAGENTA%D{%H:%M}\
+$BLUE)$SHIFT_IN$HBAR$SHIFT_OUT\
+$CYAN$SHIFT_IN$HBAR$SHIFT_OUT %(!.$RED.$WHITE)%# $NO_COLOUR '
+
+    RPROMPT='$CYAN$SHIFT_IN$HBAR$BLUE$HBAR$SHIFT_OUT\
+($MAGENTA%D{%a,%b%d}$BLUE)$SHIFT_IN$HBAR$CYAN$LRCORNER$SHIFT_OUT$NO_COLOUR'
+
+    PS2='$CYAN$SHIFT_IN$HBAR$SHIFT_OUT\
+$BLUE$SHIFT_IN$HBAR$SHIFT_OUT(\
+$LIGHT_GREEN%_$BLUE)$SHIFT_IN$HBAR$SHIFT_OUT\
+$CYAN$SHIFT_IN$HBAR$SHIFT_OUT$NO_COLOUR '
 }
 
 setprompt
