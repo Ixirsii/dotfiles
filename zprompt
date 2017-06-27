@@ -23,7 +23,9 @@ function setprompt () {
     setopt prompt_subst
 
     #load colors
-    autoload colors zsh/terminfo
+    autoload colors
+    colors
+    autoload zsh/terminfo
     for color in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
         eval BOLD_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
         eval $color='%{$fg[${(L)color}]%}'
