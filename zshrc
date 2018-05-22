@@ -11,18 +11,18 @@ compinit
 
 tmux_session_name="ryan"
 
-if which tmux >/dev/null 2>&1; then
+#if which tmux >/dev/null 2>&1; then
     #if not inside a tmux session, and if no session is started, start a new session
-    if (! tmux has-session -t $tmux_session_name); then
-        echo "starting tmux daemon session"
-        tmux -2 new-session -s $tmux_session_name -d
-    fi
-
-    if test -z "$TMUX"; then
-        (tmux new-session -t $tmux_session_name)
-    fi
-    
-fi
+#    if (! tmux has-session -t $tmux_session_name); then
+#        echo "starting tmux daemon session"
+#        tmux -2 new-session -s $tmux_session_name -d
+#    fi
+#
+#    if test -z "$TMUX"; then
+#        (tmux new-session -t $tmux_session_name)
+#    fi
+#    
+#fi
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -51,8 +51,9 @@ alias bbra='bbr apollo-pkg'
 alias register_with_aaa='/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.py'
 
 export EDITOR="vim"
+export PATH="usr/local/bin:$PATH:$HOME/bin"
 if which brew >/dev/null 2>&1; then
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH:$HOME/bin"
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 fi
 export PATH="$BRAZIL_CLI_BIN:$PATH"
 export SKIP_GIT_CHECK=1
