@@ -1,4 +1,9 @@
-source /apollo/env/envImprovement/var/zshrc
+envInvZsh="/apollo/env/envImprovement/var/zshrc"
+
+if test -f $envInvZsh; then
+    source $envInvZsh
+fi
+
 source ~/.zprompt
 zstyle :compinstall filename '/home/ryan/.zshrc'
 
@@ -27,6 +32,20 @@ tmux_session_name="ryan"
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
+
+##
+# Pull remote branch from CRUX, first argument has to be SSH url to the CR
+alias reviewCR='function _blah(){
+branch_name=$(echo $1 | awk -F'"'"'/'"'"' '"'"'{print $7 $8}'"'"')
+git remote add $branch_name $1; git fetch $branch_name; git checkout -b $branch_name $branch_name;
+};_blah'
+
+# Delete remote branch created from reviewCR alias
+alias removeCR='function _blah(){
+branch_name=$(git branch | grep \* | cut -d '"'"' '"'"' -f2)
+git checkout mainline && git branch -D $branch_name && git remote remove $branch_name
+};_blah'
+
 ## Aliases
 alias arm='sudo -u tor arm'
 alias grep='grep --color=auto'
@@ -53,7 +72,7 @@ alias register_with_aaa='/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.p
 export EDITOR="vim"
 export PATH="usr/local/bin:$PATH:$HOME/bin"
 if which brew >/dev/null 2>&1; then
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.toolbox/bin:/usr/local/bin:$PATH:$HOME/bin"
 fi
 export PATH="$BRAZIL_CLI_BIN:$PATH"
 export SKIP_GIT_CHECK=1
