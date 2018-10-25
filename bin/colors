@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo -en "\033[22;30m█ Black\033[00m\t\t\033[22;31m█ Red\033[00m\t\t"
-echo -en "\033[22;32m█ Green\033[00m\t\t\033[22;33m█ Yellow\033[00m\t\t"
-echo -en "\033[22;34m█ Blue\033[00m\t\t\033[22;35m█ Purple\033[00m\t\t"
-echo -e  "\033[22;36m█ Cyan\033[00m\t\t\033[22;37m█ Grey\033[00m"
-
+echo -e "\033[22;32m█ Green\033[00m\t\t\033[22;33m█ Yellow\033[00m\t\t"
 echo -en "\033[01;30m█ Black\033[00m\t\t\033[01;31m█ Red\033[00m\t\t"
-echo -en "\033[01;32m█ Green\033[00m\t\t\033[01;33m█ Yellow\033[00m\t\t"
-echo -en "\033[01;34m█ Blue\033[00m\t\t\033[01;35m█ Purple\033[00m\t\t"
+echo -e "\033[01;32m█ Green\033[00m\t\t\033[01;33m█ Yellow\033[00m\t\t"
+
+echo -en "\033[22;34m█ Blue\033[00m\t\t\033[22;35m█ Purple\033[00m\t"
+echo -e  "\033[22;36m█ Cyan\033[00m\t\t\033[22;37m█ Grey\033[00m"
+echo -en "\033[01;34m█ Blue\033[00m\t\t\033[01;35m█ Purple\033[00m\t"
 echo -e  "\033[01;36m█ Cyan\033[00m\t\t\033[01;37m█ Grey\033[00m"

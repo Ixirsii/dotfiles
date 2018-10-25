@@ -93,6 +93,7 @@ NeoBundleLazy 'Shougo/junkfile.vim', {'autoload':{'commands':'JunkfileOpen',
 " Improved terminal version of molokai, almost identical to the GUI one
 NeoBundle 'joedicastro/vim-molokai256'
 
+NeoBundle 'hzchirs/vim-material'
 NeoBundle 'tomasr/molokai'
 NeoBundleLazy 'sjl/badwolf', { 'autoload' :
         \ { 'unite_sources' : 'colorscheme', }}
@@ -120,7 +121,7 @@ NeoBundle 'https://bitbucket.org/ShadowHawk54/saolight-vim.git'
 " C/CPP "{{{
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 "}}}
-"
+
 " DCVS {{{
 "
 " Admin Git
@@ -161,13 +162,15 @@ NeoBundleLazy 'vim-scripts/hexman.vim', { 'autoload' :
 " Autocompletion
 NeoBundle 'Shougo/neocomplete.vim'
 " A Python plugin
-"NeoBundleLazy 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
+NeoBundleLazy 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
 " Admin virtualenvs
 NeoBundleLazy 'jmcantrell/vim-virtualenv', {'autoload': {'filetypes': ['python']}}
 " Show indent lines
 NeoBundleLazy 'Yggdroot/indentLine', {'autoload': {'filetypes': ['python']}}
 " Show reports from coverage.py
 NeoBundleLazy 'alfredodeza/coveragepy.vim', {'autoload': {'filetypes': ['python']}}
+"
+NeoBundleLazy 'nvie/vim-flake8', {'autoload': {'filetypes': ['pythov']}}
 
 " }}}
 
@@ -203,6 +206,8 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 " toggle comments
 NeoBundle 'tpope/vim-commentary'
+" Improvements for netrw
+NeoBundle 'tpope/vim-vinegar.git'
 " smart digraphs insertion
 NeoBundle 'Rykka/easydigraph.vim'
 " browse the vim undo tree
@@ -311,9 +316,9 @@ let maplocalleader= ' '
 " }}}
 
 " Edit/reload vimrc {{{ ============================================================
-map <silent><leader>ev :edit ~/.vim/vimrc<CR>
+map <silent><leader>ev :edit ~/.vimrc<CR>
 
-map <silent><leader>sv :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent><leader>sv :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " }}}
 
 " Basic options {{{
@@ -468,7 +473,7 @@ set t_Co=256                    " 256 colors for the terminal
 " and console
 if has('gui_running')
     set background=light        " set a light background
-    colorscheme solarized
+    colorscheme vim-material
 else
     set background=dark         " set a dark background
     colorscheme molokai256
@@ -478,7 +483,7 @@ endif
 
 " Font {{{
 if has("gui_gtk2")
-    set guifont=Droid\ Sans\ Mono\ 8,Oxygen\ Mono\ 8,Ubuntu\ Mono\ 9
+    set guifont=Source\ Code\ Pro\ 8,Oxygen\ Mono\ 8,Ubuntu\ Mono\ 8
 endif
 " }}}
 
@@ -736,7 +741,7 @@ nnoremap Y y$
 
 " }}}
 
-" Show Highlighting Groups for Selected Word "{{{
+" Show Highlighting Groups for Selected Word {{{
 nmap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
@@ -744,6 +749,14 @@ function! <SID>SynStack()
     endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+" }}}
+
+" File Browser (netrw) {{{
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 " }}}
 
 " END VIM SETUP }}}
@@ -892,13 +905,13 @@ let g:po_translator = "joe di castro <joe@joedicastro.com>"
 " }}}
 
 " Powerline {{{ --------------------------------------------------------------
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_cache_file = $HOME.'/.vim/tmp/Powerline.cache'
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_cache_file = $HOME.'/.vim/tmp/Powerline.cache'
 
-"set noshowmode
+set noshowmode
 " }}}
 
 " PythonMode {{{ -------------------------------------------------------------
