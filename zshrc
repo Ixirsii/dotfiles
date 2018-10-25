@@ -1,11 +1,9 @@
-envInvZsh="/apollo/env/envImprovement/var/zshrc"
+export AUTO_TITLE_SCREENS="YES"
 
-if test -f $envInvZsh; then
-    source $envInvZsh
-fi
+source '/home/ryaporte/.zamazon'
+source '/home/ryaporte/.zprompt'
 
-source ~/.zprompt
-zstyle :compinstall filename '/home/ryan/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 setopt appendhistory autocd extendedglob notify hist_ignore_dups
 unsetopt beep nomatch
@@ -32,18 +30,20 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-##
-# Pull remote branch from CRUX, first argument has to be SSH url to the CR
-alias reviewCR='function _blah(){
-branch_name=$(echo $1 | awk -F'"'"'/'"'"' '"'"'{print $7 $8}'"'"')
-git remote add $branch_name $1; git fetch $branch_name; git checkout -b $branch_name $branch_name;
-};_blah'
+set-title() {
+    echo -e "\e]0;$*\007"
+}
 
-# Delete remote branch created from reviewCR alias
-alias removeCR='function _blah(){
-branch_name=$(git branch | grep \* | cut -d '"'"' '"'"' -f2)
-git checkout mainline && git branch -D $branch_name && git remote remove $branch_name
-};_blah'
+ssh() {
+    set-title $*;
+    /usr/bin/ssh -2 $*;
+    set-title $HOST;
+}
+
+
+if [ -f ~/.zshrc-dev-dsk-post ]; then
+    source ~/.zshrc-dev-dsk-post
+fi
 
 ## Aliases
 alias arm='sudo -u tor arm'
@@ -53,20 +53,10 @@ alias fuck='sudo $(history -p \!\!)'
 alias egrep='egrep --color=auto'
 alias ls='ls --color=auto'
 
-alias bb='brazil-build'
-alias bba='brazil-build apollo-pkg'
-alias bo='/apollo/env/OctaneBrazilTools/bin/brazil-octane'
-alias bre='brazil-runtime-exec'
-alias brc='brazil-recursive-cmd'
-alias bws='brazil ws'
-alias bwsuse='bws use --gitMode -p'
-alias bwscreate='bws create -n'
-alias brc='brazil-recursive-cmd'
-alias bbr='brc brazil-build'
-alias bball='brc --allPackages'
-alias bbb='brc --allPackages brazil-build'
-alias bbra='bbr apollo-pkg'
-alias register_with_aaa='/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.py'
-
 export EDITOR="vim"
+
+if which brew >/dev/null 2>&1; then
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.toolbox/bin:/usr/local/bin:$PATH:$HOME/bin"
+fi
 export PATH="$PATH:$HOME/.toolbox/bin"
+
