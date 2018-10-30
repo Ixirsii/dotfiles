@@ -1,52 +1,49 @@
 # Phil!'s ZSH prompt
+
+ZLE_RPROMPT_INDENT=0
+
+# Parameter expansion
+setopt prompt_subst
+autoload -Uz vcs_info
+autoload zsh/terminfo
+
+# See if we can use extended characters to look nicer.
+typeset -A altchar
+set -A altchar ${(s..)terminfo[acsc]}
+SET_CHARSET="%{$terminfo[enacs]%}"
+SHIFT_IN="%{$terminfo[smacs]%}"
+SHIFT_OUT="%{$terminfo[rmacs]%}"
+HBAR=${altchar[q]:--}
+ULCORNER=${altchar[l]:--}
+LLCORNER=${altchar[m]:--}
+LRCORNER=${altchar[j]:--}
+URCORNER=${altchar[k]:--}
+
+# Some magic for loading the current git branch
+zstyle ':vcs_info:*' actionformats '%F{4} %b%F{6}|%F{9}%a%f'
+zstyle ':vcs_info:*' formats '%F{4}%b%f'
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
 function precmd {
-    local TERMWIDTH
-    (( TERMWIDTH = ${COLUMNS} - 1 ))
+    # Load VCS info
+    vcs_info
 
     # Truncate the path if it's too long.
     FILLBAR=""
     PWDLEN=""
+    VCS_INFO=""
     
-    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
+    local promptsize=${#${(%):---(%n@%m)---()--}}
     local pwdsize=${#${(%):-%~}}
 
-    if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
-        ((PWDLEN=$TERMWIDTH - $promptsize))
+    if [[ "$promptsize + $pwdsize" -gt $COLUMNS ]]; then
+        ((PWDLEN=$COLUMNS - $promptsize))
     else
-        FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${HBAR}.)}"
+        FILLBAR="\${(l.(($COLUMNS - ($promptsize + $pwdsize)))..${HBAR}.)}"
     fi
 }
 
-
 function setprompt () {
-    # Parameter expansion
-    setopt prompt_subst
-
-    #load colors
-    autoload colors
-    colors
-    autoload zsh/terminfo
-    for color in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-        eval BOLD_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-        eval $color='%{$fg[${(L)color}]%}'
-
-        #eval $COLOR='%{$fg_no_bold[${(L)COLOR}]%}'  
-        #eval BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-    done
-    eval NO_COLOUR='%{$terminfo[sgr0]%}'
-
-    # See if we can use extended characters to look nicer.
-    typeset -A altchar
-    set -A altchar ${(s..)terminfo[acsc]}
-    SET_CHARSET="%{$terminfo[enacs]%}"
-    SHIFT_IN="%{$terminfo[smacs]%}"
-    SHIFT_OUT="%{$terminfo[rmacs]%}"
-    HBAR=${altchar[q]:--}
-    ULCORNER=${altchar[l]:--}
-    LLCORNER=${altchar[m]:--}
-    LRCORNER=${altchar[j]:--}
-    URCORNER=${altchar[k]:--}
-
     # Decide if we need to set titlebar text.
     case $TERM in
 	xterm*)
@@ -76,27 +73,25 @@ ${COLUMNS}x${LINES} | %y\e\\%}'
     OB="["
 	CB="]"
 
-    # Finally, the prompt.
+    ## Finally, the prompt.
     PROMPT='$SET_CHARSET$STITLE${(e)TITLEBAR}\
-$CYAN$SHIFT_IN$ULCORNER$BLUE$HBAR$SHIFT_OUT$BLUE$OB\
-$GREEN%(!.%SROOT%s.%n)$WHITE@$GREEN%m$WHITE:$GREEN%l\
-$BLUE$CB$BLUE$SHIFT_IN$HBAR$CYAN$HBAR${(e)FILLBAR}$BLUE$HBAR$SHIFT_OUT$BLUE(\
-$MAGENTA%$PWDLEN<...<%~%<<\
-$BLUE)$BLUE$SHIFT_IN$HBAR$CYAN$URCORNER$SHIFT_OUT\
+%F{14}$SHIFT_IN$ULCORNER%F{6}$HBAR$SHIFT_OUT\
+$OB%F{4}%(!.%SROOT%s.%n)%F{15}@%F{4}%m%F{6}$CB\
+$SHIFT_IN$HBAR%F{14}$HBAR${(e)FILLBAR}%F{6}$HBAR$SHIFT_OUT\
+$OB%F{5}%$PWDLEN<...<%~%<<%F{6}$CB\
+$SHIFT_IN$HBAR%F{14}$URCORNER$SHIFT_OUT\
 
-$CYAN$SHIFT_IN$LLCORNER$BLUE$HBAR$SHIFT_OUT(\
-%(?..$LIGHT_RED%?$BLUE:)\
-${(e)APM}$MAGENTA%D{%H:%M}\
-$BLUE)$SHIFT_IN$HBAR$SHIFT_OUT\
-$CYAN$SHIFT_IN$HBAR$SHIFT_OUT %(!.$RED.$WHITE)%#$NO_COLOUR '
+%F{14}$SHIFT_IN$LLCORNER%F{6}$HBAR$SHIFT_OUT\
+(%(?..%F{9}%?%F{6}:)${(e)APM}%F{5}%D{%H:%M}%F{6})\
+$SHIFT_IN$HBAR%F{14}$HBAR$SHIFT_OUT %(!.%F{1}.%F{15})%#%f '
 
-    RPROMPT='$CYAN$SHIFT_IN$HBAR$BLUE$HBAR$SHIFT_OUT\
-($MAGENTA%D{%a,%b%d}$BLUE)$SHIFT_IN$HBAR$CYAN$LRCORNER$SHIFT_OUT$NO_COLOUR'
+    RPROMPT='%F{14}$SHIFT_IN$HBAR%F{6}$HBAR$SHIFT_OUT\
+($vcs_info_msg_0_%F{6})$SHIFT_IN$HBAR%F{14}$LRCORNER$SHIFT_OUT%f'
 
-    PS2='$CYAN$SHIFT_IN$HBAR$SHIFT_OUT\
-$BLUE$SHIFT_IN$HBAR$SHIFT_OUT(\
-$LIGHT_GREEN%_$BLUE)$SHIFT_IN$HBAR$SHIFT_OUT\
-$CYAN$SHIFT_IN$HBAR$SHIFT_OUT$NO_COLOUR '
+    PS2='%F{14}$SHIFT_IN$HBAR$SHIFT_OUT\
+%F{6}$SHIFT_IN$HBAR$SHIFT_OUT\
+(%F{4}%_%F{6})$SHIFT_IN$HBAR$SHIFT_OUT\
+%F{14}$SHIFT_IN$HBAR$SHIFT_OUT%f '
 }
 
 setprompt

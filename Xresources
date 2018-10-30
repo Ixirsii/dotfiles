@@ -31,10 +31,10 @@
 !#include "/home/ryan/.colors/xmas"
 !#include "/home/ryan/.colors/YokoLight"
 
-URxvt*font:                 xft:Source Code Pro:pixelsize=10
-URxvt*boldFont:             xft:Source Code Pro:pixelsize=10:style=bold
-URxvt*italicFont:           xft:Source Code Pro:pixelsize=10:style=italic
-URxvt*bolditalicFont:       xft:Source Code Pro:pixelsize=10:style=bolditalic
+URxvt*font:                 xft:Source Code Pro for Powerline:pixelsize=10
+URxvt*boldFont:             xft:Source Code Pro for Powerline:pixelsize=10:style=bold
+URxvt*italicFont:           xft:Source Code Pro for Powerline:pixelsize=10:style=italic
+URxvt*bolditalicFont:       xft:Source Code Pro for Powerline:pixelsize=10:style=bolditalic
 
 URxvt*termName:             rxvt-unicode-256color
 URxvt*geometry:             80x24
