@@ -21,7 +21,7 @@ URCORNER=${altchar[k]:--}
 
 # Some magic for loading the current git branch
 zstyle ':vcs_info:*' actionformats '%F{4} %b%F{6}|%F{9}%a%f'
-zstyle ':vcs_info:*' formats '%F{4}%b%f'
+zstyle ':vcs_info:*' formats '%F{4} %b%f'
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 function precmd {
