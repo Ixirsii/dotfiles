@@ -46,3 +46,5 @@ alias register_with_aaa='/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.p
 #export PATH="$BRAZIL_CLI_BIN:$PATH"
 export SKIP_GIT_CHECK=1
 export SNAPSHOT_COLOR=RICH
+
+# vim: filetype=zsh:
