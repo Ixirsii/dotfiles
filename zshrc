@@ -1,8 +1,8 @@
+# Set title
 export AUTO_TITLE_SCREENS="YES"
 
-source '/home/ryaporte/.zamazon'
-source '/home/ryaporte/.zprompt'
-
+# Set prompt
+source '~/.zprompt'
 zstyle :compinstall filename '~/.zshrc'
 
 setopt appendhistory autocd extendedglob notify hist_ignore_dups
@@ -39,7 +39,6 @@ ssh() {
     /usr/bin/ssh -2 $*;
     set-title $HOST;
 }
-
 
 if [ -f ~/.zshrc-dev-dsk-post ]; then
     source ~/.zshrc-dev-dsk-post
