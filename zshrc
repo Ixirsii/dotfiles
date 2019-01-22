@@ -1,6 +1,5 @@
 export AUTO_TITLE_SCREENS="YES"
 
-source '/home/ryaporte/.zamazon'
 source '/home/ryaporte/.zprompt'
 
 zstyle :compinstall filename '~/.zshrc'
