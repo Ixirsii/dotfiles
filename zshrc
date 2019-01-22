@@ -58,5 +58,5 @@ export EDITOR="vim"
 if which brew >/dev/null 2>&1; then
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.toolbox/bin:/usr/local/bin:$PATH:$HOME/bin"
 fi
-export PATH="$PATH:$HOME/.toolbox/bin"
+export PATH="$HOME/.toolbox/bin:$PATH"
 
