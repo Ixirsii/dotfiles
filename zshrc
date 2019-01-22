@@ -2,8 +2,8 @@
 export AUTO_TITLE_SCREENS="YES"
 
 # Source additional config files
-source '~/.zamazon'
-source '~/.zprompt'
+source '/home/ryaporte/.zamazon'
+source '/home/ryaporte/.zprompt'
 zstyle :compinstall filename '~/.zshrc'
 
 setopt appendhistory autocd extendedglob notify hist_ignore_dups
