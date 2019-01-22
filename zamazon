@@ -1,6 +1,4 @@
 ## Source additional config files
-source /apollo/env/envImprovement/var/zshrc
-
 for f in SDETools envImprovement AmazonAwsCli OdinTools; do
     if [[ -d /apollo/env/$f ]]; then
         export PATH=$PATH:/apollo/env/$f/bin
@@ -43,8 +41,8 @@ alias register_with_aaa='/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.p
 
 ## Exports
 
-#export PATH="$BRAZIL_CLI_BIN:$PATH"
-export SKIP_GIT_CHECK=1
+#export SKIP_GIT_CHECK=1
 export SNAPSHOT_COLOR=RICH
+export PATH="$HOME/.toolbox/bin:$PATH"
 
 # vim: filetype=zsh:

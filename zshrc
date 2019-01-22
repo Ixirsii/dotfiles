@@ -27,8 +27,8 @@ if which tmux >/dev/null 2>&1; then
 fi
 
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 set-title() {
     echo -e "\e]0;$*\007"
@@ -46,7 +46,6 @@ if [ -f ~/.zshrc-dev-dsk-post ]; then
 fi
 
 ## Aliases
-alias arm='sudo -u tor arm'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fuck='sudo $(history -p \!\!)'
@@ -56,7 +55,6 @@ alias ls='ls --color=auto'
 export EDITOR="vim"
 
 if which brew >/dev/null 2>&1; then
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.toolbox/bin:/usr/local/bin:$PATH:$HOME/bin"
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 fi
-export PATH="$HOME/.toolbox/bin:$PATH"
 
