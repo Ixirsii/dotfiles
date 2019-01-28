@@ -37,6 +37,7 @@ alias bbr='brc brazil-build'
 alias bball='brc --allPackages'
 alias bbb='brc --allPackages brazil-build'
 alias bbra='bbr apollo-pkg'
+alias devdsk='ssh ryaporte.aka.corp.amazon.com'
 alias register_with_aaa='/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.py'
 
 ## Exports
