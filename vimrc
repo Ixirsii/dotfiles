@@ -905,9 +905,9 @@ let g:po_translator = "joe di castro <joe@joedicastro.com>"
 " }}}
 
 " Powerline {{{ --------------------------------------------------------------
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_cache_file = $HOME.'/.vim/tmp/Powerline.cache'
 
