@@ -1,49 +1,18 @@
-! URxvt ----------------------------------------------------------------------
+! ----------------------------------- URxvt -----------------------------------
 
-! color themes
-!#include "/home/ryan/.colors/ancient"
-!#include "/home/ryan/.colors/blue"
-!#include "/home/ryan/.colors/bw_b"
-!#include "/home/ryan/.colors/bw_w"
-!#include "/home/ryan/.colors/charlie_brown"
-!#include "/home/ANT.AMAZON.COM/ryaporte/.colors/clean"
-#include "/home/ANT.AMAZON.COM/ryaporte/.colors/clean2"
-!#include "/home/ryan/.colors/clear"
-!#include "/home/ryan/.colors/colors"
-!#include "/home/ryan/.colors/crypt"
-!#include "/home/ryan/.colors/cryptetsy"
-!#include "/home/ryan/.colors/cryptred"
-!#include "/home/ryan/.colors/default"
-!#include "/home/ryan/.colors/fallac"
-!#include "/home/ryan/.colors/form"
-!#include "/home/ryan/.colors/gohucolor"
-!#include "/home/ryan/.colors/klk-vivid"
-!#include "/home/ryan/.colors/nebula"
-!#include "/home/ryan/.colors/ok100"
-!#include "/home/ryan/.colors/saolight"
-!#include "/home/ryan/.colors/solarized"
-!#include "/home/ryan/.colors/space"
-!#include "/home/ryan/.colors/thaw"
-!#include "/home/ryan/.colors/vintage"
-!#include "/home/ryan/.colors/vintage2"
-!#include "/home/ryan/.colors/vivid"
-!#include "/home/ryan/.colors/wei011@linuxremote1.eg.bucknell.edu"
-!#include "/home/ryan/.colors/xmas"
-!#include "/home/ryan/.colors/YokoLight"
-
+! Font Settings
 URxvt*font:                 xft:Source Code Pro for Powerline:pixelsize=10
 URxvt*boldFont:             xft:Source Code Pro for Powerline:pixelsize=10:style=bold
 URxvt*italicFont:           xft:Source Code Pro for Powerline:pixelsize=10:style=italic
 URxvt*bolditalicFont:       xft:Source Code Pro for Powerline:pixelsize=10:style=bolditalic
 
 URxvt*termName:             rxvt-unicode-256color
-URxvt*geometry:             80x24
+URxvt*geometry:             80x25
 
 URxvt*cursorBlink:          true
 URxvt*scrollBar:            false
 URxvt.internalBorder:       0
 URxvt.jumpScroll:           true
-!URxvt.loginShell:           true
 URxvt.pointerBlank:         true
 URxvt.saveLines:            4000
 URxvt.secondaryScroll:      true
@@ -51,40 +20,36 @@ URxvt.scrollBar:            false
 URxvt.scrollTtyKeypress:    true
 URxvt.scrollWithBuffer:     true
 
-!! Copied in from colors file because gdm doesnt #include files by default
-! Background
 URxvt*depth:            32
-URxvt*background:       rgba:0000/0000/0000/dd00
-URxvt*foreground:       #64626d
 URxvt*fading:           0
 
+urxvt*background:             #262729
+urxvt*foreground:             #f8f8f2
+urxvt*cursorColor:            #b5d2dd
 ! Black
-!URxvt*color0:           #373f4c
-!URxvt*color8:           #64626d
+urxvt*color0:                 #262729
+urxvt*color8:                 #262729
 ! Red
-!URxvt*color1:           #aa3e64
-!URxvt*color9:           #f9afd2
+urxvt*color1:                 #f92671
+urxvt*color9:                 #ff669d
 ! Green
-!URxvt*color2:           #39acaa
-!URxvt*color10:          #96c7be
+urxvt*color2:                 #a6e22e
+urxvt*color10:                #beed5f
 ! Yellow
-!URxvt*color3:           #9a8e70
-!URxvt*color11:          #f2ecba
-!blue
-!URxvt*color4:           #29529c
-!URxvt*color12:          #86b7df
+urxvt*color3:                 #fd971f
+urxvt*color11:                #e6db74
+! Blue
+urxvt*color4:                 #1692d0
+urxvt*color12:                #66d9ef
 ! Magenta
-!URxvt*color5:           #714161
-!URxvt*color13:          #af9098
+urxvt*color5:                 #9e6ffe
+urxvt*color13:                #df92f6
 ! Cyan
-!URxvt*color6:           #83cbbf
-!URxvt*color14:          #a7e8df
+urxvt*color6:                 #00AAAA
+urxvt*color14:                #55FFFF
 ! White
-!URxvt*color7:           #c0c4c5
-!URxvt*color15:          #ffffff
-! Cursor
-!URxvt*cursorColor:      #64626d
-
+urxvt*color7:                 #ffffff
+urxvt*color15:                #ffffff
 
 ! clickable links
 URxvt.perl-ext-common:	default,matcher
@@ -95,58 +60,10 @@ URxvt.keysym.M-Delete: perl:matcher:list
 URxvt.matcher.rend.0: Uline Bold fg6
 
 
-! Xft settings ---------------------------------------------------------------
+! ------------------------------------ Xft ------------------------------------
 
 Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
-
-! xterm ----------------------------------------------------------------------
-
-xterm*VT100.geometry:     80x25
-xterm*faceName:           Terminus:style=Regular:size=10
-!xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
-xterm*dynamicColors:      true
-xterm*utf8:               2
-xterm*eightBitInput:      true
-xterm*saveLines:          512
-xterm*scrollKey:          true
-xterm*scrollTtyOutput:    false
-xterm*scrollBar:          false
-xterm*rightScrollBar:     false
-xterm*jumpScroll:         true
-xterm*multiScroll:        true
-xterm*toolBar:            false
-
-! xscreensaver ---------------------------------------------------------------
-
-!font settings
-xscreensaver.Dialog.headingFont:  xft:Droid Sans Mono 10
-xscreensaver.Dialog.bodyFont:     xft:Droid Sans Mono 10
-xscreensaver.Dialog.labelFont:    xft:Droid Sans Mono 10
-xscreensaver.Dialog.unameFont:    xft:Droid Sans Mono 10
-xscreensaver.Dialog.buttonFont:   xft:Droid Sans Mono 10
-xscreensaver.Dialog.dateFont:     xft:Droid Sans Mono 10
-xscreensaver.passwd.passwdFont:   xft:Droid Sans Mono 10
-
-!general dialog box (affects main hostname, username, password text)
-xscreensaver.Dialog.foreground:         #64626d
-xscreensaver.Dialog.background:         #ffffff
-xscreensaver.Dialog.topShadowColor:     #000000
-xscreensaver.Dialog.bottomShadowColor:  #000000
-xscreensaver.Dialog.Button.foreground:  #ffffff
-xscreensaver.Dialog.Button.background:  #64626d
-!username/password input box and date text colour
-xscreensaver.Dialog.text.foreground:    #64626d
-xscreensaver.Dialog.text.background:    #ffffff
-xscreensaver.Dialog.internalBorderWidth:24
-xscreensaver.Dialog.borderWidth:        20
-xscreensaver.Dialog.shadowThickness:    2
-!timeout bar (background is actually determined by Dialog.text.background)
-xscreensaver.passwd.thermometer.foreground:  #64626d
-xscreensaver.passwd.thermometer.background:  #000000
-xscreensaver.passwd.thermometer.width:       8
-
-
