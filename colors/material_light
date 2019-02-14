@@ -1,0 +1,29 @@
+urxvt*background:   #FAFAFA
+urxvt*foreground:   #263238
+urxvt*cursorColor:  #263238
+! Black
+urxvt*color0:       #000000
+urxvt*color8:       #37474F
+! Red
+urxvt*color1:       #AD1457
+urxvt*color9:       #EC407A
+! Green
+urxvt*color2:       #00695C
+urxvt*color10:      #26A69A
+! Yellow
+urxvt*color3:       #FF8F00
+urxvt*color11:      #FFCA28
+! Blue
+urxvt*color4:       #1565C0
+urxvt*color12:      #42A5F5
+! Magenta
+urxvt*color5:       #4527A0
+urxvt*color13:      #7E57C2
+! Cyan
+urxvt*color6:       #00838F
+urxvt*color14:      #26C6DA
+! White
+urxvt*color7:       #78909C
+urxvt*color15:      #FFFFFF
+
+! vim: filetype=xdefaults:
