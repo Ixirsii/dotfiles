@@ -15,7 +15,7 @@ fi
 # Pull remote branch from CRUX, first argument has to be SSH url to the CR
 alias reviewCR='function _blah(){
 branch_name=$(echo $1 | awk -F'"'"'/'"'"' '"'"'{print $7 $8}'"'"')
-git remote add $branch_name $1; git fetch $branch_name; git checkout -b $branch_name $branch_name;
+git remote add $branch_name $1; git fetch $branch_name; git checkout -b $branch_name "$branch_name/head";
 };_blah'
 
 # Delete remote branch created from reviewCR alias
