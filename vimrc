@@ -482,8 +482,8 @@ endif
 " }}}
 
 " Font {{{
-if has("gui_gtk2")
-    set guifont=Source\ Code\ Pro\ 8,Oxygen\ Mono\ 8,Ubuntu\ Mono\ 8
+if has("gui_gtk2") || has("gui_gtk3")
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ 9,Oxygen\ Mono\ 9,Ubuntu\ Mono\ 9
 endif
 " }}}
 
@@ -550,8 +550,8 @@ vnoremap \ za
 " Cut/Paste {{{
 
 " to/from the clipboard
-map <Leader>y "*y<CR>
-map <Leader>p "*p<CR>
+map <Leader>y "+y<CR>
+map <Leader>p "+p<CR>
 
 " toggle paste mode
 map <Leader>P :set invpaste<CR>
@@ -567,8 +567,6 @@ autocmd! BufWritePost vimrc source %
 
 " Spelling {{{
 
-" turn on the spell checking and set the Spanish language
-nmap <Leader>ss :setlocal spell spelllang=es<CR>
 " turn on the spell checking and set the English language
 nmap <Leader>se :setlocal spell spelllang=en<CR>
 " turn off the spell checking
