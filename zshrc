@@ -2,7 +2,6 @@
 export AUTO_TITLE_SCREENS="YES"
 
 # Source additional config files
-source ~/.zamazon
 source ~/.zprompt
 zstyle :compinstall filename '~/.zshrc'
 
