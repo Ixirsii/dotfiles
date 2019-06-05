@@ -1,6 +1,11 @@
 # Set title
 export AUTO_TITLE_SCREENS="YES"
 
+# UTF-8 locale
+# Fix for tmux adding space after zsh prompt
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # Source additional config files
 source ~/.zamazon
 source ~/.zprompt
@@ -18,11 +23,11 @@ tmux_session_name="ryan"
 if which tmux >/dev/null 2>&1; then
     #if not inside a tmux session, and if no session is started, start a new session
     if (! tmux has-session -t $tmux_session_name); then
-        tmux -2 new-session -s $tmux_session_name -d
+        tmux -2u new-session -s $tmux_session_name -d
     fi
 
     if test -z "$TMUX"; then
-        (tmux new-session -t $tmux_session_name)
+        (tmux -2u new-session -t $tmux_session_name)
     fi
     
 fi
