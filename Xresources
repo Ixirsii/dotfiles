@@ -23,7 +23,7 @@ URxvt.scrollWithBuffer:     true
 URxvt*depth:            32
 !URxvt*fading:           0
 
-urxvt*background:   [80]#ECEFF1
+urxvt*background:   [70]#ECEFF1
 urxvt*foreground:   #263238
 urxvt*cursorColor:  #263238
 ! Black
