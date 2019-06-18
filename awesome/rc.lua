@@ -114,19 +114,13 @@ else
 end
 
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
 -- {{{ Wibar
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock(" %a %-e %b, %-I:%M %p ")
+local mytextclock = wibox.widget.textclock(" %a %-e %b, %H:%M ")
 local month_calendar = awful.widget.calendar_popup.month()
 month_calendar:attach( mytextclock, "tr" )
 
@@ -197,14 +191,6 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(gears.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
 
@@ -219,17 +205,14 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
-            s.mylayoutbox,
         },
     }
 end)
@@ -460,7 +443,7 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
+      }
     },
 
     -- Floating clients.
@@ -501,17 +484,35 @@ awful.rules.rules = {
 
     -- Set Evolution to always map on the tag "im"
     { rule = { class = "Evolution" },
-      properties = { floating = false, maximized = false, screen = 1, tag = "email" }
+      properties = {
+        floating = false,
+        maximized = false,
+        screen = 1,
+        tag = "email"
+      }
     },
 
     -- Set Firefox to always map on the tag named "www" on screen 1.
     { rule = { class = "Firefox" },
-      properties = { floating = false, maximized = false, screen = 3, tag = "www" }
+      properties = {
+        floating = false,
+        maximized = false,
+        screen = function() return screen.count() > 1 and screen[3] or screen[1] end,
+        tag = "www"
+      }
     },
 
     -- Set IntelliJ to always map on the tag "dev"
-    { rule = { class = "jetbrains-idea" },
-      properties = { floating = false, maximized = false, screen = 2, tag = "dev" }
+    { rule = { class = "jetbrains-*" },
+      properties = {
+        floating = true,
+        focus = false,
+        focusable = false,
+        maximized = false,
+        placement = awful.placement.restore,
+        screen = function() return screen.count() > 1 and screen[2] or screen[1] end,
+        tag = "dev"
+      }
     },
 
     -- Set Spotify to always map on the tag "media"

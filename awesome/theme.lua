@@ -12,18 +12,24 @@ local configuration_dir = gfs.get_configuration_dir()
 
 local theme = {}
 
+local accent = "#512da8"
+local background_primary = "#eceff1"
+local background_secondary = "#455a64"
+local font_primary = "#212121"
+local urgent = "#d32f2f"
+
 theme.font          = "Noto Sans 9"
 
-theme.bg_normal     = "#eceff1"
-theme.bg_focus      = "#512da8"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = background_primary
+theme.bg_focus      = accent
+theme.bg_urgent     = urgent
+theme.bg_minimize   = background_secondary
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#212121"
-theme.fg_focus      = "#212121"
-theme.fg_urgent     = "#212121"
-theme.fg_minimize   = "#212121"
+theme.fg_normal     = font_primary
+theme.fg_focus      = font_primary
+theme.fg_urgent     = font_primary
+theme.fg_minimize   = font_primary
 
 theme.useless_gap   = dpi(5)
 theme.border_width  = dpi(2)
