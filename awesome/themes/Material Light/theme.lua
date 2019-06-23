@@ -114,6 +114,16 @@ theme.awesome_icon                              = theme_assets.awesome_icon(them
 theme.icon_theme                                = "Flat-Remix"
 
 -- Widget icons
+theme.batt_020                                  = theme.dir .. "/icons/battery-020.png"
+theme.batt_020_charging                         = theme.dir .. "/icons/battery-020-charging.png"
+theme.batt_040                                  = theme.dir .. "/icons/battery-040.png"
+theme.batt_040_charging                         = theme.dir .. "/icons/battery-040-charging.png"
+theme.batt_060                                  = theme.dir .. "/icons/battery-060.png"
+theme.batt_060_charging                         = theme.dir .. "/icons/battery-060-charging.png"
+theme.batt_080                                  = theme.dir .. "/icons/battery-080.png"
+theme.batt_080_charging                         = theme.dir .. "/icons/battery-080-charging.png"
+theme.batt_100                                  = theme.dir .. "/icons/battery-100.png"
+theme.batt_100_charging                         = theme.dir .. "/icons/battery-100-charging.png"
 theme.wifi_disc                                 = theme.dir .. "/icons/wireless-disconnected.png"
 theme.wifi_full                                 = theme.dir .. "/icons/wireless-full.png"
 theme.wifi_high                                 = theme.dir .. "/icons/wireless-high.png"
@@ -123,6 +133,45 @@ theme.wifi_none                                 = theme.dir .. "/icons/wireless-
 -- }}}
 
 -- {{{ Widgets
+-- {{{ Battery
+local batt_icon = wibox.widget.imagebox(theme.batt_020)
+local batt_tool_tip = awful.tooltip({
+    objects = { batt_icon },
+    margin_leftright = 15,
+    margin_topbottom = 12,
+})
+batt_tool_tip.wibox.fg = theme.fg_normal
+batt_tool_tip.textbox.font = theme.font
+batt_tool_tip.timeout = 0
+batt_tool_tip:set_shape(function(cr, width, height)
+    gears.shape.infobubble(cr, width, height, corner_radius, arrow_size, width - 35)
+end)
+local batt_widget = lain.widget.bat({
+    settings = function()
+        local index, perc = "batt_", tonumber(bat_now.perc) or 0
+
+        if perc <= 20 then
+            index = index .. "020"
+        elseif perc <= 40 then
+            index = index .. "040"
+        elseif perc <= 60 then
+            index = index .. "060"
+        elseif perc <= 80 then
+            index = index .. "080"
+        else
+            index = index .. "100"
+        end
+
+        if bat_now.ac_status == 1 then
+            index = index .. "_charging"
+        end
+
+        batt_icon:set_image(theme[index])
+        batt_tool_tip:set_markup(string.format("\n%s%%, %s", perc, bat_now.time))
+    end
+})
+-- }}}
+
 -- {{{ Clock
 local mytextclock = wibox.widget.textclock("<span font_weight=\"bold\"> %d %B %Y, %H:%M </span>")
 mytextclock.font = theme.font
@@ -138,46 +187,46 @@ theme.cal = lain.widget.cal({
 -- }}}
 
 -- {{{ Network
--- local wifi_icon = wibox.widget.imagebox(theme.wifi_disc)
--- local wifi_tool_tip = awful.tooltip({
---     objects = { wifi_icon }
---     margin_leftright = 15,
---     margin_topbottom = 15,
--- })
--- wifi_tool_tip.wibox.fg = theme.fg_normal
--- wifi_tool_tip.textbox.font = theme.font
--- wifi_tool_tip.timeout = 0
--- wifi_tool_tip.set_shape(function(cr, width, height)
---     gears.shape.infobubble(cr, width, height, corer_radius, arrow_size, width - 120)
--- end)
--- local wifi_widget = awful.widget.watch(
---     { awful.util.shell, "-c", "awk 'NR==3 {printf(\"%d-%0.f\\n\",$2, $3*10/7)}' /proc/net/wireless; iw dev wlan0 link" },
---     2,
---     function(widget, stdout)
---         local carrier, perc = stdout:match("(%d)-(%d+)")
---         local tiptext = stdout:gsub("(%d)-(%d+)"):gsub("%s+$", "")
---         perc = tonumber(perc)
--- 
---         if carrier == "1" or not perc then
---             wifi_icon:set_image(theme.wifi_disc)
---             wifi_tool_tip.set_markup("Disconnected")
---         else
---             if perc <= 5 then
---                 wifi_icon:set_image(theme.wifi_none)
---             elseif perc <= 25 then
---                 wifi_icon:set_image(theme.wifi_low)
---             elseif perc <= 50 then
---                 wifi_icon:set_image(theme.wifi_med)
---             elseif perc <= 75 then
---                 wifi_icon:set_image(theme.wifi_high)
---             else
---                 wifi_icon:set_image(theme.wifi_full)
---             end
---             wifi_tool_tip.set_markup(tiptext)
---         end
---     end
--- )
--- wifi_icon:connect_signal("button::press", function() awful.spawn(string.format("%s -e wavemon", awful.util.terminal)) end)
+local wifi_icon = wibox.widget.imagebox(theme.wifi_disc)
+local wifi_tool_tip = awful.tooltip({
+    objects = { wifi_icon },
+    margin_leftright = 15,
+    margin_topbottom = 15,
+})
+wifi_tool_tip.wibox.fg = theme.fg_normal
+wifi_tool_tip.textbox.font = theme.font
+wifi_tool_tip.timeout = 0
+wifi_tool_tip:set_shape(function(cr, width, height)
+    gears.shape.infobubble(cr, width, height, corner_radius, arrow_size, width - 120)
+end)
+local wifi_widget = awful.widget.watch(
+    { awful.util.shell, "-c", "awk 'NR==3 {printf(\"%d-%0.f\\n\", $2, $3 * 10 / 7)}' /proc/net/wireless; iw dev wlp2s0 link" },
+    2,
+    function(widget, stdout)
+        local carrier, perc = stdout:match("(%d)-(%d+)")
+        local tiptext = stdout:gsub("(%d)-(%d+)"):gsub("%s+$", "")
+        perc = tonumber(perc)
+
+        if carrier == "1" or not perc then
+            wifi_icon:set_image(theme.wifi_disc)
+            wifi_tool_tip.set_markup("Disconnected")
+        else
+            if perc <= 5 then
+                wifi_icon:set_image(theme.wifi_none)
+            elseif perc <= 25 then
+                wifi_icon:set_image(theme.wifi_low)
+            elseif perc <= 50 then
+                wifi_icon:set_image(theme.wifi_med)
+            elseif perc <= 75 then
+                wifi_icon:set_image(theme.wifi_high)
+            else
+                wifi_icon:set_image(theme.wifi_full)
+            end
+            wifi_tool_tip.set_markup(tiptext)
+        end
+    end
+)
+wifi_icon:connect_signal("button::press", function() awful.spawn(string.format("%s -e wavemon", awful.util.terminal)) end)
 -- }}}
 -- }}}
 
@@ -226,7 +275,8 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            wifi_icon,
+            -- wifi_icon,
+            batt_icon,
             s.mylayoutbox,
         },
     }
