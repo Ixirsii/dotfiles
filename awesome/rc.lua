@@ -1,26 +1,16 @@
 -- {{{ Imports
-
--- Standard awesome library
-local gears = require("gears")
-local awful = require("awful")
-require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
-local menubar = require("menubar")
+local gears         = require("gears")
+local awful         = require("awful")
+                      require("awful.autofocus")
+local wibox         = require("wibox")
+local beautiful     = require("beautiful")
+local naughty       = require("naughty")
+local lain          = require("lain")
+local menubar       = require("menubar")
+local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
-
--- Load Debian menu entries
-local debian = require("debian.menu")
-local has_fdo, freedesktop = pcall(require, "freedesktop")
-
----}}}
+                      require("awful.hotkeys_popup.keys")
+-- }}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -47,36 +37,8 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
-local themes = {
-    "Material Light", -- 1
-}
-
-local mytheme = themes[1]
-
--- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
-
-browser = "firefox"
-editor = os.getenv("EDITOR") or "editor"
-editor_cmd = terminal .. " -e " .. editor
-gui_editor = "gvim"
-modkey = "Mod4"
-
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.floating,
-}
-
-beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/" .. mytheme .. "/theme.lua")
--- }}}
-
 -- {{{ Helper functions
-local function client_menu_toggle_fn()
+function awful.util.client_menu_toggle_fn()
     local instance = nil
 
     return function ()
@@ -89,7 +51,7 @@ local function client_menu_toggle_fn()
     end
 end
 
-local function set_wallpaper(s)
+function awful.util.set_wallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper
@@ -102,47 +64,36 @@ local function set_wallpaper(s)
 end
 -- }}}
 
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
+-- {{{ Variable definitions
+local themes = {
+    "Material Light", -- 1
 }
 
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
+local terminal = "urxvt"
 
-if has_fdo then
-    mymainmenu = freedesktop.menu.build({
-        before = { menu_awesome },
-        after =  { menu_terminal }
-    })
-else
-    mymainmenu = awful.menu({
-        items = {
-                  menu_awesome,
-                  { "Debian", debian.menu.Debian_menu.Debian },
-                  menu_terminal,
-                }
-    })
-end
+local altkey        = "Mod1"
+local browser       = "firefox"
+local editor        = os.getenv("EDITOR") or "editor"
+local editor_cmd    = terminal .. " -e " .. editor
+local gui_editor    = "gvim"
+local modkey        = "Mod4"
+local mytheme       = themes[1]
+local scrlocker     = "xscreensaver-command -lock"
+local theme_path = string.format(gears.filesystem.get_configuration_dir() .. "themes/%s/theme.lua", mytheme)
 
+-- Table of layouts to cover with awful.layout.inc, order matters.
+awful.layout.layouts = {
+    awful.layout.suit.tile,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier,
+    awful.layout.suit.floating,
+}
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
+awful.util.terminal = terminal
+awful.util.tagnames = { "sys", "dev", "im", "email", "www", "media" }
 
--- {{{ Wibar
--- Create a textclock widget
-local mytextclock = wibox.widget.textclock("<span font_weight=\"bold\"> %d %B %Y, %H:%M </span>")
-local month_calendar = awful.widget.calendar_popup.month()
-month_calendar:attach( mytextclock, "tr" )
-
--- Create a wibox for each screen and add it
-local taglist_buttons = gears.table.join(
+awful.util.taglist_buttons = gears.table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ modkey }, 1, function(t)
         if client.focus then
@@ -159,49 +110,38 @@ local taglist_buttons = gears.table.join(
     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
+beautiful.init(theme_path)
+-- }}}
+
+-- {{{ Menu
+-- Create a launcher widget and a main menu
+local myawesomemenu = {
+    { "hotkeys", function() return false, hotkeys_popup.show_help end},
+    { "manual", terminal .. " -e man awesome" },
+    { "edit config", editor_cmd .. " " .. awesome.conffile },
+    { "restart", awesome.restart },
+    { "quit", function() awesome.quit() end}
+}
+
+awful.util.mymainmenu = freedesktop.menu.build({
+    before = { { "awesome", myawesomemenu, beautiful.awesome_icon } },
+    after =  { { "open terminal", terminal } }
+})
+
+-- Menubar configuration
+menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- }}}
+
+-- {{{ Screen
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+screen.connect_signal("property::geometry", awful.util.set_wallpaper)
 
-awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    set_wallpaper(s)
-
-    -- Each screen has its own tag table.
-    awful.tag({ "sys", "dev", "im", "email", "www", "media" }, s, awful.layout.layouts[1])
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({ height = 24, position = "top", screen = s })
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        expand = "none",
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            s.mytaglist,
-            s.mypromptbox,
-        },
-        { -- Middle widgets
-            layout = wibox.layout.fixed.horizontal,
-            mytextclock,
-        },
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            s.mylayoutbox,
-        },
-    }
-end)
+awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 -- }}}
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -209,8 +149,11 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    -- X screen locker
+    awful.key({ altkey, "Control" }, "l", function() os.execute(scrlocker) end,
+              {description = "lock screen", group = "hotkeys"}),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+              {description = "show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -230,7 +173,7 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+    awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
@@ -303,6 +246,13 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+
+    -- User programs
+    awful.key({ modkey }, "q", function () awful.spawn(browser) end,
+              {description = "run browser", group = "launcher"}),
+    awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
+              {description = "run gui editor", group = "launcher"}),
+
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
@@ -574,5 +524,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Autorun
-awful.spawn.with_shell(os.getenv("HOME") .. "/.config/awesome/autorun.sh")
+awful.spawn.with_shell(gears.filesystem.get_configuration_dir() .. "autorun.sh")
 -- }}}

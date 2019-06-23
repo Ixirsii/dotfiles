@@ -2,24 +2,33 @@
 --                         Material Theme for Awesome                         --
 -- -------------------------------------------------------------------------- --
 
-local theme_assets = require("beautiful.theme_assets")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
+-- {{{ Imports
+local gears             = require("gears")
+local awful             = require("awful")
+local wibox             = require("wibox")
+local theme_assets      = require("beautiful.theme_assets")
+local xresources        = require("beautiful.xresources")
+local dpi               = xresources.apply_dpi
 
-local gfs = require("gears.filesystem")
-local themes_path = gfs.get_themes_dir()
+local gfs               = require("gears.filesystem")
+local themes_path       = gfs.get_themes_dir()
 local configuration_dir = gfs.get_configuration_dir()
---local lain = require("lain")
+local naughty       = require("naughty")
+local lain              = require("lain")
+-- }}}
 
-local accent = "#512da8"
-local background_primary = "#eceff1"
-local background_secondary = "#455a64"
-local font_primary = "#212121"
-local urgent = "#d32f2f"
+-- {{{ Colorscheme
+local accent                = "#512da8"
+local background_primary    = "#eceff1"
+local background_secondary  = "#455a64"
+local font_primary          = "#212121"
+local urgent                = "#d32f2f"
+-- }}}
 
 local theme = {}
 
-theme.dir           = os.getenv("HOME") .. "/.config/awesome/themes/Material Light"
+-- {{{ Set theme variables
+theme.dir           = configuration_dir .. "themes/Material Light"
 theme.wallpaper     = theme.dir .. "/wallpaper.png"
 
 theme.font          = "Noto Sans 9"
@@ -144,15 +153,58 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "Flat-Remix"
 
---theme.cal = lain.widget.cal({
---    attach_to = { mytextclock },
---    notification_preset = {
---        fg = theme.fg_normal,
---        bg = theme.bg_normal,
---        position = "top_middle",
---        font = theme.font
---    }
---})
+-- }}}
+
+-- {{{ at_screen_connect
+function theme.at_screen_connect(s)
+    s.quake = lain.util.quake({ app = awful.util.terminal, border = theme.border_width })
+
+    -- Wallpaper
+    awful.util.set_wallpaper(s)
+
+    -- Tags
+    awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
+
+    -- Create a promptbox for each screen
+    s.mypromptbox = awful.widget.prompt()
+
+    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+    -- We need one layoutbox per screen.
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(gears.table.join(
+        awful.button({ }, 1, function () awful.layout.inc( 1) end),
+        awful.button({ }, 3, function () awful.layout.inc(-1) end),
+        awful.button({ }, 4, function () awful.layout.inc( 1) end),
+        awful.button({ }, 5, function () awful.layout.inc(-1) end)
+    ))
+
+    -- Create a taglist widget
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+
+    -- Create the wibox
+    s.mywibox = awful.wibar({ height = 24, position = "top", screen = s })
+
+    -- Add widgets to the wibox
+    s.mywibox:setup {
+        expand = "none",
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            s.mytaglist,
+            s.mypromptbox,
+        },
+        { -- Middle widgets
+            layout = wibox.layout.fixed.horizontal,
+            mytextclock,
+        },
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            wibox.widget.systray(),
+            s.mylayoutbox,
+        },
+    }
+end
+-- }}}
 
 return theme
 
