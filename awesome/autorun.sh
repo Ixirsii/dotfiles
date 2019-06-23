@@ -16,6 +16,14 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 # section.
 export SSH_AUTH_SOCK
 
+# Start Screensaver
+run xscreensaver -no-splash
+
+# Start Compositing Manager
 run compton -b
+
+# Clipboard history
 run copyq
+
+# NetworkManager systray applet
 run nm-applet
