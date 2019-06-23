@@ -46,6 +46,12 @@ theme.fg_focus                                  = accent
 theme.fg_urgent                                 = font_primary
 theme.fg_minimize                               = font_primary
 
+theme.taglist_bg_empty                          = background_primary
+theme.taglist_bg_focus                          = background_primary
+theme.taglist_bg_occupied                       = background_primary
+theme.taglist_bg_urgent                         = background_primary
+theme.taglist_bg_volatile                       = background_primary
+
 theme.useless_gap                               = dpi(5)
 theme.border_width                              = dpi(2)
 theme.border_normal                             = theme.bg_normal
