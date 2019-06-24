@@ -67,3 +67,32 @@ Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
+
+! -------------------------------- xscreensaver -------------------------------
+
+!font settings
+xscreensaver.Dialog.headingFont: xft:Source Code Pro for Powerline:pixelsize=10
+xscreensaver.Dialog.bodyFont:    xft:Source Code Pro for Powerline:pixelsize=10
+xscreensaver.Dialog.labelFont:   xft:Source Code Pro for Powerline:pixelsize=10
+xscreensaver.Dialog.unameFont:   xft:Source Code Pro for Powerline:pixelsize=10
+xscreensaver.Dialog.buttonFont:  xft:Source Code Pro for Powerline:pixelsize=10
+xscreensaver.Dialog.dateFont:    xft:Source Code Pro for Powerline:pixelsize=10
+xscreensaver.passwd.passwdFont:  xft:Source Code Pro for Powerline:pixelsize=10
+
+!general dialog box (affects main hostname, username, password text)
+xscreensaver.Dialog.foreground:         #64626d
+xscreensaver.Dialog.background:         #ffffff
+xscreensaver.Dialog.topShadowColor:     #000000
+xscreensaver.Dialog.bottomShadowColor:  #000000
+xscreensaver.Dialog.Button.foreground:  #ffffff
+xscreensaver.Dialog.Button.background:  #64626d
+!username/password input box and date text colour
+xscreensaver.Dialog.text.foreground:    #64626d
+xscreensaver.Dialog.text.background:    #ffffff
+xscreensaver.Dialog.internalBorderWidth:24
+xscreensaver.Dialog.borderWidth:        20
+xscreensaver.Dialog.shadowThickness:    2
+!timeout bar (background is actually determined by Dialog.text.background)
+xscreensaver.passwd.thermometer.foreground:  #64626d
+xscreensaver.passwd.thermometer.background:  #000000
+xscreensaver.passwd.thermometer.width:       8
