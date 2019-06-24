@@ -70,7 +70,11 @@ end
 
 -- {{{ Variable definitions
 local themes = {
-    "Material Light", -- 1
+    "Material Light",   -- 1
+    "Material Lighter", -- 2
+    "Material Dark",    -- 3
+    "Material Darker",  -- 4
+    "Material Darkest", -- 5
 }
 
 local terminal = "urxvt"

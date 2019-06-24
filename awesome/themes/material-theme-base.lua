@@ -318,22 +318,22 @@ end
 
 -- {{{ set_widget_icons
 local function set_widget_icons(theme)
-    theme.batt_020                                  = theme.dir .. "/icons/battery-020.png"
-    theme.batt_020_charging                         = theme.dir .. "/icons/battery-020-charging.png"
-    theme.batt_040                                  = theme.dir .. "/icons/battery-040.png"
-    theme.batt_040_charging                         = theme.dir .. "/icons/battery-040-charging.png"
-    theme.batt_060                                  = theme.dir .. "/icons/battery-060.png"
-    theme.batt_060_charging                         = theme.dir .. "/icons/battery-060-charging.png"
-    theme.batt_080                                  = theme.dir .. "/icons/battery-080.png"
-    theme.batt_080_charging                         = theme.dir .. "/icons/battery-080-charging.png"
-    theme.batt_100                                  = theme.dir .. "/icons/battery-100.png"
-    theme.batt_100_charging                         = theme.dir .. "/icons/battery-100-charging.png"
-    theme.wifi_disc                                 = theme.dir .. "/icons/wireless-disconnected.png"
-    theme.wifi_full                                 = theme.dir .. "/icons/wireless-full.png"
-    theme.wifi_high                                 = theme.dir .. "/icons/wireless-high.png"
-    theme.wifi_low                                  = theme.dir .. "/icons/wireless-low.png"
-    theme.wifi_med                                  = theme.dir .. "/icons/wireless-medium.png"
-    theme.wifi_none                                 = theme.dir .. "/icons/wireless-none.png"
+    theme.batt_020          = theme.icons_dir .. "battery-020.png"
+    theme.batt_020_charging = theme.icons_dir .. "battery-020-charging.png"
+    theme.batt_040          = theme.icons_dir .. "battery-040.png"
+    theme.batt_040_charging = theme.icons_dir .. "battery-040-charging.png"
+    theme.batt_060          = theme.icons_dir .. "battery-060.png"
+    theme.batt_060_charging = theme.icons_dir .. "battery-060-charging.png"
+    theme.batt_080          = theme.icons_dir .. "battery-080.png"
+    theme.batt_080_charging = theme.icons_dir .. "battery-080-charging.png"
+    theme.batt_100          = theme.icons_dir .. "battery-100.png"
+    theme.batt_100_charging = theme.icons_dir .. "battery-100-charging.png"
+    theme.wifi_disc         = theme.icons_dir .. "wireless-disconnected.png"
+    theme.wifi_full         = theme.icons_dir .. "wireless-full.png"
+    theme.wifi_high         = theme.icons_dir .. "wireless-high.png"
+    theme.wifi_low          = theme.icons_dir .. "wireless-low.png"
+    theme.wifi_med          = theme.icons_dir .. "wireless-medium.png"
+    theme.wifi_none         = theme.icons_dir .. "wireless-none.png"
 
     return theme
 end
@@ -349,11 +349,14 @@ function get_theme(theme_name,
                    font,
                    opacity,
                    awesome_icon,
-                   icon_theme)
-    local theme     = {}
-    theme.font      = font
-    theme.dir       = configuration_dir .. "themes/" .. theme_name
-    theme.wallpaper = theme.dir .. "/wallpaper.png"
+                   icon_theme,
+                   icons_dir)
+    local theme_base        = configuration_dir .. "themes/"
+    local theme             = {}
+    theme.font              = font
+    theme.dir               = theme_base .. theme_name
+    theme.icons_dir         = theme_base .. icons_dir
+    theme.wallpaper         = configuration_dir .. "wallpaper.png"
 
     theme                   = set_theme_vars(accent,
                                              bg_primary,

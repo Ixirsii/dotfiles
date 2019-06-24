@@ -14,11 +14,22 @@ local bg_secondary      = "#455a64"
 local fg_primary        = "#263238"
 local font              = "Noto Sans 9"
 local icon_theme        = "Paper"
+local icons_dir         = "icons/material/"
 local opacity           = 0.8
 local theme_name        = "Material Light"
 local urgent            = "#b71c1c"
 
-return get_theme(theme_name, fg_primary, bg_primary, bg_secondary, accent, urgent, font, opacity, awesome_icon, icon_theme)
+return get_theme(theme_name,
+                 fg_primary,
+                 bg_primary,
+                 bg_secondary,
+                 accent,
+                 urgent,
+                 font,
+                 opacity,
+                 awesome_icon,
+                 icon_theme,
+                 icons_dir)
 
 -- -------------------------------------------------------------------------- --
 --                                    EOF                                     --
