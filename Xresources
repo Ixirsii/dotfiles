@@ -1,10 +1,10 @@
 ! ----------------------------------- URxvt -----------------------------------
 
 ! Font Settings
-URxvt*font:                 xft:Source Code Pro for Powerline:pixelsize=10
-URxvt*boldFont:             xft:Source Code Pro for Powerline:pixelsize=10:style=bold
-URxvt*italicFont:           xft:Source Code Pro for Powerline:pixelsize=10:style=italic
-URxvt*bolditalicFont:       xft:Source Code Pro for Powerline:pixelsize=10:style=bolditalic
+URxvt*font:                 xft:Source Code Pro for Powerline-9
+URxvt*boldFont:             xft:Source Code Pro for Powerline-9:bold
+URxvt*italicFont:           xft:Source Code Pro for Powerline-9:italic
+URxvt*bolditalicFont:       xft:Source Code Pro for Powerline-9:bolditalic
 
 URxvt*termName:             rxvt-unicode-256color
 URxvt*geometry:             80x78
@@ -70,29 +70,63 @@ Xft.hintstyle:  hintslight
 
 ! -------------------------------- xscreensaver -------------------------------
 
-!font settings
-xscreensaver.Dialog.headingFont: xft:Source Code Pro for Powerline:pixelsize=10
-xscreensaver.Dialog.bodyFont:    xft:Source Code Pro for Powerline:pixelsize=10
-xscreensaver.Dialog.labelFont:   xft:Source Code Pro for Powerline:pixelsize=10
-xscreensaver.Dialog.unameFont:   xft:Source Code Pro for Powerline:pixelsize=10
-xscreensaver.Dialog.buttonFont:  xft:Source Code Pro for Powerline:pixelsize=10
-xscreensaver.Dialog.dateFont:    xft:Source Code Pro for Powerline:pixelsize=10
-xscreensaver.passwd.passwdFont:  xft:Source Code Pro for Powerline:pixelsize=10
+! Lock and timeout settings
+xscreensaver.lock:                          true
+xscreensaver.lockTimeout:                   00:00:00
+xscreensaver.timeout:                       00:10:00
 
-!general dialog box (affects main hostname, username, password text)
-xscreensaver.Dialog.foreground:         #64626d
-xscreensaver.Dialog.background:         #ffffff
-xscreensaver.Dialog.topShadowColor:     #000000
-xscreensaver.Dialog.bottomShadowColor:  #000000
-xscreensaver.Dialog.Button.foreground:  #ffffff
-xscreensaver.Dialog.Button.background:  #64626d
-!username/password input box and date text colour
-xscreensaver.Dialog.text.foreground:    #64626d
-xscreensaver.Dialog.text.background:    #ffffff
-xscreensaver.Dialog.internalBorderWidth:24
-xscreensaver.Dialog.borderWidth:        20
-xscreensaver.Dialog.shadowThickness:    2
-!timeout bar (background is actually determined by Dialog.text.background)
-xscreensaver.passwd.thermometer.foreground:  #64626d
-xscreensaver.passwd.thermometer.background:  #000000
-xscreensaver.passwd.thermometer.width:       8
+! Power management settings
+xscreensaver.dpmsEnabled:                   true
+xscreensaver.dpmsStandby:                   00:00:00
+xscreensaver.dpmsSuspend:                   00:00:00
+xscreensaver.dpmsOff:                       00:15:00
+xscreensaver.dpmsQuickOff:                  true
+xscreensaver.fade:                          true
+xscreensaver.fadeSeconds:                   5
+xscreensaver.unfade:                        true
+
+! Datestamp format--see the strftime(3) manual page for details
+xscreensaver.dateFormat:                    %a %b %d %Y, %H:%M 
+
+! Font settings
+xscreensaver.Dialog.headingFont:            xft:Source Code Pro-22
+xscreensaver.Dialog.bodyFont:               xft:Source Code Pro-22
+xscreensaver.Dialog.labelFont:              xft:Source Code Pro-22
+xscreensaver.Dialog.unameFont:              xft:Source Code Pro-22
+xscreensaver.Dialog.buttonFont:             xft:Source Code Pro-22
+xscreensaver.Dialog.dateFont:               xft:Source Code Pro-22
+xscreensaver.passwd.passwdFont:             xft:Source Code Pro-22
+
+! General dialog box (affects main hostname, username, password text)
+xscreensaver.Dialog.foreground:             #263238
+xscreensaver.Dialog.background:             #eceff1
+xscreensaver.Dialog.Button.foreground:      #263238
+xscreensaver.Dialog.Button.background:      #b0bec5
+! Username/password input box and date text colour
+xscreensaver.Dialog.text.foreground:        #263238
+xscreensaver.Dialog.text.background:        #eceff1
+! Shadow and border settings
+xscreensaver.Dialog.borderWidth:            0
+xscreensaver.Dialog.shadowThickness:        0
+xscreensaver.Dialog.internalBorderWidth:    0
+! Timeout bar (background is actually determined by Dialog.text.background)
+xscreensaver.passwd.thermometer.foreground: #263238
+xscreensaver.passwd.thermometer.background: #5e35b1
+xscreensaver.passwd.thermometer.width:      2
+! Logo settings
+xscreensaver.Dialog.logo.width:		        0
+xscreensaver.Dialog.logo.height:            0
+! Label settings
+xscreensaver.passwd.heading.label:
+xscreensaver.passwd.body.label:
+xscreensaver.passwd.unlock.label:		    OK
+xscreensaver.passwd.login.label:		    New Login
+xscreensaver.passwd.user.label:		        Username:
+xscreensaver.passwd.uname:                  True
+xscreensaver.splash.heading.label:
+xscreensaver.splash.body.label:	
+xscreensaver.splash.body2.label:
+xscreensaver.splash.demo.label:		        Settings
+xscreensaver.splash.help.label:             Help
+
+! ------------------------------------ EOF ------------------------------------
