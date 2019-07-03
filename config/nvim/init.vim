@@ -68,6 +68,9 @@ set relativenumber
 set textwidth=80
 set colorcolumn=80
 set scrolloff=3             " keep 3 context lines above and below the cursor
+set dictionary+=/usr/share/dict/words
+set dictionary+=/usr/share/dict/american-english
+set spell spelllang=en_us
 
 " <Leader> & <LocalLeader> mapping {{{
 let mapleader=','
@@ -249,10 +252,28 @@ augroup END
 " }}}
 
 " Languages {{{
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+autocmd Filetype javascript,typescript,typescript.tsx setlocal ts=2 sts=2 sw=2 tw=100 cc=100
+autocmd Syntax c,cpp,javascript,html,typescript,xhtml,xml normal zR
 " }}}
 
 " Plugin configuration {{{
+" Airline {{{
+let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+	let g:airline_symbols={}
+endif
+let g:airline_symbols.space="\ua0"
+let g:airline#extensions#ale#enabled=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_buffers=0
+let g:airline_theme='deus'
+" }}}
+
+" ALE {{{
+let g:ale_sign_column_always=1
+" }}}
+
 " deoplete {{{
 let g:deoplete#enable_at_startup=1
 " Use tab to cycle forward
@@ -261,6 +282,16 @@ inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <silent><expr><s-tab> pumbisible() ? "\c-p" : "\<s-tab>"
 " Close the documentation window when compmletion is done
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" Remove this if you'd like to use fuzzy search
+call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
+" If dictionary is already sorted, no need to sort it again.
+call deoplete#custom#source('dictionary', 'sorters', [])
+" Do not complete too short words
+call deoplete#custom#source('dictionary', 'min_pattern_length', 3)
+" }}}
+
+" indentLine {{{
+"let g:indentLine_setColors=0
 " }}}
 
 " NERDTree {{{
@@ -274,17 +305,6 @@ let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.sqp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent='<RightMouse>'
-" }}}
-
-" Airline {{{
-let g:airline_powerline_fonts=1
-if !exists('g:airline_symbols')
-	let g:airline_symbols={}
-endif
-let g:airline_symbols.space="\ua0"
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#show_buffers=0
-let g:airline_theme='deus'
 " }}}
 " }}}
 
