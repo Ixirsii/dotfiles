@@ -60,9 +60,11 @@ alias ls='ls -hN --color=auto --group-directories-first'
 
 # Environment
 export BROWSER="firefox"
-export EDITOR="vim"
+export EDITOR="nvim"
 export READER="zathura"
+export SUDO_ASKPASS="$HOME/bin/dmenupass"
 export TERMINAL="st"
+export VISUAL="nvim-qt"
 
 # less/man colors
 export LESS=-R
