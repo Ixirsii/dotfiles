@@ -1,13 +1,22 @@
 ! ----------------------------------- URxvt -----------------------------------
 
+! color themes
+!#include ".colors/clean"
+!#include ".colors/clean2"
+!#include ".colors/clear"
+!#include ".colors/material_dark"
+!#include ".colors/material_darker"
+#include ".colors/material_light"
+!#include ".colors/solarized"
+
 ! Font Settings
-URxvt*font:                 xft:Source Code Pro for Powerline:pixelsize=10
-URxvt*boldFont:             xft:Source Code Pro for Powerline:pixelsize=10:style=bold
-URxvt*italicFont:           xft:Source Code Pro for Powerline:pixelsize=10:style=italic
-URxvt*bolditalicFont:       xft:Source Code Pro for Powerline:pixelsize=10:style=bolditalic
+URxvt*font:                 xft:Source Code Pro for Powerline-9
+URxvt*boldFont:             xft:Source Code Pro for Powerline-9:bold
+URxvt*italicFont:           xft:Source Code Pro for Powerline-9:italic
+URxvt*bolditalicFont:       xft:Source Code Pro for Powerline-9:bolditalic
 
 URxvt*termName:             rxvt-unicode-256color
-URxvt*geometry:             80x78
+!URxvt*geometry:             80x78
 
 URxvt*cursorBlink:          true
 URxvt*scrollBar:            false
@@ -21,35 +30,7 @@ URxvt.scrollTtyKeypress:    true
 URxvt.scrollWithBuffer:     true
 
 URxvt*depth:            32
-URxvt*fading:           0
-
-urxvt*background:   #FAFAFA
-urxvt*foreground:   #263238
-urxvt*cursorColor:  #263238
-! Black
-urxvt*color0:       #000000
-urxvt*color8:       #37474F
-! Red
-urxvt*color1:       #AD1457
-urxvt*color9:       #EC407A
-! Green
-urxvt*color2:       #00695C
-urxvt*color10:      #26A69A
-! Yellow
-urxvt*color3:       #FF8F00
-urxvt*color11:      #FFCA28
-! Blue
-urxvt*color4:       #1565C0
-urxvt*color12:      #42A5F5
-! Magenta
-urxvt*color5:       #4527A0
-urxvt*color13:      #7E57C2
-! Cyan
-urxvt*color6:       #00838F
-urxvt*color14:      #26C6DA
-! White
-urxvt*color7:       #78909C
-urxvt*color15:      #FFFFFF
+!URxvt*fading:           0
 
 ! clickable links
 URxvt.perl-ext-common:	default,matcher
@@ -59,6 +40,14 @@ URxvt.keysym.C-Delete: perl:matcher:last
 URxvt.keysym.M-Delete: perl:matcher:list
 URxvt.matcher.rend.0: Uline Bold fg6
 
+! ------------------------------------ ST -------------------------------------
+
+!! Transparency (0-1):
+st.alpha:       0.8
+
+!! Set a default font and font size as below:
+st.font:        Source Code Pro-9;
+st.fontalt0:    Source Code Pro for Powerline-9
 
 ! ------------------------------------ Xft ------------------------------------
 
@@ -67,3 +56,66 @@ Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
+
+! -------------------------------- xscreensaver -------------------------------
+
+! Lock and timeout settings
+xscreensaver.lock:                          true
+xscreensaver.lockTimeout:                   00:00:00
+xscreensaver.timeout:                       00:10:00
+
+! Power management settings
+xscreensaver.dpmsEnabled:                   true
+xscreensaver.dpmsStandby:                   00:00:00
+xscreensaver.dpmsSuspend:                   00:00:00
+xscreensaver.dpmsOff:                       00:15:00
+xscreensaver.dpmsQuickOff:                  true
+xscreensaver.fade:                          true
+xscreensaver.fadeSeconds:                   5
+xscreensaver.unfade:                        true
+
+! Datestamp format--see the strftime(3) manual page for details
+xscreensaver.dateFormat:                    %a %b %d %Y, %H:%M 
+
+! Font settings
+xscreensaver.Dialog.headingFont:            xft:Source Code Pro-22
+xscreensaver.Dialog.bodyFont:               xft:Source Code Pro-22
+xscreensaver.Dialog.labelFont:              xft:Source Code Pro-22
+xscreensaver.Dialog.unameFont:              xft:Source Code Pro-22
+xscreensaver.Dialog.buttonFont:             xft:Source Code Pro-22
+xscreensaver.Dialog.dateFont:               xft:Source Code Pro-22
+xscreensaver.passwd.passwdFont:             xft:Source Code Pro-22
+
+! General dialog box (affects main hostname, username, password text)
+xscreensaver.Dialog.foreground:             #263238
+xscreensaver.Dialog.background:             #eceff1
+xscreensaver.Dialog.Button.foreground:      #263238
+xscreensaver.Dialog.Button.background:      #b0bec5
+! Username/password input box and date text colour
+xscreensaver.Dialog.text.foreground:        #263238
+xscreensaver.Dialog.text.background:        #eceff1
+! Shadow and border settings
+xscreensaver.Dialog.borderWidth:            0
+xscreensaver.Dialog.shadowThickness:        0
+xscreensaver.Dialog.internalBorderWidth:    0
+! Timeout bar (background is actually determined by Dialog.text.background)
+xscreensaver.passwd.thermometer.foreground: #263238
+xscreensaver.passwd.thermometer.background: #5e35b1
+xscreensaver.passwd.thermometer.width:      2
+! Logo settings
+xscreensaver.Dialog.logo.width:		        0
+xscreensaver.Dialog.logo.height:            0
+! Label settings
+xscreensaver.passwd.heading.label:
+xscreensaver.passwd.body.label:
+xscreensaver.passwd.unlock.label:		    OK
+xscreensaver.passwd.login.label:		    New Login
+xscreensaver.passwd.user.label:		        Username:
+xscreensaver.passwd.uname:                  True
+xscreensaver.splash.heading.label:
+xscreensaver.splash.body.label:	
+xscreensaver.splash.body2.label:
+xscreensaver.splash.demo.label:		        Settings
+xscreensaver.splash.help.label:             Help
+
+! ------------------------------------ EOF ------------------------------------

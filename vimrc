@@ -483,7 +483,7 @@ endif
 
 " Font {{{
 if has("gui_gtk2") || has("gui_gtk3")
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ 9,Oxygen\ Mono\ 9,Ubuntu\ Mono\ 9
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ 9,Source\ Code\ Pro\ 9,Noto\ Sans\ Mono\ 9,Noto\ Sans\ 9,Oxygen\ Mono\ 9,Ubuntu\ Mono\ 9
 endif
 " }}}
 
