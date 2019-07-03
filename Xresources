@@ -30,23 +30,23 @@ urxvt*cursorColor:  #263238
 urxvt*color0:       #000000
 urxvt*color8:       #37474F
 ! Red
-urxvt*color1:       #AD1457
-urxvt*color9:       #EC407A
+urxvt*color1:       #880e4f
+urxvt*color9:       #c2185b
 ! Green
-urxvt*color2:       #00695C
-urxvt*color10:      #26A69A
+urxvt*color2:       #004d40
+urxvt*color10:      #00796b
 ! Yellow
-urxvt*color3:       #FF8F00
-urxvt*color11:      #FFCA28
+urxvt*color3:       #ff6f00
+urxvt*color11:      #ffa000
 ! Blue
-urxvt*color4:       #1565C0
-urxvt*color12:      #42A5F5
+urxvt*color4:       #0d47a1
+urxvt*color12:      #1976d2
 ! Magenta
-urxvt*color5:       #4527A0
-urxvt*color13:      #7E57C2
+urxvt*color5:       #311b92
+urxvt*color13:      #512da8
 ! Cyan
-urxvt*color6:       #00838F
-urxvt*color14:      #26C6DA
+urxvt*color6:       #006064
+urxvt*color14:      #0097a7
 ! White
 urxvt*color7:       #78909C
 urxvt*color15:      #FFFFFF
@@ -59,6 +59,14 @@ URxvt.keysym.C-Delete: perl:matcher:last
 URxvt.keysym.M-Delete: perl:matcher:list
 URxvt.matcher.rend.0: Uline Bold fg6
 
+! ------------------------------------ ST -------------------------------------
+
+!! Transparency (0-1):
+st.alpha:       0.8
+
+!! Set a default font and font size as below:
+st.font:        Source Code Pro-9;
+st.fontalt0:    Source Code Pro for Powerline-9
 
 ! ------------------------------------ Xft ------------------------------------
 
