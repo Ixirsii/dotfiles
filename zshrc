@@ -34,7 +34,7 @@ fi
 
 HISTFILE=~/.histfile
 HISTSIZE=10000
-SAVEHIST=10000
+SAVEHIST=$HISTSIZE
 
 set-title() {
     echo -e "\e]0;$*\007"
@@ -51,13 +51,28 @@ if [ -f ~/.zshrc-dev-dsk-post ]; then
 fi
 
 ## Aliases
+alias ccat="highlight --out-format=ansi"
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fuck='sudo $(history -p \!\!)'
 alias egrep='egrep --color=auto'
-alias ls='ls --color=auto'
+alias ls='ls -hN --color=auto --group-directories-first'
 
+# Environment
+export BROWSER="firefox"
 export EDITOR="vim"
+export READER="zathura"
+export TERMINAL="st"
+
+# less/man colors
+export LESS=-R
+export LESS_TERMCAP_mb="$(printf '%b' '\e[1;31m')"; a="${a%_}"
+export LESS_TERMCAP_md="$(printf '%b' '\e[1;36m')"; a="${a%_}"
+export LESS_TERMCAP_me="$(printf '%b' '\e[0m')"; a="${a%_}"
+export LESS_TERMCAP_so="$(printf '%b' '\e[01;44;33m')"; a="${a%_}"
+export LESS_TERMCAP_se="$(printf '%b' '\e[0m')"; a="${a%_}"
+export LESS_TERMCAP_us="$(printf '%b' '\e[01;32m')"; a="${a%_}"
+export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 
 if which brew >/dev/null 2>&1; then
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"

@@ -1,5 +1,35 @@
 ! ----------------------------------- URxvt -----------------------------------
 
+! color themes
+!#include ".colors/ancient"
+!#include ".colors/blue"
+!#include ".colors/bw_b"
+!#include ".colors/bw_w"
+!#include ".colors/charlie_brown"
+!#include ".colors/clean"
+!#include ".colors/clean2"
+!#include ".colors/clear"
+!#include ".colors/colors"
+!#include ".colors/crypt"
+!#include ".colors/cryptetsy"
+!#include ".colors/cryptred"
+!#include ".colors/default"
+!#include ".colors/fallac"
+!#include ".colors/form"
+!#include ".colors/gohucolor"
+#include ".colors/material_light"
+!#include ".colors/material_dark"
+!#include ".colors/material_darker"
+!#include ".colors/nebula"
+!#include ".colors/ok100"
+!#include ".colors/solarized"
+!#include ".colors/space"
+!#include ".colors/thaw"
+!#include ".colors/vintage"
+!#include ".colors/vintage2"
+!#include ".colors/vivid"
+!#include ".colors/xmas"
+
 ! Font Settings
 URxvt*font:                 xft:Source Code Pro for Powerline-9
 URxvt*boldFont:             xft:Source Code Pro for Powerline-9:bold
@@ -7,7 +37,7 @@ URxvt*italicFont:           xft:Source Code Pro for Powerline-9:italic
 URxvt*bolditalicFont:       xft:Source Code Pro for Powerline-9:bolditalic
 
 URxvt*termName:             rxvt-unicode-256color
-URxvt*geometry:             80x78
+!URxvt*geometry:             80x78
 
 URxvt*cursorBlink:          true
 URxvt*scrollBar:            false
@@ -22,34 +52,6 @@ URxvt.scrollWithBuffer:     true
 
 URxvt*depth:            32
 !URxvt*fading:           0
-
-urxvt*background:   [70]#ECEFF1
-urxvt*foreground:   #263238
-urxvt*cursorColor:  #263238
-! Black
-urxvt*color0:       #000000
-urxvt*color8:       #37474F
-! Red
-urxvt*color1:       #880e4f
-urxvt*color9:       #c2185b
-! Green
-urxvt*color2:       #004d40
-urxvt*color10:      #00796b
-! Yellow
-urxvt*color3:       #ff6f00
-urxvt*color11:      #ffa000
-! Blue
-urxvt*color4:       #0d47a1
-urxvt*color12:      #1976d2
-! Magenta
-urxvt*color5:       #311b92
-urxvt*color13:      #512da8
-! Cyan
-urxvt*color6:       #006064
-urxvt*color14:      #0097a7
-! White
-urxvt*color7:       #78909C
-urxvt*color15:      #FFFFFF
 
 ! clickable links
 URxvt.perl-ext-common:	default,matcher

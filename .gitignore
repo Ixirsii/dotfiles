@@ -1,7 +1,13 @@
 ## ViM
+
 # Plugins bundle
 vim/bundle
 # ViM tmp directory
 vim/tmp
 # ???
 vim.netrwhist
+
+## bin
+# Amazon SSH
+bin/AmaSSH
+
