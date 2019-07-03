@@ -58,6 +58,9 @@ alias fuck='sudo $(history -p \!\!)'
 alias egrep='egrep --color=auto'
 alias ls='ls -hN --color=auto --group-directories-first'
 
+# Use neovim instead of vim if present
+command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
+
 # Environment
 export BROWSER="firefox"
 export EDITOR="nvim"
