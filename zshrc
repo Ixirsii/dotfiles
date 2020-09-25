@@ -49,8 +49,15 @@ if [ -f ~/.zshrc-dev-dsk-post ]; then
     source ~/.zshrc-dev-dsk-post
 fi
 
+if [ -d ~/.zsh/zsh-autosuggestions ]; then
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+fi
+
 ## Aliases
 alias ccat="highlight --out-format=ansi"
+alias du="dust"
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fuck='sudo $(history -p \!\!)'
@@ -63,6 +70,7 @@ command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 # Environment
 export BROWSER="firefox"
 export EDITOR="nvim"
+export NVM_DIR="$HOME/.nvm"
 export READER="zathura"
 export SUDO_ASKPASS="$HOME/bin/dmenupass"
 export TERMINAL="st"
@@ -78,7 +86,10 @@ export LESS_TERMCAP_se="$(printf '%b' '\e[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '\e[01;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 
-if which brew >/dev/null 2>&1; then
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-fi
+# PATH
+export PATH="$PATH:$HOME/.cargo/bin"
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source "/etc/profile.d/rvm.sh" # Set up RVM
 
