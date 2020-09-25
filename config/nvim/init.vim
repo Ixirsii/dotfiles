@@ -16,8 +16,7 @@ language en_US.UTF-8
 " vim-plug {{{
 " Autoinstall Plug
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo '~/.local/share/nvim/site/autoload/plug.vim' --create-dir \
-    'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  !curl -fLo '~/.local/share/nvim/site/autoload/plug.vim' --create-dir 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
