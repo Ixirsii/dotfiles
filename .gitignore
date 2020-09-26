@@ -2,7 +2,7 @@
 
 # Plugins bundle
 vim/bundle
-config/nvim/bundle
+config/nvim/autoload
 # ViM tmp directory
 vim/tmp
 # ???

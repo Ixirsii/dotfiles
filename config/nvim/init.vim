@@ -172,6 +172,11 @@ if exists('g:GuiLoaded')
     Guifont Source Code Pro for Powerline:h9
 endif
 
+" Enable true color support
+if has('termguicolors')
+  set termguicolors
+endif
+
 colorscheme nova
 " }}}
 
