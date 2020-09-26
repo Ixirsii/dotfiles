@@ -15,45 +15,47 @@ language en_US.UTF-8
 
 " vim-plug {{{
 " Autoinstall Plug
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  !curl -fLo '~/.local/share/nvim/site/autoload/plug.vim' --create-dir 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  "autocmd VimEnter * PlugInstall
+  "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.config/nvim/bundle')
+call plug#begin('~/.config/nvim/autoload/plugged')
 
-" Autocompletion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-clang'
-Plug 'deoplete-plugins/deoplete-tag'
-Plug 'deoplete-plugins/deoplete-zsh'
-Plug 'jiangmiao/auto-pairs'
+    " Autocompletion
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'deoplete-plugins/deoplete-clang'
+    Plug 'deoplete-plugins/deoplete-tag'
+    Plug 'deoplete-plugins/deoplete-zsh'
+    Plug 'jiangmiao/auto-pairs'
 
-" Syntax highlighting
-Plug 'scrooloose/syntastic'
-Plug 'sheerun/vim-polyglot'
-Plug 'vim-scripts/hexHighlight.vim'
-Plug 'Yggdroot/indentline'
-Plug 'w0rp/ale'
+    " Syntax highlighting
+    Plug 'scrooloose/syntastic'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'vim-scripts/hexHighlight.vim'
+    Plug 'Yggdroot/indentline'
+    Plug 'w0rp/ale'
 
-" File browser
-Plug 'weynhamz/vim-plugin-minibufexpl'
-Plug 'scrooloose/nerdtree'
+    " File browser
+    Plug 'weynhamz/vim-plugin-minibufexpl'
+    Plug 'scrooloose/nerdtree'
 
-" DCVS
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+    " DCVS
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
 
-" Color editing
-Plug 'Rykka/colorv.vim'
+    " Color editing
+    Plug 'Rykka/colorv.vim'
 
-" GUI
-Plug 'trevordmiller/nova-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+    " GUI
+    Plug 'trevordmiller/nova-vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
-" TMUX integration
-Plug 'christoomey/vim-tmux-navigator'
+    " TMUX integration
+    Plug 'christoomey/vim-tmux-navigator'
 
 " call PlugInstall to install new plugins
 call plug#end()

@@ -70,7 +70,6 @@ command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 # Environment
 export BROWSER="firefox"
 export EDITOR="nvim"
-export NVM_DIR="$HOME/.nvm"
 export READER="zathura"
 export SUDO_ASKPASS="$HOME/bin/dmenupass"
 export TERMINAL="st"
@@ -89,7 +88,6 @@ export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 # PATH
 export PATH="$PATH:$HOME/.cargo/bin"
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source "/etc/profile.d/rvm.sh" # Set up RVM
+source /usr/share/nvm/init-nvm.sh # Set up NVM
+#source "/etc/profile.d/rvm.sh" # Set up RVM
 
