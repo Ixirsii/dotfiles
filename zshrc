@@ -62,7 +62,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fuck='sudo $(history -p \!\!)'
 alias egrep='egrep --color=auto'
-alias ls='ls -AFhN --color --group-directories-first'
+alias ls='gls -AFhN --color --group-directories-first'
 
 # Use neovim instead of vim if present
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
@@ -73,7 +73,7 @@ export EDITOR="nvim"
 export READER="zathura"
 export SUDO_ASKPASS="$HOME/bin/dmenupass"
 export TERMINAL="st"
-export VISUAL="nvim-qt"
+#export VISUAL="nvim-qt"
 
 # less/man colors
 export LESS=-R
@@ -88,6 +88,6 @@ export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 # PATH
 export PATH="$PATH:$HOME/.cargo/bin"
 
-source /usr/share/nvm/init-nvm.sh # Set up NVM
-#source "/etc/profile.d/rvm.sh" # Set up RVM
-
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
