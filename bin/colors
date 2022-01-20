@@ -9,7 +9,7 @@ echo     "" # blank line
 echo -en "\e[30m█ Black\e[00m\t\t\e[31m█ Red\e[00m\t\t"
 echo -e "\e[32m█ Green\e[00m\t\t\e[33m█ Yellow\e[00m\t\t"
 echo -en "\e[90m█ Grey\e[00m\t\t\e[91m█ Light red\e[00m\t"
-echo -e "\e[92m█ Ligth green\e[00m\t\e[93m█ Light yellow\e[00m\t\t"
+echo -e "\e[92m█ Light green\e[00m\t\e[93m█ Light yellow\e[00m\t\t"
 
 echo -en "\e[34m█ Blue\e[00m\t\t\e[35m█ Purple\e[00m\t"
 echo -e  "\e[36m█ Cyan\e[00m\t\t\e[37m█ Light grey\e[00m"

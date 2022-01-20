@@ -32,6 +32,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'jiangmiao/auto-pairs'
 
     " Syntax highlighting
+    Plug 'plasticboy/vim-markdown'
     Plug 'scrooloose/syntastic'
     Plug 'sheerun/vim-polyglot'
     Plug 'vim-scripts/hexHighlight.vim'
@@ -193,7 +194,7 @@ nnoremap <silent><Leader>K :bd<CR>
 " }}}
 
 " Folding {{{
-set foldmethod=syntax
+set foldmethod=marker
 
 " Toggle folding
 nnoremap \ za
