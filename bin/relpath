@@ -1,6 +1,0 @@
-#!/bin/bash
-
-RELPATH=$( echo $1 | sed 's/.*Torrents\///' )
-RELPATH=$( echo $RELPATH | awk -F / '{ for (i = 1; i < NF; i++) {printf $i"/"}; printf "\n"}' )
-#RELPATH=$( echo $RELPATH | sed 's/ /\\ /g' )
-echo -n $RELPATH

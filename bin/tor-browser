@@ -1,7 +1,0 @@
-#!/bin/bash
-
-DIRECTORY="tor-browser_en-US"
-
-cd "$HOME/$DIRECTORY"
-
-"./start-tor-browser"

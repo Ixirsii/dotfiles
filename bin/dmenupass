@@ -1,3 +1,0 @@
-#!/bin/sh
-
-dmenu -fn "Source Code Pro-10" -sb "#B0BEC5" -sf "#263238" -nb "#ECEFF1" -nf "#263238" -p "$1" <&- && echo
