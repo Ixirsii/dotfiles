@@ -1,6 +1,7 @@
 [user]
-	email = ryaporte@amazon.com
+	email = ryan@ryanporterfield.com
 	name = Ryan Porterfield
+	signingKey = BF786A4EB755397483F9DBB1C92579F5B64EF7DB
 [color]
 	ui = auto
 [core]
@@ -13,3 +14,11 @@
 	enabled = true
 [pull]
 	rebase = true
+[http]
+	sslVerify = true
+[init]
+	defaultBranch = main
+[commit]
+	gpgSign = true
+[tag]
+	forceSignAnnotated = true

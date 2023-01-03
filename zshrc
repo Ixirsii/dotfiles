@@ -10,7 +10,7 @@ export LANG=en_US.UTF-8
 source ~/.zprompt
 zstyle :compinstall filename '~/.zshrc'
 
-setopt appendhistory autocd extendedglob notify hist_ignore_dups
+setopt incappendhistory autocd extendedglob notify hist_ignore_dups
 unsetopt beep nomatch
 bindkey -v
 
@@ -73,7 +73,7 @@ export EDITOR="nvim"
 export READER="zathura"
 export SUDO_ASKPASS="$HOME/bin/dmenupass"
 export TERMINAL="st"
-export VISUAL="nvim-qt"
+#export VISUAL="nvim-qt"
 
 # less/man colors
 export LESS=-R
