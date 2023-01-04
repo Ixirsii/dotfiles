@@ -1,7 +1,7 @@
 [user]
-	email = ryan@ryanporterfield.com
+	email = ixirsii@ixirsii.tech
 	name = Ryan Porterfield
-	signingKey = BF786A4EB755397483F9DBB1C92579F5B64EF7DB
+	#signingKey = BF786A4EB755397483F9DBB1C92579F5B64EF7DB
 [color]
 	ui = auto
 [core]
@@ -19,6 +19,6 @@
 [init]
 	defaultBranch = main
 [commit]
-	gpgSign = true
+	#gpgSign = true
 [tag]
 	forceSignAnnotated = true
