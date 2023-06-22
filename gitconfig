@@ -22,3 +22,4 @@
 	gpgSign = true
 [tag]
 	forceSignAnnotated = true
+
