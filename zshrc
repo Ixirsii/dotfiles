@@ -10,26 +10,12 @@ export LANG=en_US.UTF-8
 source ~/.zprompt
 zstyle :compinstall filename '~/.zshrc'
 
-setopt appendhistory autocd extendedglob notify hist_ignore_dups
+setopt incappendhistory autocd extendedglob notify hist_ignore_dups
 unsetopt beep nomatch
 bindkey -v
 
 autoload -Uz compinit
 compinit
-
-tmux_session_name="ryan"
-
-if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and if no session is started, start a new session
-    if (! tmux has-session -t $tmux_session_name); then
-        tmux -2u new-session -s $tmux_session_name -d
-    fi
-
-    if test -z "$TMUX"; then
-        (tmux -2u new-session -t $tmux_session_name)
-    fi
-    
-fi
 
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -45,10 +31,6 @@ ssh() {
     set-title $HOST;
 }
 
-if [ -f ~/.zshrc-dev-dsk-post ]; then
-    source ~/.zshrc-dev-dsk-post
-fi
-
 if [ -d ~/.zsh/zsh-autosuggestions ]; then
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
@@ -57,23 +39,25 @@ fi
 
 ## Aliases
 alias ccat="highlight --out-format=ansi"
-alias du="dust"
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fuck='sudo $(history -p \!\!)'
 alias egrep='egrep --color=auto'
-alias ls='gls -AFhN --color --group-directories-first'
+#alias ls='gls -AFhN --color --group-directories-first'
 
 # Use neovim instead of vim if present
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
 # Environment
-export BROWSER="firefox"
+export BROWSER="safari"
 export EDITOR="nvim"
-export READER="zathura"
-export SUDO_ASKPASS="$HOME/bin/dmenupass"
-export TERMINAL="st"
-#export VISUAL="nvim-qt"
+export TERMINAL="alacritty"
+
+# AEXP Proxy
+export http_proxy=http://proxy.aexp.com:8080
+export https_proxy=http://proxy.aexp.com:8080
+export HTTPS_PROXY=http://proxy.aexp.com:8080
+export HTTP_PROXY=http://proxy.aexp.com:8080
 
 # less/man colors
 export LESS=-R
@@ -86,8 +70,18 @@ export LESS_TERMCAP_us="$(printf '%b' '\e[01;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 
 # PATH
+export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+tmux_session_name="ryan"
+
+if which tmux >/dev/null 2>&1; then
+    #if not inside a tmux session, and if no session is started, start a new session
+    if (! tmux has-session -t $tmux_session_name); then
+        tmux -2u new-session -s $tmux_session_name -d
+    fi
+
+    if test -z "$TMUX"; then
+        (tmux -2u new-session -t $tmux_session_name)
+    fi
+fi

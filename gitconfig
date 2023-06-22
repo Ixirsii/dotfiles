@@ -1,5 +1,5 @@
 [user]
-	email = ryaporte@amazon.com
+	email = Ryan.Porterfield@aexp.com
 	name = Ryan Porterfield
 [color]
 	ui = auto
@@ -13,3 +13,8 @@
 	enabled = true
 [pull]
 	rebase = true
+[http]
+	sslVerify = true
+[init]
+	defaultBranch = main
+
