@@ -71,7 +71,7 @@ command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 export BROWSER="firefox"
 export EDITOR="nvim"
 export READER="zathura"
-export SUDO_ASKPASS="$HOME/bin/dmenupass"
+#export SUDO_ASKPASS="$HOME/bin/dmenupass"
 export TERMINAL="st"
 #export VISUAL="nvim-qt"
 
