@@ -8,7 +8,7 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = {'java_language_server', 'rust_analyzer', 'tsserver'},
+    ensure_installed = {'rust_analyzer', 'tsserver'},
     handlers = {
         lsp_zero.default_setup,
     },

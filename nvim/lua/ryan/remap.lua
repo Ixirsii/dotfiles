@@ -1,5 +1,5 @@
--- Open netrw
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+-- leader
+vim.g.mapleader = ' '
 
 -- Move higlighted lines
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv')
