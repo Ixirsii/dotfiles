@@ -21,12 +21,18 @@ return require('packer').startup(function(use)
         }
     }
 
-    -- Better file navication
+    -- Better file navigation
     use('ThePrimeagen/harpoon')
+
+    -- File explorer
+    use('nvim-tree/nvim-tree.lua')
 
     -- Syntax highlighting
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('nvim-treesitter/playground')
+
+    -- Commenting with gc
+    use('numToStr/Comment.nvim')
 
     -- Undo tree
     use('mbbill/undotree')
@@ -57,6 +63,9 @@ return require('packer').startup(function(use)
 
     -- Make things pretty
     use('stevearc/dressing.nvim')
+
+    -- Status line
+    use('nvim-lualine/lualine.nvim')
 
 end)
 
