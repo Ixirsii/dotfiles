@@ -31,10 +31,18 @@ ssh() {
     set-title $HOST;
 }
 
-if [ -d ~/.zsh/zsh-autosuggestions ]; then
-    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-else
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+# Tmux
+tmux_session_name="ryan"
+
+if which tmux >/dev/null 2>&1; then
+    #if not inside a tmux session, and if no session is started, start a new session
+    if (! tmux has-session -t $tmux_session_name); then
+        tmux -2u new-session -s $tmux_session_name -d
+    fi
+
+    if test -z "$TMUX"; then
+        (tmux -2u new-session -t $tmux_session_name)
+    fi
 fi
 
 ## Aliases
@@ -79,22 +87,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-# Tmux
+# Plugins
+# https://github.com/MichaelAquilina/zsh-auto-notify
+source ~/.config/zsh/zsh-auto-notify/auto-notify.plugin.zsh
+# https://github.com/zsh-users/zsh-autosuggestions
+source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# https://github.com/zsh-users/zsh-history-substring-search
+source ~/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+# https://github.com/zsh-users/zsh-syntax-highlighting
+source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# https://github.com/MichaelAquilina/zsh-you-should-use
+source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
 
-tmux_session_name="ryan"
-
-if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and if no session is started, start a new session
-    if (! tmux has-session -t $tmux_session_name); then
-        tmux -2u new-session -s $tmux_session_name -d
-    fi
-
-    if test -z "$TMUX"; then
-        (tmux -2u new-session -t $tmux_session_name)
-    fi
-fi
-
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
