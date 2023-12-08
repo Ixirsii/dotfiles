@@ -31,20 +31,6 @@ ssh() {
     set-title $HOST;
 }
 
-# Tmux
-tmux_session_name="ryan"
-
-if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and if no session is started, start a new session
-    if (! tmux has-session -t $tmux_session_name); then
-        tmux -2u new-session -s $tmux_session_name -d
-    fi
-
-    if test -z "$TMUX"; then
-        (tmux -2u new-session -t $tmux_session_name)
-    fi
-fi
-
 ## Aliases
 alias ccat="highlight --out-format=ansi"
 alias grep='grep --color=auto'
@@ -98,4 +84,19 @@ source ~/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.z
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # https://github.com/MichaelAquilina/zsh-you-should-use
 source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
+
+# Tmux
+tmux_session_name="ryan"
+
+if which tmux >/dev/null 2>&1; then
+    # if not inside a tmux session, and if no session is started,
+    # start a new session
+    if (! tmux has-session -t $tmux_session_name); then
+        tmux -2u new-session -s $tmux_session_name -d
+    fi
+
+    if test -z "$TMUX"; then
+        (tmux -2u new-session -t $tmux_session_name)
+    fi
+fi
 
