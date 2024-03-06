@@ -12,7 +12,7 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 -- Keep search terms in the middle of the screen
 vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'R', 'Nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- Paste without losing current buffer
 vim.keymap.set('x', '<leader>p', '"_dP')

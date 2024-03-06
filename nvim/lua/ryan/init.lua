@@ -1,5 +1,5 @@
 require('ryan.remap')
-require('ryan.packer')
+require('ryan.lazy')
 
 -- Fat cursor
 vim.opt.guicursor = ''

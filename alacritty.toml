@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/catppuccin/catppuccin-mocha.yml"]
+import = ["~/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
 
 [env]
 TERM = "xterm-256color"

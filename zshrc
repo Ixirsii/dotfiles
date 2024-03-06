@@ -39,11 +39,12 @@ fi
 
 ## Aliases
 alias ccat="highlight --out-format=ansi"
+alias du="dust"
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fuck='sudo $(history -p \!\!)'
 alias egrep='egrep --color=auto'
-alias ls='gls -AFhlN --color --group-directories-first'
+alias ls='ls -AFhlN --color --group-directories-first'
 
 # Use neovim instead of vim if present
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
@@ -52,13 +53,6 @@ command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 export BROWSER="safari"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-
-# AEXP Proxy
-export http_proxy=http://proxy.aexp.com:8080
-export https_proxy=http://proxy.aexp.com:8080
-export HTTPS_PROXY=http://proxy.aexp.com:8080
-export HTTP_PROXY=http://proxy.aexp.com:8080
-export NO_PROXY=.aexp.com,localhost
 
 # less/man colors
 export LESS=-R
@@ -71,13 +65,7 @@ export LESS_TERMCAP_us="$(printf '%b' '\e[01;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 
 # PATH
-export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Tmux
 
@@ -94,7 +82,3 @@ if which tmux >/dev/null 2>&1; then
     fi
 fi
 
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
