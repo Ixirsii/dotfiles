@@ -40,7 +40,7 @@ alias ls='gls -AFhlN --color --group-directories-first'
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
 # Environment
-export BROWSER="safari"
+export BROWSER="firefox"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 
