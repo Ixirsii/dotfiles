@@ -32,27 +32,17 @@ ssh() {
 }
 
 ## Aliases
-alias ccat="highlight --out-format=ansi"
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias grep='rg --color=auto'
 alias fuck='sudo $(history -p \!\!)'
-alias egrep='egrep --color=auto'
 alias ls='gls -AFhlN --color --group-directories-first'
 
 # Use neovim instead of vim if present
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
 # Environment
-export BROWSER="safari"
+export BROWSER="firefox"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-
-# AEXP Proxy
-export http_proxy=http://proxy.aexp.com:8080
-export https_proxy=http://proxy.aexp.com:8080
-export HTTPS_PROXY=http://proxy.aexp.com:8080
-export HTTP_PROXY=http://proxy.aexp.com:8080
-export NO_PROXY=.aexp.com,localhost
 
 # less/man colors
 export LESS=-R
@@ -85,12 +75,8 @@ source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # https://github.com/MichaelAquilina/zsh-you-should-use
 source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 # Tmux
-tmux_session_name="ryan"
+local tmux_session_name="ryan"
 
 if which tmux >/dev/null 2>&1; then
     # if not inside a tmux session, and if no session is started,
@@ -104,3 +90,8 @@ if which tmux >/dev/null 2>&1; then
     fi
 fi
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

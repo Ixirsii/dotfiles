@@ -1,7 +1,7 @@
 [user]
 	email = ixirsii@ixirsii.tech
 	name = Ryan Porterfield
-	signingKey = BF786A4EB755397483F9DBB1C92579F5B64EF7DB
+	signingKey = 8DCC6FB8BDC669072621EC6AE08EE51047CC0C7B
 [color]
 	ui = auto
 [core]
@@ -22,4 +22,5 @@
 	gpgSign = true
 [tag]
 	forceSignAnnotated = true
-
+[gpg]
+	program = /opt/homebrew/Cellar/gnupg/2.4.4/bin/gpg
