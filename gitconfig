@@ -20,7 +20,9 @@
 	defaultBranch = main
 [commit]
 	gpgSign = true
+	#gpgSign = true
 [tag]
 	forceSignAnnotated = true
 [gpg]
 	program = /opt/homebrew/Cellar/gnupg/2.4.4/bin/gpg
+
