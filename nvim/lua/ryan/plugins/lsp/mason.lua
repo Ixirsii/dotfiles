@@ -45,7 +45,6 @@ return {
                 'black', -- Python formatter
                 'clang-format', -- Multi-language formatter
                 'checkstyle', -- Java linter
-                'detekt', -- Kotlin linter
                 'eslint_d', -- JavaScript/TypeScript linter
                 'google-java-format', -- Java formatter
                 'isort', -- Python formatter

@@ -22,6 +22,7 @@ return {
                 'java',
                 'javascript',
                 'json',
+                'kotlin',
                 'lua',
                 'markdown',
                 'query',
@@ -44,12 +45,12 @@ return {
                     init_selection = '<C-space>',
                     node_incremental = '<C-space>',
                     scope_incremental = false,
-                    node_decremental = '<bs>'
+                    node_decremental = '<bs>',
                 },
             },
 
             indent = {
-                enable = true
+                enable = true,
             },
 
             highlight = {
@@ -61,6 +62,8 @@ return {
                 -- Instead of true it can also be a list of languages
                 additional_vim_regex_highlighting = { 'markdown' },
             },
+
+            sync_install = false,
         })
     end,
 }

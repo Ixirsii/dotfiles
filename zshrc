@@ -48,7 +48,6 @@ command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 export BROWSER="arc"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export GPG_TTY=$(tty)
 
 # less/man colors
 export LESS=-R
@@ -146,6 +145,9 @@ eval $(thefuck --alias)
 
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
+
+# Set GPG_TTY so that git commits work from the terminal
+export GPG_TTY=$TTY
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
