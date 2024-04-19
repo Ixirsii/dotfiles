@@ -36,9 +36,10 @@ HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 
 ## Aliases
+alias cat="bat"
 alias cd="z"
 alias grep='rg --color=always'
-alias ls="eza --color=always --header --long --git --icons=always"
+alias ls="eza -A --color=always --header --long --git --icons=always"
 
 # Use neovim instead of vim if present
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
