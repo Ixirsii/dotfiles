@@ -24,7 +24,3 @@ style = "Regular"
 
 [window]
 dynamic_title = true
-
-[window.dimensions]
-columns = 80
-lines = 82
