@@ -48,6 +48,7 @@ command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 export BROWSER="arc"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
+export GPG_TTY=$(tty)
 
 # less/man colors
 export LESS=-R
