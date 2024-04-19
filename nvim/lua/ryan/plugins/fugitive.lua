@@ -4,5 +4,5 @@ return {
 
     keys = {
         { '<leader>gs', '<cmd>Git<cr>', desc='Git command' }
-    }
+    },
 }

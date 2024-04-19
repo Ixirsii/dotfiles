@@ -1,28 +1,52 @@
 return {
     -- Syntax highlighting
     'nvim-treesitter/nvim-treesitter',
+
     build = ':TSUpdate',
+
+    dependencies = {
+        'windwp/nvim-ts-autotag',
+    },
+
+    event = { 'BufReadPre', 'BufNewFile' },
+
     config = function()
         require('nvim-treesitter.configs').setup({
-            -- A list of parser names, or "all" (the five listed parsers should always be installed)
+            -- A list of parser names, or 'all' (the five listed parsers should always be installed)
             ensure_installed = {
-                "c",
-                "java",
-                "javascript",
-                "lua",
-                "query",
-                "rust",
-                "typescript",
-                "vim",
-                "vimdoc"
+                'bash',
+                'c',
+                'css',
+                'gitignore',
+                'html',
+                'java',
+                'javascript',
+                'json',
+                'lua',
+                'markdown',
+                'query',
+                'rust',
+                'tsx',
+                'typescript',
+                'vim',
+                'vimdoc',
+                'yaml',
             },
 
-            -- Install parsers synchronously (only applied to `ensure_installed`)
-            sync_install = false,
+            auto_tag = {
+                enable = true,
+            },
 
-            -- Automatically install missing parsers when entering buffer
-            -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-            auto_install = true,
+            incremental_selection = {
+                enable = true,
+
+                keymaps = {
+                    init_selection = '<C-space>',
+                    node_incremental = '<C-space>',
+                    scope_incremental = false,
+                    node_decremental = '<bs>'
+                },
+            },
 
             indent = {
                 enable = true
@@ -38,5 +62,5 @@ return {
                 additional_vim_regex_highlighting = { 'markdown' },
             },
         })
-    end
+    end,
 }

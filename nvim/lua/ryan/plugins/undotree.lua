@@ -4,5 +4,5 @@ return {
 
     keys = {
         { '<leader>u', '<cmd>UndotreeToggle<cr>', desc='Toggle undo tree' }
-    }
+    },
 }
