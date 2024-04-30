@@ -1,26 +1,50 @@
 [user]
-	email = ixirsii@ixirsii.tech
-	name = Ryan Porterfield
-	signingKey = 8DCC6FB8BDC669072621EC6AE08EE51047CC0C7B
-[color]
-	ui = auto
-[core]
-	pager = less -FMRiX
-[push]
-	default = simple
-[alias]
-	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
-[rerere]
-	enabled = true
-[pull]
-	rebase = true
-[http]
-	sslVerify = true
-[init]
-	defaultBranch = main
-[commit]
-	gpgSign = true
-	#gpgSign = true
-[tag]
-	forceSignAnnotated = true
+    email = ixirsii@ixirsii.tech
+    name = Ryan Porterfield
+    signingKey = 8DCC6FB8BDC669072621EC6AE08EE51047CC0C7B
 
+[alias]
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+
+[color]
+    ui = auto
+
+[commit]
+    gpgSign = true
+
+[core]
+    pager = delta
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    side-by-side = true
+
+[diff]
+    colorMoved = default
+
+[gpg]
+    program = /opt/homebrew/Cellar/gnupg/2.4.5/bin/gpg
+
+[http]
+    sslVerify = true
+
+[init]
+    defaultBranch = main
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = diff3
+
+[push]
+    default = simple
+
+[pull]
+    rebase = true
+
+[rerere]
+    enabled = true
+
+[tag]
+    forceSignAnnotated = true
