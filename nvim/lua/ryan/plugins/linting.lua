@@ -10,7 +10,7 @@ return {
             java = { 'checkstyle', 'sonarlint-language-server', 'trivy' },
             javascript = { 'eslint_d' },
             javascriptreact = { 'eslint_d' },
-            kotlin = { 'ktlint' },
+            kotlin = { 'ktlint', 'sonarlint-language-server' },
             python = { 'pylint' },
             rust = { 'snyk', 'trivy' },
             typescript = { 'eslint_d' },

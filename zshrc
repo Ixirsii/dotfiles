@@ -63,10 +63,8 @@ export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# FNM
+eval "$(fnm env --use-on-cd)"
 
 # Plugins
 # https://github.com/MichaelAquilina/zsh-auto-notify
