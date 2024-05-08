@@ -23,4 +23,10 @@ family = "SauceCodePro Nerd Font"
 style = "Regular"
 
 [window]
+blur = true
+decorations = "Buttonless"
 dynamic_title = true
+opacity = 0.8
+option_as_alt = "Both"
+padding.x = 10
+padding.y = 10

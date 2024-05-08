@@ -63,9 +63,6 @@ export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
-# FNM
-eval "$(fnm env --use-on-cd)"
-
 # Plugins
 # https://github.com/MichaelAquilina/zsh-auto-notify
 source ~/.config/zsh/zsh-auto-notify/auto-notify.plugin.zsh
@@ -84,7 +81,7 @@ local tmux_session_name="ryan"
 if which tmux >/dev/null 2>&1; then
     # if not inside a tmux session, and if no session is started,
     # start a new session
-    if (! tmux has-session -t $tmux_session_name); then
+    if (! tmux has-session -t $tmux_session_name >/dev/null 2>&1); then
         tmux -2u new-session -s $tmux_session_name -d
     fi
 
@@ -146,6 +143,9 @@ eval "$(zoxide init zsh)"
 
 # Set GPG_TTY so that git commits work from the terminal
 export GPG_TTY=$TTY
+
+# FNM
+eval "$(fnm env --use-on-cd)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
