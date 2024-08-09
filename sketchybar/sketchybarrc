@@ -28,8 +28,8 @@ sketchybar --bar position=top height=40 blur_radius=30 color=$BAR_COLOR
 default=(
   padding_left=5
   padding_right=5
-  icon.font="SauceCodePro Nerd Font:Semibold:15.0"
-  label.font="SauceCodePro Nerd Font:Semibold:15.0"
+  icon.font="SF Pro:Semibold:15.0"
+  label.font="SF Pro:Semibold:15.0"
   icon.color=$WHITE
   label.color=$WHITE
   background.color=$ITEM_BG_COLOR
