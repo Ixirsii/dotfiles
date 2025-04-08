@@ -110,4 +110,10 @@ return {
             end,
         })
     end,
+
+    opts = {
+        servers = {
+            cssls = { settings = { css = { lint = { unknownAtRules = 'ignore' } } } },
+        },
+    },
 }
