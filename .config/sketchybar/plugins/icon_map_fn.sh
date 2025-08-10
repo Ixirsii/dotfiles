@@ -1,7 +1,34 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function icon_map() {
   case "$1" in
+  "Zen")
+    icon_result=":zen_browser:"
+    ;;
+  "Alacritty")
+    icon_result=":alacritty:"
+    ;;
+  "Zed")
+    icon_result=":zed:"
+    ;;
+  "Discord" | "Discord Canary" | "Discord PTB" | "Legcord")
+    icon_result=":discord:"
+    ;;
+  "Proton Mail")
+    icon_result=":proton_mail:"
+    ;;
+  "Proton VPN")
+    icon_result=":proton_vpn:"
+    ;;
+  "Sublime Text")
+    icon_result=":sublime_text:"
+    ;;
+  "Obsidian")
+    icon_result=":obsidian:"
+    ;;
+  "IntelliJ IDEA")
+    icon_result=":idea:"
+    ;;
   "Keynote" | "Keynote 讲演")
     icon_result=":keynote:"
     ;;
@@ -11,7 +38,7 @@ function icon_map() {
   "VMware Fusion")
     icon_result=":vmware_fusion:"
     ;;
-  "Alacritty" | "Hyper" | "iTerm2" | "kitty" | "Terminal" | "终端" | "WezTerm")
+  "Hyper" | "iTerm2" | "kitty" | "Terminal" | "终端" | "WezTerm")
     icon_result=":terminal:"
     ;;
   "Microsoft To Do" | "Things")
@@ -34,9 +61,6 @@ function icon_map() {
     ;;
   "Joplin")
     icon_result=":joplin:"
-    ;;
-  "Discord" | "Discord Canary" | "Discord PTB")
-    icon_result=":discord:"
     ;;
   "Logseq")
     icon_result=":logseq:"
@@ -67,9 +91,6 @@ function icon_map() {
     ;;
   "Sequel Ace")
     icon_result=":sequel_ace:"
-    ;;
-  "Zed")
-    icon_result=":zed:"
     ;;
   "TeamSpeak 3")
     icon_result=":team_speak:"
@@ -188,9 +209,6 @@ function icon_map() {
   "Tweetbot" | "Twitter")
     icon_result=":twitter:"
     ;;
-  "Default")
-    icon_result=":default:"
-    ;;
   "Pages" | "Pages 文稿")
     icon_result=":pages:"
     ;;
@@ -200,7 +218,7 @@ function icon_map() {
   "MAMP" | "MAMP PRO")
     icon_result=":mamp:"
     ;;
-  "Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "Proton Mail" | "邮件")
+  "Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "邮件")
     icon_result=":mail:"
     ;;
   "WebStorm")
@@ -368,20 +386,11 @@ function icon_map() {
   "Zotero")
     icon_result=":zotero:"
     ;;
-  "Sublime Text")
-    icon_result=":sublime_text:"
-    ;;
   "Warp")
     icon_result=":warp:"
     ;;
   "Messages" | "信息" | "Nachrichten")
     icon_result=":messages:"
-    ;;
-  "Obsidian")
-    icon_result=":obsidian:"
-    ;;
-  "IntelliJ IDEA")
-    icon_result=":idea:"
     ;;
   "Atom")
     icon_result=":atom:"
@@ -424,6 +433,9 @@ function icon_map() {
     ;;
   "WhatsApp")
     icon_result=":whats_app:"
+    ;;
+  "Default")
+    icon_result=":default:"
     ;;
   *)
     icon_result=":default:"
