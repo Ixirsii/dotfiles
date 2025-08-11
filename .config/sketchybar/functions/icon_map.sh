@@ -441,8 +441,8 @@ function icon_map() {
     icon_result=":default:"
     ;;
   esac
+
+  echo "$icon_result"
 }
 
-icon_map "$1"
-
-echo "$icon_result"
+icon_map "$@"

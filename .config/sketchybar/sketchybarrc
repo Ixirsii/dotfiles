@@ -3,29 +3,31 @@
 # Colorscheme
 source "$CONFIG_DIR/colors.sh"
 
+FUNCTION_DIR="$CONFIG_DIR/functions"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
+ICON_FONT="sketchybar-app-font:Regular:16.0"
+LABEL_FONT="SF Pro:Semibold:16.0"
 
 sketchybar --bar position=top height=40 blur_radius=30 color=$BAR_COLOR
 
 default=(
-  padding_left=5
-  padding_right=5
-  icon.font="SF Pro:Semibold:15.0"
-  label.font="SF Pro:Semibold:15.0"
-  icon.color=$WHITE
-  label.color=$WHITE
   background.color=$ITEM_BG_COLOR
   background.corner_radius=5
-  background.height=24
+  background.height=40
+  icon.color=$ACCENT_COLOR
+  icon.font=$ICON_FONT
   icon.padding_left=4
-  icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=4
+  label.color=$ACCENT_COLOR
+  label.font="$LABEL_FONT"
+  label.padding_left=8
+  label.padding_right=8
+  padding_left=4
+  padding_right=4
 )
+
 sketchybar --default "${default[@]}"
 
-##### Adding aeropsace layouts #####
 # Add the aerospace events we specified in aerospace.toml
 sketchybar --add event aerospace_workspace_change
 sketchybar --add event aerospace_monitor_change

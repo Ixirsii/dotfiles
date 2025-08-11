@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
-sketchybar --add item media e \
-           --set media label.color=$ACCENT_COLOR \
-                       label.max_chars=20 \
-                       icon.padding_left=10 \
-                       scroll_texts=on \
+sketchybar --add item media_icon q \
+           --set media background.drawing=off \
                        icon=􀑪 \
-                       icon.color=$ACCENT_COLOR \
-                       background.drawing=off \
-                       script="$PLUGIN_DIR/media.sh" \
-           --subscribe media media_change
+                       label.drawing=off \
+                       padding_right=8 \
+                       script="$PLUGIN_DIR/media_icon.sh" \
+           --subscribe media_icon media_change
+
+sketchybar --add item media_label e \
+           --set media background.drawing=off \
+                       icon.drawing=off \
+                       label.max_chars=20 \
+                       padding_left=8 \
+                       scroll_texts=on \
+                       script="$PLUGIN_DIR/media_label.sh" \
+           --subscribe media_label media_change

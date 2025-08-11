@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 
-if [ "$SENDER" = "space_change" ]; then
-  source "$CONFIG_DIR/colors.sh"
+if [ "$SENDER" = "space_windows_change" ]
+then
+  icons="$($CONFIG_DIR/functions/workspace_icons.sh "$1")"
 
-  sketchybar --set space.$(aerospace list-workspaces --all) \
-    background.drawing=off \
-    label.color=$ACCENT_COLOR \
-    icon.color=$ACCENT_COLOR
+  sketchybar --set $NAME label="$icons"
+fi
 
-  sketchybar --set space.$(aerospace list-workspaces --focused) \
-    background.drawing=on \
-    background.color=$ITEM_BG_COLOR \
-    label.color=$ACCENT_COLOR \
-    icon.color=$ACCENT_COLOR
+if [ "$1" = "$AEROSPACE_FOCUSED_WORKSPACE" ]
+then
+  sketchybar --set $NAME background.drawing=on
+else
+  sketchybar --set $NAME background.drawing=off
 fi

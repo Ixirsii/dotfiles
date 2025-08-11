@@ -1,46 +1,36 @@
 #!/usr/bin/env bash
 
-for m in $(aerospace list-monitors | awk '{print $1}'); do
-  for sid in $(aerospace list-workspaces --monitor $m); do
+for monitor in $(aerospace list-monitors | awk '{print $1}')
+do
+  for sid in $(aerospace list-workspaces --monitor "$monitor")
+  do
+    icons="$($FUNCTION_DIR/workspace_icons.sh "$sid")"
+
     space=(
-      space="$sid"
-      icon="$sid"
-      label.font="sketchybar-app-font:Regular:16.0"
-      label.padding_right=20
-      label.y_offset=-1
       click_script="aerospace workspace $sid"
-      script="$PLUGIN_DIR/space.sh"
+      drawing=on
+      icon="$sid"
+      icon.font="$LABEL_FONT"
+      icon.padding_right=0
+      label="$icons"
+      label.font="$ICON_FONT"
+      label.padding_left=4
+      label.padding_right=8
+      script="$PLUGIN_DIR/space.sh $sid"
     )
 
-    sketchybar --add space space.$sid left \
+    sketchybar --add item space.$sid left \
                --set space.$sid "${space[@]}" \
-               --subscribe space.$sid aerospace_workspace_change
-
-    apps=$(aerospace list-windows --workspace $sid | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
-    icon_strip=" "
-    if [ "${apps}" != "" ]; then
-        while read -r app
-        do
-        icon_strip+=" $($PLUGIN_DIR/icon_map.sh "$app")"
-        done <<< "${apps}"
-    else
-        icon_strip=" —"
-    fi
-
-    sketchybar --set space.$sid label="$icon_strip"
+               --subscribe space.$sid aerospace_workspace_change space_windows_change
   done
 done
 
-space_creator=(
-  icon=􀆊
-  icon.color=$ACCENT_COLOR
-  icon.padding_left=4
-  label.drawing=off
+space_separator=(
   background.drawing=off
-  script="$PLUGIN_DIR/space_windows.sh"
+  icon=􀆊
+  icon.padding_right=8
+  label.drawing=off
 )
 
-sketchybar --add item space_creator left               \
-           --set space_creator "${space_creator[@]}"   \
-           --subscribe space_separator space_windows_change aerospace_workspace_change aerospace_monitor_change
+sketchybar --add item space_separator left \
+           --set space_separator "${space_separator[@]}"

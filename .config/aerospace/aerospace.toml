@@ -41,7 +41,7 @@ automatically-unhide-macos-hidden-apps = false
 exec-on-workspace-change = [
     "/bin/bash",
     "-c",
-    "sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE",
+    "sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE",
 ]
 
 # Possible values: (qwerty|dvorak|colemak)
@@ -182,3 +182,11 @@ run = "move-node-to-workspace 2"
 [[on-window-detected]]
 if.app-id = "dev.zed.Zed"
 run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = "app.legcord.Legcord"
+run = "move-node-to-workspace 8"
+
+[[on-window-detected]]
+if.app-id = "ch.protonmail.desktop"
+run = "move-node-to-workspace 9"
