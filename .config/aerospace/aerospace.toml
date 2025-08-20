@@ -180,6 +180,10 @@ if.app-id = "org.alacritty"
 run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
+if.app-id = "com.jetbrains.intellij.ce"
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
 if.app-id = "dev.zed.Zed"
 run = "move-node-to-workspace 3"
 
