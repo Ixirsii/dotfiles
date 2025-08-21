@@ -39,32 +39,33 @@ unsetopt beep nomatch
 
 # Save history
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
+HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 
 ## Aliases
 alias cat="bat"
 alias cd="z"
-alias grep='rg --color=always'
+alias find="fd"
+alias grep="rg --color=always"
 alias ls="eza -A --color=always --header --long --git --icons=always"
 
 # Use neovim instead of vim if present
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
 # Environment
-export BROWSER="arc"
+export BROWSER="Zen"
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="ghostty"
 
 # less/man colors
 export LESS=-R
-export LESS_TERMCAP_mb="$(printf '%b' '\e[1;31m')"; a="${a%_}"
-export LESS_TERMCAP_md="$(printf '%b' '\e[1;36m')"; a="${a%_}"
-export LESS_TERMCAP_me="$(printf '%b' '\e[0m')"; a="${a%_}"
-export LESS_TERMCAP_so="$(printf '%b' '\e[01;44;33m')"; a="${a%_}"
-export LESS_TERMCAP_se="$(printf '%b' '\e[0m')"; a="${a%_}"
-export LESS_TERMCAP_us="$(printf '%b' '\e[01;32m')"; a="${a%_}"
-export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"; a="${a%_}"
+export LESS_TERMCAP_mb="$(printf "%b" "\e[1;31m")"; a="${a%_}"
+export LESS_TERMCAP_md="$(printf "%b" "\e[1;36m")"; a="${a%_}"
+export LESS_TERMCAP_me="$(printf "%b" "\e[0m")"; a="${a%_}"
+export LESS_TERMCAP_so="$(printf "%b" "\e[01;44;33m")"; a="${a%_}"
+export LESS_TERMCAP_se="$(printf "%b" "\e[0m")"; a="${a%_}"
+export LESS_TERMCAP_us="$(printf "%b" "\e[01;32m")"; a="${a%_}"
+export LESS_TERMCAP_ue="$(printf "%b" "\e[0m")"; a="${a%_}"
 
 # PATH
 export PATH="$PATH:/opt/homebrew/bin"
@@ -120,9 +121,9 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    cd)           fzf --preview "eza --tree --color=always {} | head -200" "$@" ;;
     export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    ssh)          fzf --preview "dig {}"                   "$@" ;;
     *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
   esac
 }
