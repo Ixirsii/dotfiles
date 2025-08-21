@@ -22,3 +22,21 @@
 [submodule ".config/tmux/plugins/tmux-weather"]
 	path = .config/tmux/plugins/tmux-weather
 	url = https://github.com/xamut/tmux-weather.git
+[submodule ".config/zsh/zsh-auto-notify"]
+	path = .config/zsh/zsh-auto-notify
+	url = https://github.com/MichaelAquilina/zsh-auto-notify.git
+[submodule ".config/zsh/zsh-autosuggestions"]
+	path = .config/zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule ".config/zsh/zsh-history-substring-search"]
+	path = .config/zsh/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule ".config/zsh/zsh-syntax-highlighting"]
+	path = .config/zsh/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule ".config/zsh/zsh-you-should-use"]
+	path = .config/zsh/zsh-you-should-use
+	url = https://github.com/MichaelAquilina/zsh-you-should-use
+[submodule ".config/zsh/catpuccin/zsh-syntax-highlighting"]
+	path = .config/zsh/catpuccin/zsh-syntax-highlighting
+	url = https://github.com/catppuccin/zsh-syntax-highlighting.git
