@@ -1,3 +1,14 @@
+# PATH
+export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# Start tmux
+local tmux_session_name="ryan"
+
+if [ -z "$TMUX" ]; then
+  exec tmux new-session -A -s $tmux_session_name
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -42,21 +53,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 
-## Aliases
-alias cat="bat"
-alias cd="z"
-alias find="fd"
-alias grep="rg --color=always"
-alias ls="eza -A --color=always --header --long --git --icons=always"
-
-# Use neovim instead of vim if present
-command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
-
-# Environment
-export BROWSER="Zen"
-export EDITOR="nvim"
-export TERMINAL="ghostty"
-
 # less/man colors
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf "%b" "\e[1;31m")"; a="${a%_}"
@@ -66,10 +62,6 @@ export LESS_TERMCAP_so="$(printf "%b" "\e[01;44;33m")"; a="${a%_}"
 export LESS_TERMCAP_se="$(printf "%b" "\e[0m")"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf "%b" "\e[01;32m")"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf "%b" "\e[0m")"; a="${a%_}"
-
-# PATH
-export PATH="$PATH:/opt/homebrew/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
 
 # Plugins
 # https://github.com/MichaelAquilina/zsh-auto-notify
@@ -82,21 +74,6 @@ source ~/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.z
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # https://github.com/MichaelAquilina/zsh-you-should-use
 source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
-
-# Tmux
-local tmux_session_name="ryan"
-
-if which tmux >/dev/null 2>&1; then
-    # if not inside a tmux session, and if no session is started,
-    # start a new session
-    if (! tmux has-session -t $tmux_session_name >/dev/null 2>&1); then
-        tmux -2u new-session -s $tmux_session_name -d
-    fi
-
-    if test -z "$TMUX"; then
-        (tmux -2u new-session -t $tmux_session_name)
-    fi
-fi
 
 # FZF
 eval "$(fzf --zsh)"
@@ -155,6 +132,21 @@ export GPG_TTY=$TTY
 # FNM
 eval "$(fnm env --use-on-cd)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Aliases
+# These must be after sdkman init because the find alias breaks sdkman scripts
+alias cat="bat"
+alias cd="z"
+alias find="fd"
+alias grep="rg --color=always"
+alias ls="eza -A --color=always --header --long --git --icons=always"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
+# Environment
+export BROWSER="Zen"
+export EDITOR="nvim"
+export TERMINAL="Ghostty"
