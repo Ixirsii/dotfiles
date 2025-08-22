@@ -100,8 +100,8 @@ style = "bg:blue fg:crust"
 format = '[ $symbol( $version) ]($style)'
 
 [odin]
+detect_files = ["odinfmt.json", "ols.json"]
 format = '[ $symbol( $version) ]($style)'
-symbol = "Ø "
 style = "bg:blue fg:crust"
 
 [os]
