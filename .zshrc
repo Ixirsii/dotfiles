@@ -2,47 +2,17 @@
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
+# Environment
+export BROWSER="Zen"
+export EDITOR="nvim"
+export TERMINAL="Ghostty"
+
 # Start tmux
 local tmux_session_name="ryan"
 
 if [ -z "$TMUX" ]; then
   exec tmux new-session -A -s $tmux_session_name
 fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Zsh options (https://zsh.sourceforge.io/Doc/Release/Options.html)
 setopt incappendhistory extendedglob hist_ignore_dups
@@ -70,6 +40,8 @@ source ~/.config/zsh/zsh-auto-notify/auto-notify.plugin.zsh
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # https://github.com/zsh-users/zsh-history-substring-search
 source ~/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+# https://github.com/catppuccin/zsh-syntax-highlighting.git
+source ~/.config/zsh/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 # https://github.com/zsh-users/zsh-syntax-highlighting
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # https://github.com/MichaelAquilina/zsh-you-should-use
@@ -121,7 +93,7 @@ _fzf_compgen_dir() {
 export BAT_THEME="Catppuccin Mocha"
 
 # thefuck alias
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
@@ -146,7 +118,5 @@ alias ls="eza -A --color=always --header --long --git --icons=always"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# Environment
-export BROWSER="Zen"
-export EDITOR="nvim"
-export TERMINAL="Ghostty"
+# Start starship
+eval "$(starship init zsh)"

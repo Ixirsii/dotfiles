@@ -37,6 +37,6 @@
 [submodule ".config/zsh/zsh-you-should-use"]
 	path = .config/zsh/zsh-you-should-use
 	url = https://github.com/MichaelAquilina/zsh-you-should-use
-[submodule ".config/zsh/catpuccin/zsh-syntax-highlighting"]
-	path = .config/zsh/catpuccin/zsh-syntax-highlighting
+[submodule ".config/zsh/catppuccin/zsh-syntax-highlighting"]
+	path = .config/zsh/catppuccin/zsh-syntax-highlighting
 	url = https://github.com/catppuccin/zsh-syntax-highlighting.git
