@@ -10,7 +10,7 @@ export TERMINAL="Ghostty"
 # Start tmux
 local tmux_session_name="ryan"
 
-if [ -z "$TMUX" ]; then
+if [ $tty -s -a -z "$TMUX" ]; then
   exec tmux new-session -A -s $tmux_session_name
 fi
 

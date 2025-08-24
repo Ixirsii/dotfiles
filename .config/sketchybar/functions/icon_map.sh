@@ -5,8 +5,8 @@ function icon_map() {
   "Zen")
     icon_result=":zen_browser:"
     ;;
-  "Alacritty")
-    icon_result=":alacritty:"
+  "Ghostty")
+    icon_result=":ghostty:"
     ;;
   "Zed")
     icon_result=":zed:"

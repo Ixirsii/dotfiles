@@ -184,8 +184,20 @@ if.app-id = "com.jetbrains.intellij.ce"
 run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
+if.app-id = "com.epicgames.UnrealEditor"
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = "com.apple.dt.Xcode"
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
 if.app-id = "dev.zed.Zed"
 run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = "com.epicgames.EpicGamesLauncher"
+run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
 if.app-id = "app.legcord.Legcord"
