@@ -10,7 +10,8 @@ export TERMINAL="Ghostty"
 # Start tmux
 local tmux_session_name="ryan"
 
-if [ $tty -s -a -z "$TMUX" ]; then
+if [[ -n "$TMUX" && -z "$TMUX" ]]
+then
   exec tmux new-session -A -s $tmux_session_name
 fi
 
@@ -112,8 +113,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # These must be after sdkman init because the find alias breaks sdkman scripts
 alias cat="bat"
 alias cd="z"
-alias find="fd"
-alias grep="rg --color=always"
 alias ls="eza -A --color=always --header --long --git --icons=always"
 alias vim="nvim"
 alias vimdiff="nvim -d"
