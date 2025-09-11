@@ -49,7 +49,7 @@ source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
 
 # FZF
-eval "$(fzf --zsh)"
+source <(fzf --zsh)
 source ~/fzf-git.sh/fzf-git.sh
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \

@@ -7,12 +7,10 @@ return {
         local lint = require('lint')
 
         lint.linters_by_ft = {
-            java = { 'checkstyle', 'sonarlint-language-server', 'trivy' },
+            java = { 'checkstyle' },
             javascript = { 'eslint_d' },
             javascriptreact = { 'eslint_d' },
-            kotlin = { 'ktlint', 'sonarlint-language-server' },
-            python = { 'pylint' },
-            rust = { 'snyk', 'trivy' },
+            kotlin = { 'ktlint' },
             typescript = { 'eslint_d' },
             typescriptreact = { 'eslint_d' },
         }

@@ -1,12 +1,14 @@
 return {
     'nvim-telescope/telescope.nvim',
 
-    -- tag = '0.1.5',
     branch = '0.1.x',
 
     dependencies = {
         'nvim-lua/plenary.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+        },
         'nvim-tree/nvim-web-devicons',
         'folke/todo-comments.nvim',
     },
@@ -14,23 +16,9 @@ return {
     config = function()
         local telescope = require('telescope')
         local actions = require('telescope.actions')
-        local builtin = require('telescope.builtin')
-
-        vim.keymap.set('n', '<leader>ps', function()
-            builtin.grep_string({ search = vim.fn.input('Grep > ') })
-        end)
 
         telescope.setup({
             defaults = {
-                extensions = {
-                    fzf = {
-                        fuzzy = true, -- false will only do exact matching
-                        override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true, -- override the file sorter
-                        case_mode = 'smart_case', -- or 'ignore_case' or 'respect_case'
-                    },
-                },
-
                 mappings = {
                     i = {
                         ['<C-k>'] = actions.move_selection_previous,
@@ -40,6 +28,19 @@ return {
                 },
 
                 path_display = { 'smart' },
+            },
+            extensions = {
+                fzf = {
+                    fuzzy = true, -- false will only do exact matching
+                    override_generic_sorter = true, -- override the generic sorter
+                    override_file_sorter = true, -- override the file sorter
+                    case_mode = 'smart_case', -- or 'ignore_case' or 'respect_case'
+                },
+            },
+            pickers = {
+                find_files = {
+                    hidden = true,
+                },
             },
         })
 
@@ -53,7 +54,7 @@ return {
         { '<leader>fc', '<cmd>Telescope grep_string<CR>', desc = 'Find string under cursor' },
         { '<leader>fb', '<cmd>Telescope buffers<CR>', desc = 'Telescope open buffers' },
         { '<leader>fh', '<cmd>Telescope help_tags<CR>', desc = 'Telescope help tags' },
-        { '<C-p>', '<cmd>Telescope git_files<CR>', desc = 'Telescope git files' },
+        { '<leader>fs', '<cmd>Telescope git_files<CR>', desc = 'Telescope git files' },
         { '<leader>ft', '<cmd>TodoTelescope<CR>', desc = 'Find todos' },
     },
 }
