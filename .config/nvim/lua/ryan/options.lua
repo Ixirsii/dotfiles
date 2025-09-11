@@ -50,3 +50,6 @@ vim.opt.updatetime = 50
 
 -- Marker at 80 characters
 vim.opt.colorcolumn = '80'
+
+-- Format on save
+vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
