@@ -24,6 +24,13 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 
+# Aliases
+alias cat="bat"
+alias cd="z"
+alias ls="eza -A --color=always --header --long --git --icons=always"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
 # less/man colors
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf "%b" "\e[1;31m")"; a="${a%_}"
@@ -109,13 +116,8 @@ eval "$(fnm env --use-on-cd)"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# Aliases
-# These must be after sdkman init because the find alias breaks sdkman scripts
-alias cat="bat"
-alias cd="z"
-alias ls="eza -A --color=always --header --long --git --icons=always"
-alias vim="nvim"
-alias vimdiff="nvim -d"
+# Start atuin
+eval "$(atuin init zsh)"
 
 # Start starship
 eval "$(starship init zsh)"
