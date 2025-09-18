@@ -31,29 +31,23 @@ alias ls="eza -A --color=always --header --long --git --icons=always"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# less/man colors
-export LESS=-R
-export LESS_TERMCAP_mb="$(printf "%b" "\e[1;31m")"; a="${a%_}"
-export LESS_TERMCAP_md="$(printf "%b" "\e[1;36m")"; a="${a%_}"
-export LESS_TERMCAP_me="$(printf "%b" "\e[0m")"; a="${a%_}"
-export LESS_TERMCAP_so="$(printf "%b" "\e[01;44;33m")"; a="${a%_}"
-export LESS_TERMCAP_se="$(printf "%b" "\e[0m")"; a="${a%_}"
-export LESS_TERMCAP_us="$(printf "%b" "\e[01;32m")"; a="${a%_}"
-export LESS_TERMCAP_ue="$(printf "%b" "\e[0m")"; a="${a%_}"
+# Start atuin
+eval "$(atuin init zsh)"
 
-# Plugins
-# https://github.com/MichaelAquilina/zsh-auto-notify
-source ~/.config/zsh/zsh-auto-notify/auto-notify.plugin.zsh
-# https://github.com/zsh-users/zsh-autosuggestions
-source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# https://github.com/zsh-users/zsh-history-substring-search
-source ~/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-# https://github.com/catppuccin/zsh-syntax-highlighting.git
-source ~/.config/zsh/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
-# https://github.com/zsh-users/zsh-syntax-highlighting
-source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# https://github.com/MichaelAquilina/zsh-you-should-use
-source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
+# Set bat theme
+export BAT_THEME="Catppuccin Mocha"
+
+# FNM
+eval "$(fnm env --use-on-cd)"
+
+# thefuck alias
+eval "$(thefuck --alias)"
+
+# Zoxide (better cd)
+eval "$(zoxide init zsh)"
+
+# Set GPG_TTY so that git commits work from the terminal
+export GPG_TTY=$TTY
 
 # FZF
 source <(fzf --zsh)
@@ -97,27 +91,33 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-# Set bat theme
-export BAT_THEME="Catppuccin Mocha"
+# less/man colors
+export LESS=-R
+export LESS_TERMCAP_mb="$(printf "%b" "\e[1;31m")"; a="${a%_}"
+export LESS_TERMCAP_md="$(printf "%b" "\e[1;36m")"; a="${a%_}"
+export LESS_TERMCAP_me="$(printf "%b" "\e[0m")"; a="${a%_}"
+export LESS_TERMCAP_so="$(printf "%b" "\e[01;44;33m")"; a="${a%_}"
+export LESS_TERMCAP_se="$(printf "%b" "\e[0m")"; a="${a%_}"
+export LESS_TERMCAP_us="$(printf "%b" "\e[01;32m")"; a="${a%_}"
+export LESS_TERMCAP_ue="$(printf "%b" "\e[0m")"; a="${a%_}"
 
-# thefuck alias
-eval "$(thefuck --alias)"
-
-# Zoxide (better cd)
-eval "$(zoxide init zsh)"
-
-# Set GPG_TTY so that git commits work from the terminal
-export GPG_TTY=$TTY
-
-# FNM
-eval "$(fnm env --use-on-cd)"
+# Plugins
+# https://github.com/MichaelAquilina/zsh-auto-notify
+source ~/.config/zsh/zsh-auto-notify/auto-notify.plugin.zsh
+# https://github.com/zsh-users/zsh-autosuggestions
+source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# https://github.com/zsh-users/zsh-history-substring-search
+source ~/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+# https://github.com/catppuccin/zsh-syntax-highlighting.git
+source ~/.config/zsh/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+# https://github.com/zsh-users/zsh-syntax-highlighting
+source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# https://github.com/MichaelAquilina/zsh-you-should-use
+source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# Start atuin
-eval "$(atuin init zsh)"
 
 # Start starship
 eval "$(starship init zsh)"
