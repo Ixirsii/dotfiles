@@ -36,14 +36,6 @@ return {
                 })
             end,
 
-            ['graphql'] = function()
-                -- configure graphql language server
-                lspconfig['graphql'].setup({
-                    capabilities = capabilities,
-                    filetypes = { 'graphql', 'gql' },
-                })
-            end,
-
             ['lua_ls'] = function()
                 -- configure lua server (with special settings)
                 lspconfig['lua_ls'].setup({

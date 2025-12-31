@@ -1,0 +1,14 @@
+return {
+    'rmagatti/auto-session',
+
+    config = function()
+        require('auto-session').setup({
+            auto_session_suppress_dirs = { '~/', '~/Downloads', '~/Documents', '~/Desktop' },
+        })
+    end,
+
+    keys = {
+        { '<leader>wr', '<cmd>AutoSession restore<CR>', desc = 'Restore session' },
+        { '<leader>ws', '<cmd>AutoSession save<CR>', desc = 'Save session' },
+    },
+}

@@ -19,4 +19,8 @@ return {
 
         todo_comments.setup()
     end,
+
+    keys = {
+        { '<leader>ee', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle file explorer' },
+    },
 }

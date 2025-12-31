@@ -180,7 +180,7 @@ if.app-id = "com.mitchellh.ghostty"
 run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
-if.app-id = "com.jetbrains.intellij.ce"
+if.app-id = "com.jetbrains.intellij"
 run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
@@ -196,8 +196,16 @@ if.app-id = "dev.zed.Zed"
 run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
+if.app-id = "md.obsidian"
+run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
 if.app-id = "com.epicgames.EpicGamesLauncher"
 run = "move-node-to-workspace 6"
+
+[[on-window-detected]]
+if.app-id = "com.valvesoftware.steam"
+run = "move-node-to-workspace 5"
 
 [[on-window-detected]]
 if.app-id = "app.legcord.Legcord"

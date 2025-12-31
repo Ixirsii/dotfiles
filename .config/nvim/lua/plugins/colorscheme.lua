@@ -1,8 +1,6 @@
 return {
     'catppuccin/nvim',
-
     name = 'catppuccin',
-
     priority = 1000,
 
     config = function()
@@ -13,10 +11,9 @@ return {
                 nvimtree = true,
                 telescope = {
                     enabled = true,
-                    -- style = 'nvchad'
                 },
                 treesitter = true,
-            }
+            },
         })
 
         vim.cmd('colorscheme catppuccin')

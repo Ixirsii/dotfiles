@@ -15,13 +15,12 @@ return {
                 json = { 'prettier' },
                 lua = { 'stylua' },
                 markdown = { 'prettier' },
-                python = { 'isort', 'black' },
                 typescript = { 'prettier' },
                 yaml = { 'prettier' },
             },
 
             format_on_save = {
-                lsp_fallback = false,
+                lsp_fallback = true,
                 async = false,
                 timeout_ms = 1000,
             },
@@ -29,7 +28,7 @@ return {
 
         vim.keymap.set({ 'n', 'v' }, '<leader>mp', function()
             conform.format({
-                lsp_fallback = false,
+                lsp_fallback = true,
                 async = false,
                 timeout_ms = 1000,
             })
