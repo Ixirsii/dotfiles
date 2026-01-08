@@ -11,6 +11,7 @@ return {
             'bashls',
             'html',
             'lua_ls',
+            'ols',
             'rust_analyzer',
             'sqlls',
             'tailwindcss',
