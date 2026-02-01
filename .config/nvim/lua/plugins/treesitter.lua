@@ -9,7 +9,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
 
     config = function()
-        require('nvim-treesitter.configs').setup({
+        require('nvim-treesitter').setup({
             -- A list of parser names, or 'all' (the five listed parsers should always be installed)
             ensure_installed = {
                 'bash',
@@ -23,6 +23,7 @@ return {
                 'kotlin',
                 'lua',
                 'markdown',
+                'odin',
                 'query',
                 'rust',
                 'tsx',

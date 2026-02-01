@@ -1,0 +1,4 @@
+export XCURSOR_SIZE=24
+export HYPRCURSOR_SIZE=24
+export HYPRSHOT_DIR=~/Pictures/screenshots
+export QT_STYLE_OVERRIDE=kvantum

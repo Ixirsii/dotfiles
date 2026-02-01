@@ -1,11 +1,10 @@
 # PATH
-export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
 # Environment
-export BROWSER="Zen"
+export BROWSER="zen"
 export EDITOR="nvim"
-export TERMINAL="Ghostty"
+export TERMINAL="ghostty"
 
 # Start tmux
 local tmux_session_name="ryan"
@@ -27,7 +26,7 @@ SAVEHIST=$HISTSIZE
 # Aliases
 alias cat="bat"
 alias cd="z"
-alias ls="eza -A --color=always --header --long --git --icons=always"
+alias ls="eza -A --color=always --header --long --git --group-directories-first --icons=always"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
@@ -51,7 +50,7 @@ export GPG_TTY=$TTY
 
 # FZF
 source <(fzf --zsh)
-source ~/fzf-git.sh/fzf-git.sh
+source ~/.config/zsh/fzf-git.sh/fzf-git.sh
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \

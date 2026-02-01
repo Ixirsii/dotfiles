@@ -1,2 +1,14 @@
 ### Mac OS ###
 .DS_Store
+
+### Linux config ###
+autostart
+dconf
+gtk-3.0
+gtk-4.0
+JetBrains
+legcord
+Proton Mail
+pulse
+systemd
+thefuck

@@ -23,7 +23,7 @@
     colorMoved = default
 
 [gpg]
-    program = /opt/homebrew/bin/gpg
+    program = gpg
 
 [http]
     sslVerify = true
