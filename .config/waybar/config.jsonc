@@ -19,11 +19,21 @@
         "temperature",
         "battery"
     ],
-    
     // Modules configuration
     "battery": {
         "format": "{capacity}% {icon}",
-        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-icons": [
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ],
         "interval": 10,
         "states": {
             "warning": 20,
@@ -39,16 +49,16 @@
         "tooltip": true,
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
-            "mode"          : "year",
-            "mode-mon-col"  : 3,
-            "weeks-pos"     : "",
-            "on-scroll"     : 1,
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "",
+            "on-scroll": 1,
             "format": {
-                "days":       "<span color='#89dceb'><b>{}</b></span>",
-                "months":     "<span color='#f5c2e7'><b>{}</b></span>",
-                "today":      "<span color='#74c7ec'><b><u>{}</u></b></span>",
-                "weekdays":   "<span color='#74c7ec'><b>{}</b></span>",
-                "weeks":      "<span color='#f5c2e7'><b>W{}</b></span>"
+                "days": "<span color='#89dceb'><b>{}</b></span>",
+                "months": "<span color='#f5c2e7'><b>{}</b></span>",
+                "today": "<span color='#74c7ec'><b><u>{}</u></b></span>",
+                "weekdays": "<span color='#74c7ec'><b>{}</b></span>",
+                "weeks": "<span color='#f5c2e7'><b>W{}</b></span>"
             }
         }
     },
@@ -57,7 +67,13 @@
         "tooltip": false
     },
     "network": {
-        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-icons": [
+            "󰤯",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
         "format": "{icon}",
         "format-wifi": "{icon}",
         "format-ethernet": "󰈁",
@@ -72,7 +88,11 @@
         "format": "{icon}",
         "format-muted": "",
         "format-icons": {
-            "default": ["", "", ""],
+            "default": [
+                "",
+                "",
+                ""
+            ],
             "headphone": "",
             "headset": ""
         },
@@ -105,21 +125,35 @@
             "transition-duration": 600,
             "children-class": "tray-group-item"
         },
-        "modules": ["custom/expand-icon", "tray"]
+        "modules": [
+            "custom/expand-icon",
+            "tray"
+        ]
     },
     "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "󰧮",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "󰻞"
+        },
         "on-click": "activate",
-        "format": "{name}",
         "persistent-workspaces": {
-          "1": [],
-          "2": [],
-          "3": [],
-          "4": [],
-          "5": [],
-          "6": [],
-          "7": [],
-          "8": [],
-          "9": []
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": []
         }
     }
 }
