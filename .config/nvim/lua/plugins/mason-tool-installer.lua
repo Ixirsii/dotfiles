@@ -10,7 +10,9 @@ return {
             'ast-grep', -- Multi-language linter and formatter
             'clang-format', -- Multi-language formatter
             'eslint_d', -- JavaScript/TypeScript linter
+            'jsonlint', -- JSON linter
             'prettier', -- JavaScript/TypeScript formatter
+            'prettierd', -- Prettier daemon
             'stylua', -- Lua formatter
         },
     },

@@ -10,6 +10,7 @@ return {
         ensure_installed = {
             'bashls',
             'html',
+            'jsonls',
             'lua_ls',
             'ols',
             'rust_analyzer',

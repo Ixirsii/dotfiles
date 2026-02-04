@@ -13,3 +13,5 @@ Proton Pass
 pulse
 systemd
 thefuck
+transmission
+!transmission/settings.json
