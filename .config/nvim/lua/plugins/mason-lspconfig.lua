@@ -12,6 +12,7 @@ return {
             'html',
             'jsonls',
             'lua_ls',
+            'marksman',
             'ols',
             'rust_analyzer',
             'sqlls',

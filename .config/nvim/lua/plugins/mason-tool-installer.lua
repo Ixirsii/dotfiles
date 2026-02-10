@@ -11,6 +11,7 @@ return {
             'clang-format', -- Multi-language formatter
             'eslint_d', -- JavaScript/TypeScript linter
             'jsonlint', -- JSON linter
+            'markdownlint', -- Markdown linter and formatter
             'prettier', -- JavaScript/TypeScript formatter
             'prettierd', -- Prettier daemon
             'stylua', -- Lua formatter
