@@ -20,6 +20,10 @@ alias vim="nvim"
 alias vimdiff="nvim -d"
 
 if status is-interactive
+    if not set -q TMUX
+        tmux new-session -A -s ryan
+    end
+
     atuin init fish | source
     starship init fish | source
 end
