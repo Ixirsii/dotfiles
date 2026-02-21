@@ -1,6 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+
     dependencies = {
         'nvim-lua/plenary.nvim',
         {
@@ -52,11 +52,6 @@ return {
     end,
 
     keys = {
-        { '<leader>D', '<cmd>Telescope diagnostics bufnr=0<CR>', desc = 'Show buffer diagnostics' },
-        { '<leader>gd', '<cmd>Telescope lsp_definitions<CR>', desc = 'Show LSP definitions' },
-        { '<leader>gi', '<cmd>Telescope lsp_implementations<CR>', desc = 'Show LSP implementations' },
-        { '<leader>gR', '<cmd>Telescope lsp_references<CR>', desc = 'Show LSP references' },
-        { '<leader>gt', '<cmd>Telescope lsp_type_definitions<CR>', desc = 'Show LSP type definitions' },
         { '<leader>ff', '<cmd>Telescope find_files<CR>', desc = 'Fuzzy find file by name' },
         { '<leader>fr', '<cmd>Telescope oldfiles<CR>', desc = 'Fuzzy find recent files' },
         { '<leader>fg', '<cmd>Telescope live_grep<CR>', desc = 'Find string' },

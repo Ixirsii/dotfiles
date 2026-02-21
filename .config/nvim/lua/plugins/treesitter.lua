@@ -1,68 +1,58 @@
 -- Syntax highlighting
 return {
     'nvim-treesitter/nvim-treesitter',
+
+    branch = 'main',
     build = ':TSUpdate',
+    event = { 'BufReadPre', 'BufNewFile' },
+    lazy = false,
+
     dependencies = {
         'windwp/nvim-ts-autotag',
     },
 
-    event = { 'BufReadPre', 'BufNewFile' },
-
     config = function()
-        require('nvim-treesitter').setup({
-            -- A list of parser names, or 'all' (the five listed parsers should always be installed)
-            ensure_installed = {
-                'bash',
-                'c',
-                'css',
-                'gitignore',
-                'html',
-                'java',
-                'javascript',
-                'json',
-                'kotlin',
-                'lua',
-                'markdown',
-                'odin',
-                'query',
-                'rust',
-                'tsx',
-                'typescript',
-                'vim',
-                'vimdoc',
-                'yaml',
-            },
+        local treesitter = require('nvim-treesitter')
 
-            auto_tag = {
-                enable = true,
-            },
-
-            incremental_selection = {
-                enable = true,
-
-                keymaps = {
-                    init_selection = '<C-space>',
-                    node_incremental = '<C-space>',
-                    scope_incremental = false,
-                    node_decremental = '<bs>',
-                },
-            },
-
-            indent = {
-                enable = true,
-            },
-
-            highlight = {
-                enable = true,
-
-                -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                -- Instead of true it can also be a list of languages
-                additional_vim_regex_highlighting = { 'markdown' },
-            },
-
-            sync_install = false,
+        treesitter.setup({
+            highlight = { enable = true },
+            indent = { enable = true },
+        })
+        treesitter.install({
+            'bash',
+            'c',
+            'cpp',
+            'css',
+            'desktop',
+            'fish',
+            'git_config',
+            'git_rebase',
+            'gitattributes',
+            'gitcommit',
+            'gitignore',
+            'go',
+            'html',
+            'hyprlang',
+            'java',
+            'javascript',
+            'json',
+            'kotlin',
+            'latex',
+            'lua',
+            'markdown',
+            'odin',
+            'regex',
+            'rust',
+            'scss',
+            'svelte',
+            'tsx',
+            'typescript',
+            'typst',
+            'vim',
+            'vimdoc',
+            'vue',
+            'yaml',
+            'zsh',
         })
     end,
 }
