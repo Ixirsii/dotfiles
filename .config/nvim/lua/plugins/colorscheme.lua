@@ -1,21 +1,27 @@
 return {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
+    {
+        'catppuccin/nvim',
 
-    config = function()
-        require('catppuccin').setup({
-            flavor = 'mocha',
-            integrations = {
-                mason = true,
-                nvimtree = true,
-                telescope = {
-                    enabled = true,
+        name = 'catppuccin',
+        lazy = false,
+        priority = 1000,
+
+        config = function()
+            require('catppuccin').setup({
+                auto_integrations = true,
+                flavor = 'mocha',
+                float = {
+                    transparent = true, -- enable transparent floating windows
+                    solid = false, -- use solid styling for floating windows, see |winborder|
                 },
-                treesitter = true,
-            },
-        })
+            })
 
-        vim.cmd('colorscheme catppuccin')
-    end,
+            vim.cmd('colorscheme catppuccin')
+        end,
+    },
+    {
+        'folke/tokyonight.nvim',
+        lazy = false,
+        priority = 1000,
+    },
 }

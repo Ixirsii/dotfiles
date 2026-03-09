@@ -1,58 +1,60 @@
 -- Syntax highlighting
 return {
-    'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
 
-    branch = 'main',
-    build = ':TSUpdate',
-    event = { 'BufReadPre', 'BufNewFile' },
-    lazy = false,
+        branch = 'main',
+        build = ':TSUpdate',
+        lazy = false,
 
-    dependencies = {
-        'windwp/nvim-ts-autotag',
+        dependencies = {
+            'windwp/nvim-ts-autotag',
+        },
+
+        config = function()
+            local treesitter = require('nvim-treesitter')
+
+            treesitter.setup({
+                additional_vim_regex_highlighting = false,
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+            treesitter.install({
+                'bash',
+                'c',
+                'cpp',
+                'css',
+                'desktop',
+                'fish',
+                'git_config',
+                'git_rebase',
+                'gitattributes',
+                'gitcommit',
+                'gitignore',
+                'go',
+                'html',
+                'hyprlang',
+                'java',
+                'javascript',
+                'json',
+                'jsx',
+                'kotlin',
+                'latex',
+                'lua',
+                'markdown',
+                'odin',
+                'regex',
+                'rust',
+                'typescript',
+                'typst',
+                'vim',
+                'vimdoc',
+                'yaml',
+                'zsh',
+            })
+        end,
     },
-
-    config = function()
-        local treesitter = require('nvim-treesitter')
-
-        treesitter.setup({
-            highlight = { enable = true },
-            indent = { enable = true },
-        })
-        treesitter.install({
-            'bash',
-            'c',
-            'cpp',
-            'css',
-            'desktop',
-            'fish',
-            'git_config',
-            'git_rebase',
-            'gitattributes',
-            'gitcommit',
-            'gitignore',
-            'go',
-            'html',
-            'hyprlang',
-            'java',
-            'javascript',
-            'json',
-            'kotlin',
-            'latex',
-            'lua',
-            'markdown',
-            'odin',
-            'regex',
-            'rust',
-            'scss',
-            'svelte',
-            'tsx',
-            'typescript',
-            'typst',
-            'vim',
-            'vimdoc',
-            'vue',
-            'yaml',
-            'zsh',
-        })
-    end,
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+    },
 }
