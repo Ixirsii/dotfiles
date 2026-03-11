@@ -26,6 +26,7 @@ config.font = wezterm.font("SauceCodePro Nerd Font")
 config.font_size = 14
 config.color_scheme = get_color_scheme(get_appearance())
 config.enable_tab_bar = true
+config.show_new_tab_button_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32
 config.use_fancy_tab_bar = false
