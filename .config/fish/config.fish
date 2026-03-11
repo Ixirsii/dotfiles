@@ -14,10 +14,7 @@ end
 # pnpm end
 
 # Source /etc/profile
-fish_add_path -p /etc/profile
-
-# Wezterm CLI support
-fish_add_path -a "/Applications/WezTerm.app/Contents/MacOS"
+#fish_add_path -p /etc/profile
 
 if status is-interactive
     # Atuin

@@ -26,13 +26,13 @@ config.font = wezterm.font("SauceCodePro Nerd Font")
 config.font_size = 14
 config.color_scheme = get_color_scheme(get_appearance())
 config.enable_tab_bar = true
+config.enable_wayland = true
 config.show_new_tab_button_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32
 config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.8
-config.macos_window_background_blur = 10
 
 -- Update interval
 config.status_update_interval = 1000
@@ -48,7 +48,7 @@ config.keys = {
 	-- Split pane
 	{
 		mods = "SUPER",
-		key = "|",
+		key = "d",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
