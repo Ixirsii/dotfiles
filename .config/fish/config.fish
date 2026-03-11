@@ -1,29 +1,38 @@
 # Environment
-set -gx BROWSER Zen
+set -gx BROWSER Helium
 set -gx EDITOR nvim
-set -gx TERMINAL Ghostty
+set -gx TERMINAL wezterm
 
 # Set bat theme
 set -gx BAT_THEME "Catppuccin Mocha"
 
-# FNM
-fnm env --use-on-cd --shell fish | source
+# Source /etc/profile
+fish_add_path -p /etc/profile
 
-# Zoxide
-zoxide init fish | source
-
-# Aliases
-alias cat="bat"
-alias cd="z"
-alias ls="eza -A --color=always --header --long --git --icons=always"
-alias vim="nvim"
-alias vimdiff="nvim -d"
+# Wezterm CLI support
+fish_add_path -a "/Applications/WezTerm.app/Contents/MacOS"
 
 if status is-interactive
-    if not set -q TMUX
-        tmux new-session -A -s ryan
-    end
-
+    # Atuin
     atuin init fish | source
+
+    # FNM
+    fnm env --use-on-cd --shell fish | source
+
+    # Zoxide
+    zoxide init fish | source
+
+    # Starship
     starship init fish | source
+end
+
+function fish_title
+    set -f cwd (prompt_pwd | string split /)[-1]
+    set -q argv[1]; or set argv fish
+
+    if set -q argv[1]; and [ $argv[1] != fish ]
+        echo $argv[1] $cwd
+    else
+        echo $cwd
+    end
 end

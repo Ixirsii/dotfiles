@@ -9,6 +9,7 @@ return {
     opts = {
         ensure_installed = {
             'bashls',
+            'fish_lsp',
             'html',
             'jsonls',
             'lua_ls',
