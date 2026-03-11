@@ -3,7 +3,7 @@
 
 add_newline = true
 format = """
-[](teal)\
+[╭─](subtext0) [](teal)\
 $os\
 $username\
 [](bg:sapphire fg:teal)\
@@ -26,7 +26,7 @@ $time\
 [ ](fg:mauve)\
 $cmd_duration\
 $line_break\
-$character"""
+[╰─](subtext0) $character"""
 palette = "catppuccin_mocha"
 
 [c]
@@ -36,12 +36,12 @@ format = '[ $symbol( $version) ]($style)'
 
 [character]
 disabled = false
-success_symbol = '[󰄛 ❯](bold green)'
-error_symbol = '[󰄛 ❯](bold red)'
-vimcmd_symbol = '[󰄛 ❮](bold green)'
-vimcmd_replace_one_symbol = '[󰄛 ❮](bold lavender)'
-vimcmd_replace_symbol = '[󰄛 ❮](bold lavender)'
-vimcmd_visual_symbol = '[󰄛 ❮](bold yellow)'
+success_symbol = '[󰄛](bold green)'
+error_symbol = '[󰄛](bold red)'
+vimcmd_symbol = '[󰄛](bold green)'
+vimcmd_replace_one_symbol = '[󰄛](bold lavender)'
+vimcmd_replace_symbol = '[󰄛](bold lavender)'
+vimcmd_visual_symbol = '[󰄛](bold yellow)'
 
 [cmd_duration]
 show_milliseconds = true
