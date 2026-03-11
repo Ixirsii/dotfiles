@@ -6,6 +6,13 @@ set -gx TERMINAL wezterm
 # Set bat theme
 set -gx BAT_THEME "Catppuccin Mocha"
 
+# pnpm
+set -gx PNPM_HOME "/home/ryan/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+
 # Source /etc/profile
 fish_add_path -p /etc/profile
 
