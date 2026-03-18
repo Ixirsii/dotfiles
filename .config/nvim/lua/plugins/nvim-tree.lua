@@ -39,6 +39,8 @@ return {
                 width = 50,
             },
         })
+
+        require('nvim-tree.api').tree.open()
     end,
 
     keys = {
