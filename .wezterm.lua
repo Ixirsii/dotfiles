@@ -47,8 +47,8 @@ config.keys = {
 	},
 	-- Split pane
 	{
-		mods = "SUPER",
-		key = "d",
+		mods = "SHIFT|SUPER",
+		key = "\\",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
@@ -124,7 +124,7 @@ config.keys = {
 		end),
 	},
 	{
-		mods = "CTRL|SHIFT|META",
+		mods = "SHIFT|CTRL|META",
 		key = "h",
 		action = wezterm.action_callback(function(win, pane)
 			if is_vim(pane) then
@@ -150,7 +150,7 @@ config.keys = {
 		end),
 	},
 	{
-		mods = "CTRL|SHIFT|META",
+		mods = "SHIFT|CTRL|META",
 		key = "j",
 		action = wezterm.action_callback(function(win, pane)
 			if is_vim(pane) then
@@ -176,7 +176,7 @@ config.keys = {
 		end),
 	},
 	{
-		mods = "CTRL|SHIFT|META",
+		mods = "SHIFT|CTRL|META",
 		key = "k",
 		action = wezterm.action_callback(function(win, pane)
 			if is_vim(pane) then
@@ -202,7 +202,7 @@ config.keys = {
 		end),
 	},
 	{
-		mods = "CTRL|SHIFT|META",
+		mods = "SHIFT|CTRL|META",
 		key = "l",
 		action = wezterm.action_callback(function(win, pane)
 			if is_vim(pane) then
