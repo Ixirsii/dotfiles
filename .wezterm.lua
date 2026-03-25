@@ -31,7 +31,7 @@ config.show_new_tab_button_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32
 config.use_fancy_tab_bar = false
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.window_background_opacity = 0.8
 
 -- Update interval
@@ -48,7 +48,7 @@ config.keys = {
 	-- Split pane
 	{
 		mods = "SHIFT|SUPER",
-		key = "\\",
+		key = "|",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
