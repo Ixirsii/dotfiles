@@ -1,4 +1,4 @@
-vim.lsp.config('lua_ls', {
+return {
     settings = {
         Lua = {
             -- make the language server recognize vim global
@@ -10,4 +10,4 @@ vim.lsp.config('lua_ls', {
             },
         },
     },
-})
+}

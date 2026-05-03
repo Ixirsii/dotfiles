@@ -45,7 +45,7 @@
     "clock": {
         "format": "{:%A %H:%M}",
         "format-alt": "{:%A %B %d %Y %H:%M}",
-        "timezone": "America/Phoenix",
+        "timezone": "America/Chicago",
         "tooltip": true,
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
