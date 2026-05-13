@@ -1,5 +1,5 @@
 return {
-    'folke/snacks.nvim',
+    "folke/snacks.nvim",
 
     lazy = false,
     priority = 1000,
@@ -57,7 +57,7 @@ return {
             },
 
             sections = {
-                { section = 'header' },
+                { section = "header" },
             },
         },
 

@@ -1,26 +1,26 @@
 return {
-    'windwp/nvim-autopairs',
+    "windwp/nvim-autopairs",
 
-    event = 'InsertEnter',
+    event = "InsertEnter",
 
     dependencies = {
-        'hrsh7th/nvim-cmp',
+        "hrsh7th/nvim-cmp",
     },
 
     config = function()
-        require('nvim-autopairs').setup({
+        require("nvim-autopairs").setup({
             check_ts = true,
 
             ts_config = {
                 java = false,
-                javascript = { 'template_string' },
-                lua = { 'string' },
+                javascript = { "template_string" },
+                lua = { "string" },
             },
         })
 
-        local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-        local cmp = require('cmp')
+        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+        local cmp = require("cmp")
 
-        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
 }

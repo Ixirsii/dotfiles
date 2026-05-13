@@ -1,2 +1,2 @@
 -- Marker at 100 characters
-vim.opt.colorcolumn = '100'
+vim.opt.colorcolumn = "100"

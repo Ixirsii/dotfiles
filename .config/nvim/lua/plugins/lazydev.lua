@@ -1,14 +1,14 @@
 return {
-    'folke/lazydev.nvim',
+    "folke/lazydev.nvim",
 
     -- only load on lua files
-    ft = 'lua',
+    ft = "lua",
 
     opts = {
         library = {
             -- See the configuration section for more details
             -- Load luvit types when the `vim.uv` word is found
-            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         },
     },
 }
