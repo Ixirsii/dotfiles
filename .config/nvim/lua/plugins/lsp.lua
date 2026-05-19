@@ -32,6 +32,7 @@ return {
                 "ols",
                 "rust_analyzer",
                 "sqlls",
+                "superhtml",
                 "tailwindcss",
                 "taplo",
                 "ts_ls",
