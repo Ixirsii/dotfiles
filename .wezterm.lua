@@ -31,7 +31,7 @@ end
 --                                           Appearance                                           --
 -- ---------------------------------------------------------------------------------------------- --
 
-config.font = wezterm.font("SauceCodePro Nerd Font")
+config.font = wezterm.font("SauceCodePro Nerd Font Mono")
 config.font_size = 14
 config.color_scheme = get_color_scheme(get_appearance())
 config.enable_tab_bar = true
@@ -126,8 +126,8 @@ config.keys = {
     },
     -- Font size
     {
-        mods = "CTRL",
-        key = "-",
+        mods = "CTRL|SHIFT",
+        key = "_",
         action = act.DecreaseFontSize,
     },
     {
@@ -234,7 +234,7 @@ config.keys = {
         action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
     },
     {
-        mods = "SUPER",
+        mods = "CTRL",
         key = "-",
         action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
     },
