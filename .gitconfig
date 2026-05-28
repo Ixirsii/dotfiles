@@ -13,8 +13,8 @@
     gpgSign = true
 
 [core]
+    autocrlf = input
     pager = delta
-    autocrlf = true
 
 [delta]
     navigate = true
