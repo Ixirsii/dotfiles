@@ -25,7 +25,6 @@ return {
                 "cpp",
                 "css",
                 "desktop",
-                "fish",
                 "git_config",
                 "git_rebase",
                 "gitattributes",

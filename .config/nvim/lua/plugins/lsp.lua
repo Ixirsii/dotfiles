@@ -55,7 +55,6 @@ return {
                 "markdownlint",
                 "prettierd",
                 "stylua",
-                "yamlfmt",
             },
         },
     },

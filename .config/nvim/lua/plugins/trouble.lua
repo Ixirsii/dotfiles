@@ -1,23 +1,27 @@
 return {
     "folke/trouble.nvim",
+
     dependencies = { "nvim-tree/nvim-web-devicons" },
 
-    opts = {
-        -- Default configuration
-    },
+    specs = {
+        "folke/snacks.nvim",
 
-    keys = {
-        {
-            "<leader>xx",
-            "<cmd>Trouble diagnostics toggle<CR>",
-            desc = "Open/close trouble diagnostics",
-        },
-        {
-            "<leader>xX",
-            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-            desc = "Open/close trouble buffer diagnostics",
-        },
-        { "<leader>xq", "<cmd>Trouble qflist toggle<CR>", desc = "Open trouble quickfix list" },
-        { "<leader>xl", "<cmd>Trouble loclist toggle<CR>", desc = "Open trouble location list" },
+        opts = function(_, opts)
+            return vim.tbl_deep_extend("force", opts or {}, {
+                picker = {
+                    actions = require("trouble.sources.snacks").actions,
+                    win = {
+                        input = {
+                            keys = {
+                                ["<c-t>"] = {
+                                    "trouble_open",
+                                    mode = { "n", "i" },
+                                },
+                            },
+                        },
+                    },
+                },
+            })
+        end,
     },
 }
