@@ -1,7 +1,7 @@
 [user]
     email = ixirsii@ixirsii.tech
     name = Ryan Porterfield
-    signingKey = 8DCC6FB8BDC669072621EC6AE08EE51047CC0C7B
+    signingKey = E08EE51047CC0C7B
 
 [alias]
     dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
@@ -14,9 +14,10 @@
 
 [core]
     pager = delta
+    autocrlf = true
 
 [delta]
-    navigate = true    # use n and N to move between diff sections
+    navigate = true
     side-by-side = true
 
 [diff]
