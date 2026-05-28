@@ -2,6 +2,9 @@
 #                                 Environment                                  #
 # ############################################################################ #
 
+export BAT_THEME="Catppuccin Mocha"
+export SDKMAN_DIR="$HOME/.sdkman"
+
 export BROWSER="zen"
 export EDITOR="nvim"
 export PATH="$PATH:$HOME/.cargo/bin"
@@ -41,12 +44,9 @@ alias vimdiff="nvim -d"
 # ############################################################################ #
 
 eval "$(atuin init zsh)"
-export BAT_THEME="Catppuccin Mocha"
 eval "$(fnm env --use-on-cd)"
-export GPG_TTY=$TTY
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
-# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
+# SDKMAN
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
