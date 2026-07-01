@@ -1,18 +1,15 @@
-[submodule ".config/zsh/zsh-autosuggestions"]
-	path = .config/zsh/zsh-autosuggestions
+[submodule "common/.config/zsh/zsh-autosuggestions"]
+	path = common/.config/zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule ".config/zsh/zsh-syntax-highlighting"]
-	path = .config/zsh/zsh-syntax-highlighting
+[submodule "common/.config/zsh/zsh-syntax-highlighting"]
+	path = common/.config/zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
-[submodule ".config/zsh/zsh-you-should-use"]
-	path = .config/zsh/zsh-you-should-use
+[submodule "common/.config/zsh/zsh-you-should-use"]
+	path = common/.config/zsh/zsh-you-should-use
 	url = https://github.com/MichaelAquilina/zsh-you-should-use
-[submodule ".config/zsh/catppuccin/zsh-syntax-highlighting"]
-	path = .config/zsh/catppuccin/zsh-syntax-highlighting
+[submodule "common/.config/zsh/catppuccin/zsh-syntax-highlighting"]
+	path = common/.config/zsh/catppuccin/zsh-syntax-highlighting
 	url = https://github.com/catppuccin/zsh-syntax-highlighting.git
-[submodule ".config/zsh/fzf-git.sh"]
-	path = .config/zsh/fzf-git.sh
+[submodule "common/.config/zsh/fzf-git.sh"]
+	path = common/.config/zsh/fzf-git.sh
 	url = https://github.com/junegunn/fzf-git.sh.git
-[submodule ".config/hypr/hyprland"]
-	path = .config/hypr/hyprland
-	url = https://github.com/catppuccin/hyprland
