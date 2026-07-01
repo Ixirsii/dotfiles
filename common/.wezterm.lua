@@ -65,6 +65,8 @@ config.status_update_interval = 1000
 -- Disable default key bindings
 config.disable_default_key_bindings = true
 
+local paste_mod = wezterm.target_triple:find("darwin") and "SUPER" or "CTRL"
+
 config.keys = {
     -- Manage Wezterm
     {
@@ -114,7 +116,7 @@ config.keys = {
         action = act.Search("CurrentSelectionOrEmptyString"),
     },
     {
-        mods = "SUPER",
+        mods = paste_mod,
         key = "v",
         action = act.PasteFrom("Clipboard"),
     },

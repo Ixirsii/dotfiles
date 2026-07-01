@@ -21,6 +21,9 @@ _darcs
 # emacs autosave files
 \#.*\#
 
+# Lua config
+.luarc.json
+
 # Lua style
 .stylua.toml
 
