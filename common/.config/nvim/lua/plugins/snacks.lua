@@ -77,6 +77,9 @@ return {
 
         picker = {
             sources = {
+                grep = {
+                    hidden = true,
+                },
                 explorer = {
                     hidden = true,
                 },

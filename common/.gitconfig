@@ -1,7 +1,10 @@
+[include]
+	path = ~/.config/delta/catppuccin.gitconfig
+
 [user]
-    email = ixirsii@ixirsii.tech
+    email = ixirsii@9dev.tech
     name = Ryan Porterfield
-    signingKey = E08EE51047CC0C7B
+    signingKey = D299B6482C961930F6EAAB2D9D923B929C317D97
 
 [alias]
     dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
@@ -17,6 +20,7 @@
     pager = delta
 
 [delta]
+    features = catppuccin-mocha
     navigate = true
     side-by-side = true
 
@@ -25,6 +29,9 @@
 
 [gpg]
     program = gpg
+
+[fetch]
+    prune = true
 
 [http]
     sslVerify = true
@@ -36,13 +43,16 @@
     diffFilter = delta --color-only
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [push]
     default = simple
 
 [pull]
-    rebase = true
+    ff = only
+
+[rebase]
+    autoStash = true
 
 [rerere]
     enabled = true

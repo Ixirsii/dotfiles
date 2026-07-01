@@ -40,7 +40,11 @@ config.show_new_tab_button_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32
 config.use_fancy_tab_bar = false
-config.window_decorations = "NONE"
+if wezterm.target_triple:find("darwin") then
+    config.window_decorations = "RESIZE"
+else
+    config.window_decorations = "NONE"
+end
 config.window_background_opacity = 0.8
 
 -- ---------------------------------------------------------------------------------------------- --
