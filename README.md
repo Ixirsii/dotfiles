@@ -31,3 +31,17 @@ Apply changes:
 ```sh
 stow --verbose --restow --target="$HOME" common linux
 ```
+
+### Windows
+
+Preview changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" common windows
+```
+
+Apply changes:
+
+```sh
+stow --verbose --restow --target="$HOME" common windows
+```

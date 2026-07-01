@@ -32,15 +32,20 @@ end
 -- ---------------------------------------------------------------------------------------------- --
 
 config.font = wezterm.font("SauceCodePro Nerd Font Mono")
-config.font_size = 14
+config.font_size = wezterm.target_triple:find("windows") and 12 or 14
 config.color_scheme = get_color_scheme(get_appearance())
+if wezterm.target_triple:find("windows") then
+    config.default_prog = { "pwsh.exe" }
+end
 config.enable_tab_bar = true
 config.enable_wayland = true
 config.show_new_tab_button_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32
 config.use_fancy_tab_bar = false
-if wezterm.target_triple:find("darwin") then
+if wezterm.target_triple:find("windows") then
+    config.window_decorations = "TITLE | RESIZE"
+elseif wezterm.target_triple:find("darwin") then
     config.window_decorations = "RESIZE"
 else
     config.window_decorations = "NONE"
