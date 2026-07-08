@@ -1,0 +1,158 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "spacing": 4,
+    "modules-left": [
+        "custom/system",
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "group/tray-expander",
+        "network",
+        "pulseaudio",
+        "cpu",
+        "temperature"
+    ],
+    // Modules configuration
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": [
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ],
+        "interval": 10,
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "tooltip-format-charging": "{capacity}%",
+        "tooltip-format-discharging": "{capacity}%"
+    },
+    "clock": {
+        "format": "{:%A %H:%M}",
+        "format-alt": "{:%A %B %d %Y %H:%M}",
+        "timezone": "America/Chicago",
+        "tooltip": true,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "",
+            "on-scroll": 1,
+            "format": {
+                "days": "<span color='#89dceb'><b>{}</b></span>",
+                "months": "<span color='#f5c2e7'><b>{}</b></span>",
+                "today": "<span color='#74c7ec'><b><u>{}</u></b></span>",
+                "weekdays": "<span color='#74c7ec'><b>{}</b></span>",
+                "weeks": "<span color='#f5c2e7'><b>W{}</b></span>"
+            }
+        }
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "network": {
+        "format-icons": [
+            "󰤯",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
+        "format": "{icon}",
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈁",
+        "format-disconnected": "󰤮",
+        "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-disconnected": "Disconnected",
+        "interval": 5,
+        "spacing": 1
+    },
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ],
+            "headphone": "",
+            "headset": ""
+        },
+        "tooltip-format": "{volume}%",
+        "on-click": "pavucontrol",
+        "scroll-step": 5
+    },
+    "temperature": {
+        "format": "{temperatureC}°C "
+    },
+    "tray": {
+        "icon-size": 12,
+        "spacing": 17
+    },
+    "custom/expand-icon": {
+        "format": "",
+        "tooltip": false,
+        "on-scroll-up": "",
+        "on-scroll-down": "",
+        "on-scroll-left": "",
+        "on-scroll-right": ""
+    },
+    "custom/system": {
+        "format": "󰣇",
+        "on-click": "nwg-bar"
+    },
+    "group/tray-expander": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 600,
+            "children-class": "tray-group-item"
+        },
+        "modules": [
+            "custom/expand-icon",
+            "tray"
+        ]
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "󰧮",
+            "6": "",
+            "7": "󰖂",
+            "8": "",
+            "9": "󰻞"
+        },
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": []
+        }
+    }
+}

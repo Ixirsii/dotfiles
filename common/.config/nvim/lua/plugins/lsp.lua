@@ -23,16 +23,15 @@ return {
         opts = {
             ensure_installed = {
                 "bashls",
-                "fish_lsp",
                 "eslint",
                 "html",
+                "hyprls",
                 "jsonls",
                 "lua_ls",
                 "marksman",
                 "ols",
                 "rust_analyzer",
                 "sqlls",
-                "superhtml",
                 "tailwindcss",
                 "taplo",
                 "ts_ls",

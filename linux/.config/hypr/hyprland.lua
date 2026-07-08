@@ -34,7 +34,7 @@ BROWSER = "zen-browser"
 FILE_MANAGER = "dolphin"
 MENU = "hyprlauncher"
 TERMINAL = "wezterm"
-TORRENT = "transmission-qt"
+TORRENT = "transmission-gtk"
 
 -- -------------------------------------------------------------------------- --
 --                                 Auto start                                 --

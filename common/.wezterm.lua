@@ -51,6 +51,7 @@ else
     config.window_decorations = "NONE"
 end
 config.window_background_opacity = 0.8
+config.window_close_confirmation = "NeverPrompt"
 
 -- ---------------------------------------------------------------------------------------------- --
 --                                        Update interval                                         --
