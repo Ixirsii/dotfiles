@@ -115,6 +115,21 @@ vim.opt.backspace = "indent,eol,start"
 -- Clipboard
 vim.opt.clipboard:append("unnamedplus")
 
+if vim.env.WAYLAND_DISPLAY and vim.fn.executable("wl-copy") == 1 and vim.fn.executable("wl-paste") == 1 then
+    vim.g.clipboard = {
+        name = "wl-clipboard",
+        copy = {
+            ["+"] = "wl-copy --type text/plain",
+            ["*"] = "wl-copy --primary --type text/plain",
+        },
+        paste = {
+            ["+"] = "wl-paste --no-newline",
+            ["*"] = "wl-paste --primary --no-newline",
+        },
+        cache_enabled = 1,
+    }
+end
+
 -- Split windows
 vim.opt.splitright = true
 vim.opt.splitbelow = true
