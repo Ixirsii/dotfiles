@@ -1,3 +1,41 @@
+local is_freebsd = vim.uv.os_uname().sysname == "FreeBSD"
+
+local native_freebsd_servers = {
+    "hyprls",
+    "lua_ls",
+    "marksman",
+    "ols",
+    "rust_analyzer",
+    "taplo",
+}
+
+local mason_lsp_servers = {
+    "bashls",
+    "eslint",
+    "html",
+    "jsonls",
+    "sqlls",
+    "tailwindcss",
+    "ts_ls",
+    "yamlls",
+}
+
+if not is_freebsd then
+    vim.list_extend(mason_lsp_servers, native_freebsd_servers)
+end
+
+local mason_tools = {
+    "clang-format",
+    "eslint_d",
+    "jsonlint",
+    "markdownlint",
+    "prettierd",
+}
+
+if not is_freebsd then
+    table.insert(mason_tools, "stylua")
+end
+
 return {
     {
         "mason-org/mason-lspconfig.nvim",
@@ -21,23 +59,16 @@ return {
         },
 
         opts = {
-            ensure_installed = {
-                "bashls",
-                "eslint",
-                "html",
-                "hyprls",
-                "jsonls",
-                "lua_ls",
-                "marksman",
-                "ols",
-                "rust_analyzer",
-                "sqlls",
-                "tailwindcss",
-                "taplo",
-                "ts_ls",
-                "yamlls",
-            },
+            ensure_installed = mason_lsp_servers,
         },
+
+        config = function(_, opts)
+            require("mason-lspconfig").setup(opts)
+
+            if is_freebsd then
+                vim.lsp.enable(native_freebsd_servers)
+            end
+        end,
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -47,14 +78,7 @@ return {
         },
 
         opts = {
-            ensure_installed = {
-                "clang-format",
-                "eslint_d",
-                "jsonlint",
-                "markdownlint",
-                "prettierd",
-                "stylua",
-            },
+            ensure_installed = mason_tools,
         },
     },
     {
