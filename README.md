@@ -32,6 +32,20 @@ Apply changes:
 stow --verbose --restow --target="$HOME" common linux
 ```
 
+### FreeBSD
+
+Preview changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" common freebsd
+```
+
+Apply changes:
+
+```sh
+stow --verbose --restow --target="$HOME" common freebsd
+```
+
 ### Windows
 
 Preview changes:
