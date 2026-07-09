@@ -16,7 +16,8 @@
         "network",
         "pulseaudio",
         "cpu",
-        "temperature"
+        "temperature",
+        "custom/ups"
     ],
     // Modules configuration
     "battery": {
@@ -101,6 +102,11 @@
     },
     "temperature": {
         "format": "{temperatureC}°C "
+    },
+    "custom/ups": {
+        "exec": "waybar-ups",
+        "return-type": "json",
+        "interval": 10
     },
     "tray": {
         "icon-size": 12,

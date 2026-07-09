@@ -23,9 +23,19 @@ tooltip {
 #battery,
 #network,
 #pulseaudio,
-#temperature {
+#temperature,
+#custom-ups {
   margin: 0 6px;
   min-width: 12px;
+}
+
+#custom-ups.battery {
+  color: @yellow;
+}
+
+#custom-ups.low,
+#custom-ups.unknown {
+  color: @red;
 }
 
 #custom-system {

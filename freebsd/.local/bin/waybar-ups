@@ -1,0 +1,31 @@
+#!/bin/sh
+
+UPS_NAME="ups@localhost"
+
+charge=$(upsc "$UPS_NAME" battery.charge 2>/dev/null)
+status=$(upsc "$UPS_NAME" ups.status 2>/dev/null)
+runtime=$(upsc "$UPS_NAME" battery.runtime 2>/dev/null)
+
+if [ -z "$charge" ] || [ -z "$status" ]; then
+    printf '{"text":"󰚥 ?","tooltip":"UPS unavailable","class":"unknown"}\n'
+    exit 0
+fi
+
+class="online"
+case " $status " in
+    *" LB "*) class="low" ;;
+    *" OB "*) class="battery" ;;
+esac
+
+if [ "$charge" -le 20 ] 2>/dev/null; then
+    class="low"
+fi
+
+runtime_text="unknown"
+case "$runtime" in
+    "" | *[!0-9]*) ;;
+    *) runtime_text="$((runtime / 60))m" ;;
+esac
+
+printf '{"text":"󰚥 %s%% %s","tooltip":"Status: %s\\nRuntime: %s","class":"%s"}\n' \
+    "$charge" "$status" "$status" "$runtime_text" "$class"

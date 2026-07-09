@@ -8,7 +8,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export BROWSER="zen"
 export EDITOR="nvim"
-export PATH="$PATH:$HOME/.cargo/bin:$BUN_INSTALL/bin"
+export PATH="$HOME/.local/bin:$PATH:$HOME/.cargo/bin:$BUN_INSTALL/bin"
 export TERMINAL="wezterm"
 
 # ############################################################################ #
