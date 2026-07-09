@@ -5,7 +5,7 @@ window {
   border-width: 1px;
   border-color: rgba(137, 220, 235, 0.5);
   color: #cdd6f4;
-  font-family: "Noto Sans";
+  font-family: "Mulish", "Noto Sans", "Noto Sans CJK", sans-serif;
   font-size: 14px;
 }
 
