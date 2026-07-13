@@ -122,19 +122,9 @@ config.keys = {
         action = act.PasteFrom("Clipboard"),
     },
     {
-        mods = "CTRL",
-        key = "x",
-        action = act.ActivateCopyMode,
-    },
-    {
         mods = "SHIFT",
         key = "Insert",
         action = act.PasteFrom("PrimarySelection"),
-    },
-    {
-        mods = "NONE",
-        key = "Copy",
-        action = act.CopyTo("Clipboard"),
     },
     -- Font size
     {
@@ -615,7 +605,8 @@ local function get_ups_status()
     ups_last_update = now
     ups_cache = nil
 
-    local ok, success, stdout = pcall(wezterm.run_child_process, { "/usr/local/bin/upsc", "ups@localhost" })
+    local ok, success, stdout =
+        pcall(wezterm.run_child_process, { "/usr/local/bin/upsc", "ups@localhost" })
     if not ok or not success or type(stdout) ~= "string" then
         return nil
     end
