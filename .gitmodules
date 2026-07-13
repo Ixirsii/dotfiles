@@ -13,3 +13,18 @@
 [submodule "common/.config/zsh/fzf-git.sh"]
 	path = common/.config/zsh/fzf-git.sh
 	url = https://github.com/junegunn/fzf-git.sh.git
+[submodule "linux/.config/tmux/plugins/tpm"]
+	path = linux/.config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
+[submodule "linux/.config/tmux/plugins/tmux-cpu"]
+	path = linux/.config/tmux/plugins/tmux-cpu
+	url = https://github.com/tmux-plugins/tmux-cpu.git
+[submodule "linux/.config/tmux/plugins/tmux-sensible"]
+	path = linux/.config/tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible.git
+[submodule "linux/.config/tmux/plugins/tmux-yank"]
+	path = linux/.config/tmux/plugins/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank.git
+[submodule "linux/.config/tmux/plugins/catppuccin"]
+	path = linux/.config/tmux/plugins/catppuccin
+	url = https://github.com/catppuccin/tmux.git
