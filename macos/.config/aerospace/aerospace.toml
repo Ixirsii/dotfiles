@@ -143,10 +143,6 @@ if.app-id = "com.github.wez.wezterm"
 run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
-if.app-id = "net.imput.helium"
-run = "move-node-to-workspace 2"
-
-[[on-window-detected]]
 if.app-id = "app.zen-browser.zen"
 run = "move-node-to-workspace 2"
 
@@ -171,45 +167,49 @@ if.app-id = "dev.zed.Zed"
 run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
-if.app-id = "com.terrygodier.Current"
+if.app-id = "com.openai.codex"
 run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
+if.app-id = "com.terrygodier.Current"
+run = "move-node-to-workspace 5"
 
 [[on-window-detected]]
 if.app-id = "md.obsidian"
-run = "move-node-to-workspace 4"
+run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
 if.app-id = "org.gimp.gimp"
-run = "move-node-to-workspace 5"
+run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
 if.app-id = "org.inkscape.Inkscape"
-run = "move-node-to-workspace 5"
+run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
 if.app-id = "com.epicgames.EpicGamesLauncher"
-run = "move-node-to-workspace 6"
-
-[[on-window-detected]]
-if.app-id = "com.spotify.client"
-run = "move-node-to-workspace 6"
-
-[[on-window-detected]]
-if.app-id = "com.valvesoftware.steam"
-run = "move-node-to-workspace 6"
-
-[[on-window-detected]]
-if.app-id = "ch.protonvpn.mac"
 run = "move-node-to-workspace 7"
 
 [[on-window-detected]]
-if.app-id = "app.legcord.Legcord"
+if.app-id = "com.spotify.client"
+run = "move-node-to-workspace 7"
+
+[[on-window-detected]]
+if.app-id = "com.1password.1password"
 run = "move-node-to-workspace 8"
+
+[[on-window-detected]]
+if.app-id = "io.tailscale.ipn.macsys"
+run = "move-node-to-workspace 8"
+
+[[on-window-detected]]
+if.app-id = "com.fastmail.mac.Fastmail"
+run = "move-node-to-workspace 9"
+
+[[on-window-detected]]
+if.app-id = "app.legcord.Legcord"
+run = "move-node-to-workspace 9"
 
 [[on-window-detected]]
 if.app-id = "org.whispersystems.signal-desktop"
-run = "move-node-to-workspace 8"
-
-[[on-window-detected]]
-if.app-id = "ch.protonmail.desktop"
 run = "move-node-to-workspace 9"
