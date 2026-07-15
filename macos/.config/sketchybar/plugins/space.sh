@@ -22,7 +22,8 @@ function workspace_icons() {
 
     if [ "${apps}" != "" ]; then
         while read -r app; do
-            icons+=" $(icon_map "$app")"
+            __icon_map "$app"
+            icons+=" ${icon_result}"
         done <<<"${apps}"
     else
         icons=" —"
