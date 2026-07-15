@@ -55,16 +55,22 @@ alias vimdiff="nvim -d"
 #                             Initialize programs                              #
 # ############################################################################ #
 
+# OS-specific setup
+[ -f "$HOME/.config/zsh/os.zsh" ] && source "$HOME/.config/zsh/os.zsh"
+
 eval "$(atuin init zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
-# OS-specific setup
-[ -f "$HOME/.config/zsh/os.zsh" ] && source "$HOME/.config/zsh/os.zsh"
-
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# pnpm
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
 
 # SDKMAN
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
