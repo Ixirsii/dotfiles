@@ -7,7 +7,10 @@
     signingKey = D299B6482C961930F6EAAB2D9D923B929C317D97
 
 [alias]
-    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)"%an" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+
+[coderabbit]
+	machineId = cli/f0997d7e7f254f6fa33c1a9bc4982146
 
 [color]
     ui = auto
