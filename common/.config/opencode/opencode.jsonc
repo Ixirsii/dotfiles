@@ -5,5 +5,36 @@
     "lsp": true,
     "default_agent": "plan",
     "shell": "/bin/zsh",
-    "formatter": true
+    "formatter": true,
+    "mcp": {
+        "firefox-devtools": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@mozilla/firefox-devtools-mcp@latest",
+                "--firefox-path",
+                "/Applications/Firefox.app/Contents/MacOS/firefox"
+            ],
+            "enabled": true
+        },
+        "safari-mcp-stp": {
+            "type": "local",
+            "command": [
+                "/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver",
+                "--mcp"
+            ],
+            "enabled": true
+        },
+        "chrome-devtools": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "chrome-devtools-mcp@latest",
+                "--no-usage-statistics"
+            ],
+            "enabled": true
+        }
+    }
 }
