@@ -34,4 +34,5 @@ require("lazy").setup({
     checker = { enabled = true },
     -- Don't notify when config changes
     change_detection = { notify = false },
+    rocks = { enabled = false },
 })

@@ -3,7 +3,7 @@ local is_freebsd = vim.uv.os_uname().sysname == "FreeBSD"
 local native_freebsd_servers = {
     "hyprls",
     "lua_ls",
-    "marksman",
+    "markdown-oxide",
     "ols",
     "rust_analyzer",
     "taplo",

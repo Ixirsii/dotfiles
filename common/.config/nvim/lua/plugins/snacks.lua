@@ -65,6 +65,8 @@ return {
             },
         },
 
+        explorer = {},
+
         image = {},
 
         input = {},
@@ -95,6 +97,8 @@ return {
         quickfile = {},
 
         scope = {},
+
+        scroll = {},
 
         statuscolumn = { enabled = true },
 

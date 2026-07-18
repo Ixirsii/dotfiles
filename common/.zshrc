@@ -4,6 +4,7 @@
 
 export BAT_THEME="Catppuccin Mocha"
 export BUN_INSTALL="$HOME/.bun"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 export SDKMAN_DIR="$HOME/.sdkman"
 
 export BROWSER="zen"
