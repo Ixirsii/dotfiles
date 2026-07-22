@@ -7,6 +7,26 @@
     "shell": "/bin/zsh",
     "formatter": true,
     "mcp": {
+        "chrome-devtools": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "chrome-devtools-mcp@latest",
+                "--no-usage-statistics"
+            ],
+            "enabled": true
+        },
+        "cloudflare": {
+            "type": "remote",
+            "url": "https://mcp.cloudflare.com/mcp",
+            "enabled": true
+        },
+        "cloudflare-docs": {
+            "type": "remote",
+            "url": "https://docs.mcp.cloudflare.com/mcp",
+            "enabled": true
+        },
         "firefox-devtools": {
             "type": "local",
             "command": [
@@ -18,21 +38,19 @@
             ],
             "enabled": true
         },
+        "railway": {
+            "command": [
+                "railway",
+                "mcp"
+            ],
+            "enabled": true,
+            "type": "local"
+        },
         "safari-mcp-stp": {
             "type": "local",
             "command": [
                 "/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver",
                 "--mcp"
-            ],
-            "enabled": true
-        },
-        "chrome-devtools": {
-            "type": "local",
-            "command": [
-                "npx",
-                "-y",
-                "chrome-devtools-mcp@latest",
-                "--no-usage-statistics"
             ],
             "enabled": true
         }
