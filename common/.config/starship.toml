@@ -7,21 +7,21 @@
 add_newline = true
 continuation_prompt = "[󱞩](bold fg:green) "
 format = """
-[╭─](fg:subtext0) [](fg:sapphire)\
-[ $os $username$hostname ](bg:sapphire fg:crust)\
+[╭─](fg:subtext0) [](fg:red)\
+[ $os $username$hostname ](bg:red fg:crust)\
+[](bg:peach fg:red)\
+[ $directory ](bg:peach fg:crust)\
+[](bg:yellow fg:peach)\
+[ $git_branch ($git_status )](bg:yellow fg:crust)\
+[](bg:green fg:yellow)\
+[ $git_commit ($git_state )](bg:green fg:crust)\
+[](bg:sky fg:green)\
+[ $bun$cmake$dotnet$gradle$maven$nodejs ](bg:sky fg:crust)\
+[](bg:sapphire fg:sky)\
+[ $c$cpp$golang$java$kotlin$odin$python$rust$zig ](bg:sapphire fg:crust)\
 [](bg:mauve fg:sapphire)\
-[ $directory ](bg:mauve fg:crust)\
-[](bg:maroon fg:mauve)\
-[ $git_branch ($git_status )](bg:maroon fg:crust)\
-[](bg:peach fg:maroon)\
-[ $git_commit ($git_state )](bg:peach fg:crust)\
-[](bg:blue fg:peach)\
-[ $bun$cmake$dotnet$gradle$maven$nodejs ](bg:blue fg:crust)\
-[](bg:lavender fg:blue)\
-[ $c$cpp$golang$java$kotlin$odin$python$rust$zig ](bg:lavender fg:crust)\
-[](bg:pink fg:lavender)\
-[ $time ](bg:pink fg:crust)\
-[ ](fg:pink)\
+[ $time ](bg:mauve fg:crust)\
+[ ](fg:mauve)\
 [$cmd_duration$line_break](fg:red)\
 [╰─](fg:subtext0) $character """
 palette = "catppuccin_mocha"
@@ -56,11 +56,11 @@ symbol = ""
 
 [git_commit]
 commit_hash_length = 8
-format = "$hash $tag"
+format = "(󰜘 $hash)( $tag)"
 only_detached = true
 tag_disabled = false
 tag_max_candidates = 0
-tag_symbol = ""
+tag_symbol = "󰓹 "
 
 [git_state]
 format = "$state($progress_current/$progress_total)"
@@ -110,8 +110,8 @@ Windows = ""
 [username]
 format = "[$user]($style)"
 show_always = true
-style_root = "bg:sapphire fg:red"
-style_user = "bg:sapphire fg:crust"
+style_root = "bg:red fg:flamingo"
+style_user = "bg:red fg:crust"
 
 # ############################################################################ #
 #                                    Prompt                                    #
