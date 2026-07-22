@@ -31,7 +31,7 @@ end
 --                                           Appearance                                           --
 -- ---------------------------------------------------------------------------------------------- --
 
-config.font = wezterm.font("SauceCodePro Nerd Font Mono")
+config.font = wezterm.font("Source Code Pro")
 config.font_size = wezterm.target_triple:find("windows") and 12 or 14
 config.color_scheme = get_color_scheme(get_appearance())
 if wezterm.target_triple:find("windows") then
