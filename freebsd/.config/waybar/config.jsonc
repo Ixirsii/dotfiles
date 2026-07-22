@@ -103,11 +103,6 @@
     "temperature": {
         "format": "{temperatureC}°C "
     },
-    "custom/ups": {
-        "exec": "waybar-ups",
-        "return-type": "json",
-        "interval": 10
-    },
     "tray": {
         "icon-size": 12,
         "spacing": 17
@@ -123,6 +118,11 @@
     "custom/system": {
         "format": "󰣇",
         "on-click": "nwg-bar"
+    },
+    "custom/ups": {
+        "exec": "$HOME/.local/bin/waybar-ups",
+        "return-type": "json",
+        "interval": 10
     },
     "group/tray-expander": {
         "orientation": "inherit",
