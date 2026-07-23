@@ -1,0 +1,54 @@
+{
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi-for-mac/refs/heads/master/schema.bar.json",
+    "font_family": "SauceCodePro NFM",
+    "font_size": 16,
+    "height": 40,
+    "theme": {
+        "palette": "Catppuccin",
+        "name": "Mocha",
+        "accent": "Sky",
+        "auto_select_fill": "Mauve",
+        "auto_select_text": "Green"
+    },
+    "left_widgets": [
+        {
+            "Komorebi": {
+                "workspaces": {
+                    "enable": true,
+                    "hide_empty_workspaces": false
+                },
+                "layout": {
+                    "enable": true
+                },
+                "focused_container": {
+                    "enable": true,
+                    "show_icon": true
+                }
+            }
+        }
+    ],
+    "right_widgets": [
+        {
+            "Update": {
+                "enable": true
+            }
+        },
+        {
+            "Battery": {
+                "enable": true
+            }
+        },
+        {
+            "Date": {
+                "enable": true,
+                "format": "DayDateMonthYear"
+            }
+        },
+        {
+            "Time": {
+                "enable": true,
+                "format": "TwentyFourHour"
+            }
+        }
+    ]
+}
