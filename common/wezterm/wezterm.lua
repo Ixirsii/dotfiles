@@ -31,8 +31,8 @@ end
 --                                           Appearance                                           --
 -- ---------------------------------------------------------------------------------------------- --
 
-config.font = wezterm.font("Source Code Pro")
-config.font_size = wezterm.target_triple:find("windows") and 12 or 14
+config.font = wezterm.font("SauceCodePro NFM")
+config.font_size = wezterm.target_triple:find("windows") and 10 or 14
 config.color_scheme = get_color_scheme(get_appearance())
 if wezterm.target_triple:find("windows") then
     config.default_prog = { "pwsh.exe" }
@@ -44,13 +44,13 @@ config.tab_bar_at_bottom = true
 config.tab_max_width = 32
 config.use_fancy_tab_bar = false
 if wezterm.target_triple:find("windows") then
-    config.window_decorations = "TITLE | RESIZE"
+    config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
 elseif wezterm.target_triple:find("darwin") then
     config.window_decorations = "RESIZE"
 else
     config.window_decorations = "NONE"
 end
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.9
 config.window_close_confirmation = "NeverPrompt"
 
 -- ---------------------------------------------------------------------------------------------- --

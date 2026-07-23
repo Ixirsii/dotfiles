@@ -1,5 +1,10 @@
 # Dotfiles
 
+## Submodules
+
+This repository has submodules for tmux and zsh plugins.
+Initialize them with `git submodule update --init --recursive`.
+
 ## Dependencies
 
 The following programs are expected to be available on the target system:
