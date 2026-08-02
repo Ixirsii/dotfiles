@@ -43,6 +43,15 @@
             "url": "https://mcp.linear.app/mcp",
             "enabled": true
         },
+        "porkbun": {
+            "type": "local",
+            "command": [
+                "/bin/sh",
+                "-c",
+                "exec op run --no-masking --env-file=\"$HOME/.config/op-env/opencode.env\" -- npx -y @porkbunllc/mcp-server@0.12.0"
+            ],
+            "enabled": true
+        },
         "railway": {
             "command": [
                 "railway",

@@ -1,0 +1,8 @@
+{
+    "$schema": "https://opencode.ai/tui.json",
+    "keybinds": {
+        "command_list": "ctrl+shift+p",
+        "dialog.select.prev": "up",
+        "prompt.autocomplete.prev": "up"
+    }
+}
