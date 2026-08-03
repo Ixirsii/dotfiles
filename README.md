@@ -5,6 +5,56 @@
 This repository has submodules for tmux and zsh plugins.
 Initialize them with `git submodule update --init --recursive`.
 
+## Stow Packages
+
+Apply the shared config plus the package for the current OS.
+
+### FreeBSD
+
+Preview changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" freebsd
+```
+
+Apply changes:
+
+```sh
+stow --verbose --restow --target="$HOME" freebsd
+```
+
+### Linux
+
+Preview changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" linux
+```
+
+Apply changes:
+
+```sh
+stow --verbose --restow --target="$HOME" linux
+```
+
+### macOS
+
+Preview changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" macos
+```
+
+Apply changes:
+
+```sh
+stow --verbose --restow --target="$HOME" macos
+```
+
+### Windows
+
+Manually create links from `windows` module into your home directory
+
 ## Dependencies
 
 The following programs are expected to be available on the target system:
@@ -16,19 +66,25 @@ The following programs are expected to be available on the target system:
 - [btop++][5]
 - [bun (deprecated)][6]
 - [delta][7]
-- [dust][8]
 - [eza][9]
 - [fastfetch][10]
 - [fd][11]
 - [fnm][12]
 - [fzf][13]
+- [Git][36]
+- [GnuPG][37]
+- [GNU Stow][38]
 - [lazygit][16]
 - [neovim][18]
 - [Nerd fonts][19]
+- [Node.js][39]
+- [OpenCode][40]
+- [pnpm][41]
 - [ripgrep][22]
 - [rustup (and cargo)][23]
 - [SDKMAN][24]
 - [starship][27]
+- [tmux][28]
 - [wezterm][31]
 - [yazi][32]
 - [Zen browser][33]
@@ -37,7 +93,7 @@ The following programs are expected to be available on the target system:
 
 ### FreeBSD
 
-- [Google Fonts][12]
+- [Google Fonts][14]
 - [Hyprland][15]
 - [mako][17]
 - [nwg-bar][20]
@@ -48,90 +104,30 @@ The following programs are expected to be available on the target system:
 
 - [Hyprland][15]
 - [mako][17]
+- [MPD][42]
+- [ncmpcpp][43]
 - [nwg-bar][20]
-- [tmux][28]
 - [Transmission][29]
 - [waybar][30]
 
 ### macOS
 
-- [AeroSpace][1]
 - [Homebrew][4]
-- [SketchyBar][25]
-- [SketchyBar app font][26]
+- [komorebi-for-mac][44]
+- [skhd][45]
 
 ### Windows
 
+- [Komorebi][46]
 - [PowerShell][21]
+- [whkd][47]
 
-## Stow Packages
-
-Apply the shared config plus the package for the current OS.
-
-### FreeBSD
-
-Preview changes:
-
-```sh
-stow --simulate --verbose --restow --target="$HOME" common freebsd
-```
-
-Apply changes:
-
-```sh
-stow --verbose --restow --target="$HOME" common freebsd
-```
-
-### Linux
-
-Preview changes:
-
-```sh
-stow --simulate --verbose --restow --target="$HOME" common linux
-```
-
-Apply changes:
-
-```sh
-stow --verbose --restow --target="$HOME" common linux
-```
-
-### macOS
-
-Preview changes:
-
-```sh
-stow --simulate --verbose --restow --target="$HOME" common macos
-```
-
-Apply changes:
-
-```sh
-stow --verbose --restow --target="$HOME" common macos
-```
-
-### Windows
-
-Preview changes:
-
-```sh
-stow --simulate --verbose --restow --target="$HOME" common windows
-```
-
-Apply changes:
-
-```sh
-stow --verbose --restow --target="$HOME" common windows
-```
-
-[1]: https://github.com/nikitabobko/AeroSpace
 [2]: https://atuin.sh
 [3]: https://github.com/sharkdp/bat
 [4]: https://brew.sh
 [5]: https://github.com/aristocratos/btop
 [6]: https://bun.com
 [7]: https://github.com/dandavison/delta
-[8]: https://github.com/bootandy/dust
 [9]: https://github.com/eza-community/eza
 [10]: https://github.com/fastfetch-cli/fastfetch
 [11]: https://github.com/sharkdp/fd
@@ -148,8 +144,6 @@ stow --verbose --restow --target="$HOME" common windows
 [22]: https://github.com/BurntSushi/ripgrep
 [23]: https://rustup.rs
 [24]: https://sdkman.io
-[25]: https://github.com/felixkratz/sketchybar
-[26]: https://github.com/kvndrsslr/sketchybar-app-font
 [27]: https://starship.rs
 [28]: https://github.com/tmux/tmux
 [29]: https://transmissionbt.com
@@ -159,3 +153,15 @@ stow --verbose --restow --target="$HOME" common windows
 [33]: https://zen-browser.app
 [34]: https://github.com/ajeetdsouza/zoxide
 [35]: https://www.zsh.org
+[36]: https://git-scm.com
+[37]: https://gnupg.org
+[38]: https://www.gnu.org/software/stow/
+[39]: https://nodejs.org
+[40]: https://opencode.ai
+[41]: https://pnpm.io
+[42]: https://www.musicpd.org
+[43]: https://github.com/ncmpcpp/ncmpcpp
+[44]: https://github.com/LGUG2Z/komorebi-for-mac
+[45]: https://github.com/koekeishiya/skhd
+[46]: https://github.com/LGUG2Z/komorebi
+[47]: https://github.com/LGUG2Z/whkd
