@@ -36,6 +36,8 @@ HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 
 # Plugins
+# https://github.com/junegunn/fzf-git.sh
+source ~/.config/zsh/fzf-git.sh/fzf-git.sh
 # https://github.com/zsh-users/zsh-autosuggestions
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # https://github.com/catppuccin/zsh-syntax-highlighting.git
