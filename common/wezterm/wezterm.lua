@@ -7,20 +7,9 @@ local act = wezterm.action
 local callback = wezterm.action_callback
 local config = wezterm.config_builder()
 
-local function get_appearance()
-    if wezterm.gui then
-        return wezterm.gui.get_appearance()
-    end
-
-    return "Dark"
-end
-
-local function get_color_scheme(appearance)
-    if appearance:find("Dark") then
-        return "Catppuccin Mocha"
-    else
-        return "Catppuccin Frappe"
-    end
+-- Default shell on Windows
+if wezterm.target_triple:find("windows") then
+    config.default_prog = { "pwsh.exe" }
 end
 
 local function is_vim(pane)
@@ -33,25 +22,44 @@ end
 
 config.font = wezterm.font("SauceCodePro NFM")
 config.font_size = wezterm.target_triple:find("windows") and 10 or 14
-config.color_scheme = get_color_scheme(get_appearance())
-if wezterm.target_triple:find("windows") then
-    config.default_prog = { "pwsh.exe" }
-end
+local catppuccin = wezterm.get_builtin_color_schemes()["Catppuccin Mocha"]
+catppuccin.tab_bar.active_tab.bg_color = "#89dceb"
+
+config.color_scheme = "Catppuccin Mocha"
+config.colors = {
+    tab_bar = catppuccin.tab_bar,
+}
 config.enable_tab_bar = true
 config.enable_wayland = true
 config.show_new_tab_button_in_tab_bar = false
-config.tab_bar_at_bottom = true
-config.tab_max_width = 32
-config.use_fancy_tab_bar = false
-if wezterm.target_triple:find("windows") then
+config.use_fancy_tab_bar = true
+
+if wezterm.target_triple:find("darwin") or wezterm.target_triple:find("windows") then
     config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
-elseif wezterm.target_triple:find("darwin") then
-    config.window_decorations = "RESIZE"
 else
     config.window_decorations = "NONE"
 end
-config.window_background_opacity = 0.9
+
+config.window_background_opacity = 0.8
 config.window_close_confirmation = "NeverPrompt"
+
+config.window_frame = {
+    font = wezterm.font("SauceCodePro NFM"),
+    font_size = 14.0,
+    active_titlebar_bg = catppuccin.tab_bar.background,
+    inactive_titlebar_bg = catppuccin.tab_bar.background,
+    active_titlebar_fg = catppuccin.foreground,
+    inactive_titlebar_fg = catppuccin.foreground,
+    button_fg = catppuccin.foreground,
+    button_bg = catppuccin.background,
+}
+
+config.window_padding = {
+    bottom = 0,
+    left = 0,
+    right = 0,
+    top = 0,
+}
 
 -- ---------------------------------------------------------------------------------------------- --
 --                                        Update interval                                         --
@@ -542,12 +550,10 @@ config.key_tables = {
 --                                            Tab bar                                             --
 -- ---------------------------------------------------------------------------------------------- --
 
-wezterm.on("format-tab-title", function(tab_info, _, _, conf, _, max_width)
-    local palette = conf.resolved_palette
-
+wezterm.on("format-tab-title", function(tab_info, _, _, _, _, max_width)
     local index = tab_info.tab_index + 1
-    local title_size = max_width - 5
-    local tab_color = tab_info.is_active and 7 or 1
+    local prefix = string.format("%d ", index)
+    local title_size = math.max(1, max_width - wezterm.column_width(prefix))
     local title = tab_info.tab_title
 
     if not title or #title < 1 then
@@ -555,38 +561,103 @@ wezterm.on("format-tab-title", function(tab_info, _, _, conf, _, max_width)
     end
 
     -- Try to get just the application name first
-    if #title > title_size then
-        local start_index = title:find(" ")
-        title = title:sub(0, start_index)
+    if wezterm.column_width(title) > title_size then
+        title = title:match("^%S+") or title
     end
 
     -- Truncate if still needed
-    if #title > title_size then
-        title = wezterm.truncate_right(title, title_size - 1) .. "…"
+    if wezterm.column_width(title) > title_size then
+        title = wezterm.truncate_right(title, math.max(0, title_size - 1)) .. "…"
     end
 
-    return {
-        { Background = { Color = palette.tab_bar.background } },
-        { Foreground = { Color = palette.ansi[tab_color] } },
-        { Text = "" },
-        { Background = { Color = palette.ansi[tab_color] } },
-        { Foreground = { Color = palette.tab_bar.background } },
-        { Text = tostring(index) },
-        { Foreground = { Color = palette.ansi[tab_color] } },
-        { Text = "█" },
-        { Background = { Color = palette.tab_bar.background } },
-        { Foreground = { Color = palette.tab_bar.background } },
-        { Text = "█" },
-        { Foreground = { Color = palette.foreground } },
-        { Text = title },
-        { Foreground = { Color = palette.tab_bar.background } },
-        { Text = "█" },
-    }
+    return { { Text = prefix .. title } }
 end)
 
 -- ---------------------------------------------------------------------------------------------- --
 --                                           Status bar                                           --
 -- ---------------------------------------------------------------------------------------------- --
+
+local function get_battery_status()
+    local battery_icons = {
+        charging = {
+            "󰢜",
+            "󰂆",
+            "󰂇",
+            "󰂈",
+            "󰢝",
+            "󰂉",
+            "󰢞",
+            "󰂊",
+            "󰂋",
+            "󰂅",
+        },
+        discharging = {
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹",
+        },
+    }
+    local battery_icon = ""
+    local battery_text = ""
+
+    local battery_ok, batteries = pcall(wezterm.battery_info)
+    if battery_ok then
+        for _, b in ipairs(batteries) do
+            local icons = (b.state == "Charging" or b.state == "Full") and battery_icons.charging
+                or battery_icons.discharging
+            local battery_charge = b.state_of_charge * 100
+            local icon_index = math.max(1, math.min(10, math.floor(battery_charge / 10) + 1))
+
+            battery_text = string.format("%.0f%%", battery_charge)
+            battery_icon = icons[icon_index]
+        end
+    end
+
+    return battery_icon, battery_text
+end
+
+local function get_hostname(cwd_uri)
+    local hostname = ""
+
+    if cwd_uri then
+        local cwd = ""
+
+        if type(cwd_uri) == "userdata" then
+            -- Running on a newer version of wezterm and we have
+            -- a URL object here, making this simple!
+
+            cwd = cwd_uri.file_path
+            hostname = cwd_uri.host or wezterm.hostname()
+        else
+            -- an older version of wezterm, 20230712-072601-f4abf8fd or earlier,
+            -- which doesn't have the Url object
+            cwd_uri = cwd_uri:sub(8)
+            local slash = cwd_uri:find("/")
+            if slash then
+                hostname = cwd_uri:sub(1, slash - 1)
+                -- and extract the cwd from the uri, decoding %-encoding
+                cwd = cwd_uri:sub(slash):gsub("%%(%x%x)", function(hex)
+                    return string.char(tonumber(hex, 16))
+                end)
+            end
+        end
+
+        -- Remove the domain name portion of the hostname
+        local dot = hostname:find("[.]")
+        if dot then
+            hostname = hostname:sub(1, dot - 1)
+        end
+    end
+
+    return hostname
+end
 
 local ups_cache = nil
 local ups_last_update = 0
@@ -639,98 +710,48 @@ end
 
 wezterm.on("update-status", function(window, pane)
     local palette = window:effective_config().resolved_palette
-    local tab_bar_background = palette.tab_bar and palette.tab_bar.background or palette.background
+    local background = palette.tab_bar.background
+    local foreground = palette.foreground
+
+    window:set_left_status(" ")
 
     -- Right status
-    local battery_text = ""
-    local battery_icon = ""
+    local battery_icon, battery_text = get_battery_status()
+    local date = wezterm.strftime("%a %b %d %H:%M:%S")
+    local hostname = get_hostname(pane:get_current_working_dir())
     local ups = get_ups_status()
-    local battery_icons = {
-        charging = {
-            "󰢜",
-            "󰂆",
-            "󰂇",
-            "󰂈",
-            "󰢝",
-            "󰂉",
-            "󰢞",
-            "󰂊",
-            "󰂋",
-            "󰂅",
-        },
-        discharging = {
-            "󰁺",
-            "󰁻",
-            "󰁼",
-            "󰁽",
-            "󰁾",
-            "󰁿",
-            "󰂀",
-            "󰂁",
-            "󰂂",
-            "󰁹",
-        },
-    }
-    local date = wezterm.strftime("%b %-d %H:%M:%S")
-
-    local battery_ok, batteries = pcall(wezterm.battery_info)
-    if battery_ok then
-        for _, b in ipairs(batteries) do
-            local icons = (b.state == "Charging" or b.state == "Full") and battery_icons.charging
-                or battery_icons.discharging
-            local battery_charge = b.state_of_charge * 100
-            local icon_index = math.max(1, math.min(10, math.floor(battery_charge / 10) + 1))
-
-            battery_text = string.format("%.0f%%", battery_charge)
-            battery_icon = icons[icon_index]
-        end
-    end
 
     local status = {
-        { Foreground = { Color = palette.ansi[3] } },
+        { Foreground = { Color = "#a6e3a1" } },
         { Text = "" },
-        { Background = { Color = palette.ansi[3] } },
-        { Foreground = { Color = tab_bar_background } },
-        { Text = "  " },
-        { Foreground = { Color = palette.ansi[3] } },
-        { Text = "█" },
-        { Background = { Color = tab_bar_background } },
-        { Foreground = { Color = tab_bar_background } },
-        { Text = "█" },
-        { Foreground = { Color = palette.foreground } },
-        { Text = pane:get_title() },
-        { Foreground = { Color = tab_bar_background } },
-        { Text = "█" },
-        { Foreground = { Color = palette.ansi[5] } },
-        { Text = "" },
-        { Background = { Color = palette.ansi[5] } },
-        { Foreground = { Color = tab_bar_background } },
+        { Background = { Color = "#a6e3a1" } },
+        { Foreground = { Color = background } },
         { Text = " 󰌢 " },
-        { Foreground = { Color = palette.ansi[5] } },
+        { Foreground = { Color = "#a6e3a1" } },
         { Text = "█" },
-        { Background = { Color = tab_bar_background } },
-        { Foreground = { Color = tab_bar_background } },
+        { Background = { Color = background } },
+        { Foreground = { Color = background } },
         { Text = "█" },
-        { Foreground = { Color = palette.foreground } },
-        { Text = wezterm.hostname() },
-        { Foreground = { Color = tab_bar_background } },
+        { Foreground = { Color = foreground } },
+        { Text = hostname },
+        { Foreground = { Color = background } },
         { Text = "█" },
     }
 
     if battery_text ~= "" then
-        table.insert(status, { Foreground = { Color = palette.ansi[6] } })
+        table.insert(status, { Foreground = { Color = "#89b4fa" } })
         table.insert(status, { Text = "" })
-        table.insert(status, { Background = { Color = palette.ansi[6] } })
-        table.insert(status, { Foreground = { Color = tab_bar_background } })
+        table.insert(status, { Background = { Color = "#89b4fa" } })
+        table.insert(status, { Foreground = { Color = background } })
         table.insert(status, { Text = " " .. battery_icon .. " " })
-        table.insert(status, { Foreground = { Color = palette.ansi[6] } })
+        table.insert(status, { Foreground = { Color = "#89b4fa" } })
         table.insert(status, { Text = "█" })
-        table.insert(status, { Background = { Color = tab_bar_background } })
-        table.insert(status, { Foreground = { Color = tab_bar_background } })
+        table.insert(status, { Background = { Color = background } })
+        table.insert(status, { Foreground = { Color = background } })
         table.insert(status, { Text = "█" })
-        table.insert(status, { Foreground = { Color = palette.foreground } })
+        table.insert(status, { Foreground = { Color = foreground } })
         table.insert(status, { Text = battery_text })
-        table.insert(status, { Foreground = { Color = tab_bar_background } })
+        table.insert(status, { Foreground = { Color = background } })
         table.insert(status, { Text = "█" })
     end
 
@@ -740,35 +761,35 @@ wezterm.on("update-status", function(window, pane)
             ups_text = ups_text .. " " .. ups.runtime
         end
 
-        table.insert(status, { Foreground = { Color = palette.ansi[6] } })
+        table.insert(status, { Foreground = { Color = "#b4befe" } })
         table.insert(status, { Text = "" })
-        table.insert(status, { Background = { Color = palette.ansi[6] } })
-        table.insert(status, { Foreground = { Color = tab_bar_background } })
+        table.insert(status, { Background = { Color = "#b4befe" } })
+        table.insert(status, { Foreground = { Color = background } })
         table.insert(status, { Text = " 󰚥 " })
-        table.insert(status, { Foreground = { Color = palette.ansi[6] } })
+        table.insert(status, { Foreground = { Color = "#b4befe" } })
         table.insert(status, { Text = "█" })
-        table.insert(status, { Background = { Color = tab_bar_background } })
-        table.insert(status, { Foreground = { Color = tab_bar_background } })
+        table.insert(status, { Background = { Color = background } })
+        table.insert(status, { Foreground = { Color = background } })
         table.insert(status, { Text = "█" })
-        table.insert(status, { Foreground = { Color = palette.foreground } })
+        table.insert(status, { Foreground = { Color = foreground } })
         table.insert(status, { Text = ups_text })
-        table.insert(status, { Foreground = { Color = tab_bar_background } })
+        table.insert(status, { Foreground = { Color = background } })
         table.insert(status, { Text = "█" })
     end
 
-    table.insert(status, { Foreground = { Color = palette.ansi[7] } })
+    table.insert(status, { Foreground = { Color = "#cba6f7" } })
     table.insert(status, { Text = "" })
-    table.insert(status, { Background = { Color = palette.ansi[7] } })
-    table.insert(status, { Foreground = { Color = tab_bar_background } })
+    table.insert(status, { Background = { Color = "#cba6f7" } })
+    table.insert(status, { Foreground = { Color = background } })
     table.insert(status, { Text = "  " })
-    table.insert(status, { Foreground = { Color = palette.ansi[7] } })
+    table.insert(status, { Foreground = { Color = "#cba6f7" } })
     table.insert(status, { Text = "█" })
-    table.insert(status, { Background = { Color = tab_bar_background } })
-    table.insert(status, { Foreground = { Color = tab_bar_background } })
+    table.insert(status, { Background = { Color = background } })
+    table.insert(status, { Foreground = { Color = background } })
     table.insert(status, { Text = "█" })
-    table.insert(status, { Foreground = { Color = palette.foreground } })
+    table.insert(status, { Foreground = { Color = foreground } })
     table.insert(status, { Text = date })
-    table.insert(status, { Foreground = { Color = tab_bar_background } })
+    table.insert(status, { Foreground = { Color = background } })
     table.insert(status, { Text = "█" })
 
     window:set_right_status(wezterm.format(status))
