@@ -1,0 +1,119 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  secrets:
+    name: Secrets
+    runs-on: node24
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ forgejo.sha }}
+
+      - name: Scan Git history
+        uses: docker://ghcr.io/gitleaks/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f # v8.30.1
+        with:
+          args: git --no-banner --redact --verbose .
+
+  quality:
+    name: Quality
+    runs-on: node24
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          ref: ${{ forgejo.sha }}
+          submodules: recursive
+
+      - name: Install workflow prerequisites
+        run: |
+          apt-get update -q
+          apt-get install -q -y python3 shellcheck stow zsh
+
+      - name: Check Lua formatting
+        run: git ls-files -z '*.lua' | xargs -0 npx --yes @johnnymorganz/stylua-bin@2.5.2 --check --
+
+      - name: Check shell scripts
+        run: |
+          zsh -n common/.zshrc freebsd/.config/zsh/os.zsh macos/.config/zsh/os.zsh
+          shellcheck freebsd/.local/bin/waybar-ups
+
+      - name: Check JSON
+        run: |
+          node <<'NODE'
+          const { execFileSync } = require("node:child_process");
+          const { readFileSync } = require("node:fs");
+
+          const paths = execFileSync("git", ["ls-files", "-z", "*.json"])
+            .toString()
+            .split("\0")
+            .filter(Boolean);
+
+          for (const path of paths) {
+            JSON.parse(readFileSync(path, "utf8"));
+          }
+          NODE
+
+      - name: Check JSONC and YAML
+        shell: bash
+        run: |
+          files=()
+          while IFS= read -r -d '' entry; do
+            [[ $entry == 100644\ * ]] || continue
+            files+=("${entry#*$'\t'}")
+          done < <(git ls-files -z -s '*.jsonc' '*.yaml' '*.yml')
+          npx --yes prettier@3.9.6 --debug-check "${files[@]}"
+
+      - name: Check TOML
+        run: |
+          python3 <<'PYTHON'
+          import pathlib
+          import subprocess
+          import tomllib
+
+          paths = subprocess.check_output(
+              ["git", "ls-files", "-z", "*.toml"]
+          ).decode().split("\0")
+
+          for path in filter(None, paths):
+              tomllib.loads(pathlib.Path(path).read_text())
+          PYTHON
+
+      - name: Check symlinks
+        shell: bash
+        run: |
+          result=0
+          while IFS= read -r -d '' entry; do
+            [[ $entry == 120000\ * ]] || continue
+            path=${entry#*$'\t'}
+            if [[ ! -e $path ]]; then
+              printf 'Broken symlink: %s -> %s\n' "$path" "$(readlink "$path")"
+              result=1
+            fi
+          done < <(git ls-files -z -s)
+          exit "$result"
+
+      - name: Simulate Stow packages
+        run: |
+          for package in freebsd linux macos; do
+            target=$(mktemp -d)
+            stow --simulate --verbose --no-folding --restow --target="$target" "$package"
+            rm -rf "$target"
+          done
+
+      - name: Check workflow
+        uses: docker://docker.io/rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 # v1.7.12
+        with:
+          args: -config-file .forgejo/actionlint.yaml .forgejo/workflows/checks.yml

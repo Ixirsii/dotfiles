@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Ignore public GPG signing-key fingerprints"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+regexes = ['''(?i)^\s*#?signingKey\s*=\s*[0-9a-f]{40}\s*$''']
