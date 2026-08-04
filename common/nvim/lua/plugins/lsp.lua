@@ -11,6 +11,7 @@ local native_freebsd_servers = {
 local mason_lsp_servers = {
     "bashls",
     "eslint",
+    "gopls",
     "html",
     "jsonls",
     "sqlls",
