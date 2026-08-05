@@ -1,3 +1,5 @@
+local picker_exclude = { ".git", ".output", "node_modules" }
+
 return {
     "folke/snacks.nvim",
 
@@ -80,14 +82,22 @@ return {
                 files = {
                     hidden = true,
                     ignored = true,
+                    exclude = picker_exclude,
                 },
                 grep = {
                     hidden = true,
                     ignored = true,
+                    exclude = picker_exclude,
+                },
+                grep_word = {
+                    hidden = true,
+                    ignored = true,
+                    exclude = picker_exclude,
                 },
                 explorer = {
                     hidden = true,
                     ignored = true,
+                    exclude = picker_exclude,
                 },
             },
         },
