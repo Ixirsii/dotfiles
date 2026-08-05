@@ -20,7 +20,7 @@ end
 --                                           Appearance                                           --
 -- ---------------------------------------------------------------------------------------------- --
 
-config.font = wezterm.font("SauceCodePro NFM")
+config.font = wezterm.font("Source Code Pro")
 config.font_size = wezterm.target_triple:find("windows") and 10 or 14
 local catppuccin = wezterm.get_builtin_color_schemes()["Catppuccin Mocha"]
 catppuccin.tab_bar.active_tab.bg_color = "#89dceb"
