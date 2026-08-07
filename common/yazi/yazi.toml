@@ -8,7 +8,7 @@ sort_reverse = false
 sort_dir_first = true
 sort_translit = false
 sort_fallback = "alphabetical"
-linemode = "none"
+linemode = "size"
 show_hidden = true
 show_symlink = true
 scrolloff = 5
@@ -113,7 +113,7 @@ fetch_workers = 5
 preload_workers = 2
 process_workers = 5
 bizarre_retry = 3
-image_alloc = 536870912 # 512MB
+image_alloc = 536870912      # 512MB
 image_bound = [10000, 10000]
 suppress_preload = false
 
