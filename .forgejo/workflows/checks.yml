@@ -39,8 +39,8 @@ jobs:
 
       - name: Install workflow prerequisites
         run: |
-          apt-get update -q
-          apt-get install -q -y python3 shellcheck stow zsh
+          apt-get -o APT::Cache-Start=100000000 update -q
+          apt-get -o APT::Cache-Start=100000000 install -q -y python3 shellcheck stow zsh
 
       - name: Check Lua formatting
         run: git ls-files -z '*.lua' | xargs -0 npx --yes @johnnymorganz/stylua-bin@2.5.2 --check --

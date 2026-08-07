@@ -113,8 +113,9 @@ The following programs are expected to be available on the target system:
 ### macOS
 
 - [Homebrew][4]
-- [komorebi-for-mac][44]
+- [SketchyBar][48]
 - [skhd][45]
+- [Yabai][44]
 
 ### Windows
 
@@ -161,7 +162,8 @@ The following programs are expected to be available on the target system:
 [41]: https://pnpm.io
 [42]: https://www.musicpd.org
 [43]: https://github.com/ncmpcpp/ncmpcpp
-[44]: https://github.com/LGUG2Z/komorebi-for-mac
+[44]: https://github.com/koekeishiya/yabai
 [45]: https://github.com/koekeishiya/skhd
 [46]: https://github.com/LGUG2Z/komorebi
 [47]: https://github.com/LGUG2Z/whkd
+[48]: https://github.com/FelixKratz/SketchyBar

@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+source "$CONFIG_DIR/colors.sh"
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+FONT="SauceCodePro Nerd Font"
+
+bar=(
+    position=top
+    height=40
+    color="$TRANSPARENT"
+    shadow=off
+    padding_left=12
+    padding_right=12
+)
+
+default=(
+    padding_left=3
+    padding_right=3
+    icon.font="$FONT:Regular:15.0"
+    icon.color="$TEXT"
+    icon.padding_left=8
+    icon.padding_right=8
+    label.font="$FONT:Semibold:13.0"
+    label.color="$TEXT"
+    label.padding_left=0
+    label.padding_right=8
+    background.color="$SURFACE0"
+    background.corner_radius=8
+    background.height=28
+    background.drawing=on
+)
+
+sketchybar --bar "${bar[@]}" \
+    --default "${default[@]}"
+
+workspace_icons=(
+    "󰆍"
+    "󰖟"
+    "󰅩"
+    "󰠮"
+    "󰏘"
+    "󰐑"
+    "󰭹"
+    "󰇮"
+    "󰦝"
+)
+
+for sid in {1..9}; do
+    sketchybar --add space "space.$sid" left \
+        --set "space.$sid" \
+        space="$sid" \
+        icon="${workspace_icons[$((sid - 1))]}" \
+        label.drawing=off \
+        script="$PLUGIN_DIR/space.sh" \
+        click_script="skhd -k 'ctrl - $sid'"
+done
+
+sketchybar --add item clock right \
+    --set clock \
+    icon="󰥔" \
+    update_freq=30 \
+    script="$PLUGIN_DIR/status.sh" \
+    --add item battery right \
+    --set battery \
+    update_freq=120 \
+    script="$PLUGIN_DIR/status.sh" \
+    --subscribe battery power_source_change system_woke \
+    --add item volume right \
+    --set volume \
+    script="$PLUGIN_DIR/status.sh" \
+    --subscribe volume volume_change
+
+sketchybar --update
