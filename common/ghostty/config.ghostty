@@ -1,5 +1,11 @@
 language = en
 font-family = "SauceCodePro NFM"
+font-family = "Noto Sans Mono"
+font-family = "Noto Sans Mono CJK JP"
+font-family = "Noto Sans Mono CJK KR"
+font-family = "Noto Sans Mono CJK SC"
+font-family = "Noto Sans Mono CJK TC"
+font-family = "Noto Sans Mono CJK HK"
 font-size = 14
 theme = "Catppuccin Mocha"
 background-opacity = 0.8
