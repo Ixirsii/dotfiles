@@ -5,7 +5,7 @@
 if [ "$SELECTED" = "true" ]; then
     sketchybar --set "$NAME" \
         icon.color="$BASE" \
-        background.color="$SKY"
+        background.color="$ACCENT"
 else
     sketchybar --set "$NAME" \
         icon.color="$TEXT" \

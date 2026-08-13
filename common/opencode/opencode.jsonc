@@ -8,27 +8,26 @@
     "formatter": true,
     "mcp": {
         "chrome-devtools": {
-            "type": "local",
             "command": [
                 "npx",
                 "-y",
                 "chrome-devtools-mcp@latest",
                 "--no-usage-statistics"
             ],
-            "enabled": true
+            "enabled": true,
+            "type": "local"
         },
         "cloudflare": {
+            "enabled": false,
             "type": "remote",
-            "url": "https://mcp.cloudflare.com/mcp",
-            "enabled": true
+            "url": "https://mcp.cloudflare.com/mcp"
         },
         "cloudflare-docs": {
+            "enabled": false,
             "type": "remote",
-            "url": "https://docs.mcp.cloudflare.com/mcp",
-            "enabled": true
+            "url": "https://docs.mcp.cloudflare.com/mcp"
         },
         "firefox-devtools": {
-            "type": "local",
             "command": [
                 "npx",
                 "-y",
@@ -36,37 +35,38 @@
                 "--firefox-path",
                 "/Applications/Firefox.app/Contents/MacOS/firefox"
             ],
-            "enabled": true
+            "enabled": true,
+            "type": "local"
         },
         "linear": {
+            "enabled": false,
             "type": "remote",
-            "url": "https://mcp.linear.app/mcp",
-            "enabled": true
+            "url": "https://mcp.linear.app/mcp"
         },
         "porkbun": {
-            "type": "local",
             "command": [
                 "/bin/sh",
                 "-c",
                 "exec op run --no-masking --env-file=\"$HOME/.config/op-env/opencode.env\" -- npx -y @porkbunllc/mcp-server@0.12.0"
             ],
-            "enabled": true
+            "enabled": false,
+            "type": "local"
         },
         "railway": {
             "command": [
                 "railway",
                 "mcp"
             ],
-            "enabled": true,
+            "enabled": false,
             "type": "local"
         },
         "safari-mcp-stp": {
-            "type": "local",
             "command": [
                 "/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver",
                 "--mcp"
             ],
-            "enabled": true
+            "enabled": true,
+            "type": "local"
         }
     }
 }

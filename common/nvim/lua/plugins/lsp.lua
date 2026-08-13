@@ -14,6 +14,7 @@ local mason_lsp_servers = {
     "gopls",
     "html",
     "jsonls",
+    "postgres_lsp",
     "sqlls",
     "tailwindcss",
     "ts_ls",
