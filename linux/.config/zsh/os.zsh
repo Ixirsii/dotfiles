@@ -1,8 +1,6 @@
 # Start tmux
-local tmux_session_name="ryan"
-
-if [[ -n "$TTY" && -z "$TMUX" ]]
+if [[ -x "$(command -v tmux)" && -n "$TTY" && -z "$TMUX" ]]
 then
-  exec tmux new-session -A -s $tmux_session_name
+  exec tmux new-session -A
 fi
 

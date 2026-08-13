@@ -59,15 +59,16 @@ alias vimdiff="nvim -d"
 # ############################################################################ #
 
 # OS-specific setup
-[ -f "$HOME/.config/zsh/os.zsh" ] && source "$HOME/.config/zsh/os.zsh"
+[ -s "$HOME/.config/zsh/os.zsh" ] && source "$HOME/.config/zsh/os.zsh"
 
+# Atuin
 eval "$(atuin init zsh)"
-eval "$(fnm env --use-on-cd)"
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# Fast Node Manager
+[] && eval "$(fnm env --use-on-cd)"
 
 # pnpm
 case ":$PATH:" in
@@ -76,4 +77,10 @@ case ":$PATH:" in
 esac
 
 # SDKMAN
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Starship
+eval "$(starship init zsh)"
+
+# Zoxide
+eval "$(zoxide init zsh)"
