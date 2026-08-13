@@ -68,7 +68,7 @@ eval "$(atuin init zsh)"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Fast Node Manager
-[] && eval "$(fnm env --use-on-cd)"
+[ -x "$(command -v fnm)" ] && eval "$(fnm env --use-on-cd)"
 
 # pnpm
 case ":$PATH:" in
