@@ -4,6 +4,7 @@ local native_freebsd_servers = {
     "hyprls",
     "lua_ls",
     "ols",
+    "postgres_lsp",
     "rust_analyzer",
     "taplo",
 }
@@ -14,7 +15,6 @@ local mason_lsp_servers = {
     "gopls",
     "html",
     "jsonls",
-    "postgres_lsp",
     "sqlls",
     "tailwindcss",
     "ts_ls",
@@ -30,12 +30,12 @@ local mason_tools = {
     "eslint_d",
     "jsonlint",
     "markdownlint",
-    "markdown-oxide",
     "prettierd",
 }
 
 if not is_freebsd then
     table.insert(mason_tools, "stylua")
+    table.insert(mason_tools, "markdown-oxide")
 end
 
 return {
@@ -90,15 +90,15 @@ return {
 
         dependencies = {
             "hrsh7th/cmp-buffer", -- Source for text in buffer
-            "hrsh7th/cmp-path", -- Source for file system paths
+            "hrsh7th/cmp-path",   -- Source for file system paths
             {
                 "L3MON4D3/LuaSnip",
                 version = "v2.*",
                 build = "make install_jsregexp",
             },
-            "saadparwaiz1/cmp_luasnip", -- Autocompletions
+            "saadparwaiz1/cmp_luasnip",     -- Autocompletions
             "rafamadriz/friendly-snippets", -- Useful snippets
-            "onsails/lspkind.nvim", -- VSCode like pictograms
+            "onsails/lspkind.nvim",         -- VSCode like pictograms
         },
 
         config = function()
@@ -126,7 +126,7 @@ return {
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-                    ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+                    ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 }),
 
@@ -134,8 +134,8 @@ return {
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "luasnip" }, -- snippets
-                    { name = "buffer" }, -- text within current buffer
-                    { name = "path" }, -- file system paths
+                    { name = "buffer" },  -- text within current buffer
+                    { name = "path" },    -- file system paths
                 }),
 
                 -- configure lspkind for vs-code like pictograms in completion menu
