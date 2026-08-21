@@ -16,15 +16,3 @@
 [submodule "linux/.config/tmux/plugins/tpm"]
 	path = common/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "linux/.config/tmux/plugins/tmux-cpu"]
-	path = common/tmux/plugins/tmux-cpu
-	url = https://github.com/tmux-plugins/tmux-cpu.git
-[submodule "linux/.config/tmux/plugins/tmux-sensible"]
-	path = common/tmux/plugins/tmux-sensible
-	url = https://github.com/tmux-plugins/tmux-sensible.git
-[submodule "linux/.config/tmux/plugins/tmux-yank"]
-	path = common/tmux/plugins/tmux-yank
-	url = https://github.com/tmux-plugins/tmux-yank.git
-[submodule "linux/.config/tmux/plugins/catppuccin"]
-	path = common/tmux/plugins/catppuccin
-	url = https://github.com/catppuccin/tmux.git
