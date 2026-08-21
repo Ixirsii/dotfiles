@@ -7,9 +7,7 @@ Personal configuration shared across FreeBSD, Linux, macOS, and Windows.
 
 ## Preview
 
-<!-- Add the primary screenshot here when it is ready:
 ![Desktop preview](screenshots/macos/desktop.png)
--->
 
 Additional screenshots are grouped with each operating system below.
 
@@ -168,7 +166,8 @@ stow --verbose --restow --target="$HOME" macos
 <details>
 <summary>Screenshots</summary>
 
-Screenshots will be added under `screenshots/macos/`.
+![macOS desktop preview](screenshots/macos/desktop.png)
+![SketchyBar preview](screenshots/macos/sketchybar.png)
 
 </details>
 
@@ -234,6 +233,12 @@ Preview the installation commands without changing the system:
 scripts/install-neovim-tools --dry-run
 ```
 
+<details>
+<summary>Screenshots</summary>
+
+![neovim preview](screenshots/common/neovim.png)
+
+</details>
 <details>
 <summary>Tooling details</summary>
 
