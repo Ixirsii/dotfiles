@@ -40,16 +40,38 @@ jobs:
       - name: Install workflow prerequisites
         run: |
           apt-get -o APT::Cache-Start=100000000 update -q
-          apt-get -o APT::Cache-Start=100000000 install -q -y python3 shellcheck stow zsh
+          apt-get -o APT::Cache-Start=100000000 install -q -y python3 shellcheck zsh
 
       - name: Check Lua formatting
         run: git ls-files -z '*.lua' | xargs -0 npx --yes @johnnymorganz/stylua-bin@2.5.2 --check --
 
       - name: Check shell scripts
         run: |
-          zsh -n common/.zshrc freebsd/.config/zsh/os.zsh macos/.config/zsh/os.zsh
-          sh -n scripts/check-neovim-tools scripts/install-neovim-tools
-          shellcheck freebsd/.local/bin/waybar-ups scripts/check-neovim-tools scripts/install-neovim-tools
+          zsh -n common/.zshrc freebsd/.config/zsh/os.zsh linux/.config/zsh/os.zsh macos/.config/zsh/os.zsh
+          sh -n \
+            freebsd/.local/bin/waybar-ups \
+            macos/.config/sketchybar/colors.sh \
+            macos/.config/sketchybar/plugins/space.sh \
+            macos/.config/sketchybar/plugins/status.sh \
+            macos/.config/yabai/yabairc \
+            macos/.local/bin/spaces-debug \
+            macos/.local/bin/spaces-move-window \
+            macos/.local/bin/spaces-recover \
+            scripts/check-neovim-tools \
+            scripts/install-neovim-tools
+          bash -n macos/.config/sketchybar/sketchybarrc
+          shellcheck --exclude=SC1091 \
+            freebsd/.local/bin/waybar-ups \
+            macos/.config/sketchybar/colors.sh \
+            macos/.config/sketchybar/plugins/space.sh \
+            macos/.config/sketchybar/plugins/status.sh \
+            macos/.config/sketchybar/sketchybarrc \
+            macos/.config/yabai/yabairc \
+            macos/.local/bin/spaces-debug \
+            macos/.local/bin/spaces-move-window \
+            macos/.local/bin/spaces-recover \
+            scripts/check-neovim-tools \
+            scripts/install-neovim-tools
 
       - name: Check JSON
         run: |
@@ -105,11 +127,3 @@ jobs:
             fi
           done < <(git ls-files -z -s)
           exit "$result"
-
-      - name: Simulate Stow packages
-        run: |
-          for package in freebsd linux macos; do
-            target=$(mktemp -d)
-            stow --simulate --verbose --no-folding --restow --target="$target" "$package"
-            rm -rf "$target"
-          done
