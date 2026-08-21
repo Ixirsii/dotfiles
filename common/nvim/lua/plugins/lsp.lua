@@ -1,87 +1,28 @@
-local is_freebsd = vim.uv.os_uname().sysname == "FreeBSD"
-
-local native_freebsd_servers = {
-    "hyprls",
-    "lua_ls",
-    "ols",
-    "postgres_lsp",
-    "rust_analyzer",
-    "taplo",
-}
-
-local mason_lsp_servers = {
+local servers = {
     "bashls",
+    "cssls",
+    "docker_language_server",
     "eslint",
     "gopls",
     "html",
+    "hyprls",
     "jsonls",
-    "sqlls",
+    "lua_ls",
+    "ols",
+    "rust_analyzer",
+    "sqls",
     "tailwindcss",
+    "taplo",
     "ts_ls",
     "yamlls",
 }
 
-if not is_freebsd then
-    vim.list_extend(mason_lsp_servers, native_freebsd_servers)
-end
-
-local mason_tools = {
-    "clang-format",
-    "eslint_d",
-    "jsonlint",
-    "markdownlint",
-    "prettierd",
-}
-
-if not is_freebsd then
-    table.insert(mason_tools, "stylua")
-    table.insert(mason_tools, "markdown-oxide")
-end
-
 return {
     {
-        "mason-org/mason-lspconfig.nvim",
-
-        dependencies = {
-            {
-                "mason-org/mason.nvim",
-
-                opts = {
-                    ui = {
-                        icons = {
-                            package_installed = "✓",
-                            package_pending = "➜",
-                            package_uninstalled = "✗",
-                        },
-                    },
-                },
-            },
-
-            "neovim/nvim-lspconfig",
-        },
-
-        opts = {
-            ensure_installed = mason_lsp_servers,
-        },
-
-        config = function(_, opts)
-            require("mason-lspconfig").setup(opts)
-
-            if is_freebsd then
-                vim.lsp.enable(native_freebsd_servers)
-            end
+        "neovim/nvim-lspconfig",
+        config = function()
+            vim.lsp.enable(servers)
         end,
-    },
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-
-        dependencies = {
-            "mason-org/mason.nvim",
-        },
-
-        opts = {
-            ensure_installed = mason_tools,
-        },
     },
     {
         "hrsh7th/nvim-cmp",
@@ -90,15 +31,15 @@ return {
 
         dependencies = {
             "hrsh7th/cmp-buffer", -- Source for text in buffer
-            "hrsh7th/cmp-path",   -- Source for file system paths
+            "hrsh7th/cmp-path", -- Source for file system paths
             {
                 "L3MON4D3/LuaSnip",
                 version = "v2.*",
                 build = "make install_jsregexp",
             },
-            "saadparwaiz1/cmp_luasnip",     -- Autocompletions
+            "saadparwaiz1/cmp_luasnip", -- Autocompletions
             "rafamadriz/friendly-snippets", -- Useful snippets
-            "onsails/lspkind.nvim",         -- VSCode like pictograms
+            "onsails/lspkind.nvim", -- VSCode like pictograms
         },
 
         config = function()
@@ -126,7 +67,7 @@ return {
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-                    ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+                    ["<C-e>"] = cmp.mapping.abort(), -- close completion window
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 }),
 
@@ -134,8 +75,8 @@ return {
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "luasnip" }, -- snippets
-                    { name = "buffer" },  -- text within current buffer
-                    { name = "path" },    -- file system paths
+                    { name = "buffer" }, -- text within current buffer
+                    { name = "path" }, -- file system paths
                 }),
 
                 -- configure lspkind for vs-code like pictograms in completion menu

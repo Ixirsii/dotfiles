@@ -1,0 +1,140 @@
+#!/bin/sh
+
+set -eu
+
+usage() {
+    cat <<'EOF'
+Usage: scripts/install-neovim-tools [--dry-run]
+
+Install the system-level language servers and formatters configured for
+Neovim. JavaScript project libraries such as ESLint, Prettier, and TypeScript
+remain project-local and are not installed by this command.
+EOF
+}
+
+dry_run=false
+case "${1-}" in
+    --dry-run)
+        dry_run=true
+        ;;
+    -h | --help)
+        usage
+        exit 0
+        ;;
+    "") ;;
+    *)
+        usage >&2
+        exit 2
+        ;;
+esac
+
+script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+repo_dir=$(dirname -- "$script_dir")
+manifest_dir="$repo_dir/packages"
+
+run() {
+    if "$dry_run"; then
+        printf '+'
+        printf ' %s' "$@"
+        printf '\n'
+    else
+        "$@"
+    fi
+}
+
+run_as_root() {
+    if [ "$(id -u)" -eq 0 ]; then
+        run "$@"
+    else
+        command -v sudo >/dev/null 2>&1 || {
+            printf 'sudo is required to install OS packages\n' >&2
+            exit 1
+        }
+        run sudo "$@"
+    fi
+}
+
+for_each_manifest_line() {
+    manifest=$1
+    callback=$2
+
+    while IFS= read -r line || [ -n "$line" ]; do
+        case "$line" in
+            "" | \#*) continue ;;
+        esac
+        "$callback" "$line"
+    done < "$manifest"
+}
+
+install_freebsd_package() {
+    run_as_root pkg install -y "$1"
+}
+
+install_arch_package() {
+    run_as_root pacman --sync --needed --noconfirm "$1"
+}
+
+install_npm_package() {
+    run npm install --global "$1"
+}
+
+install_go_package() {
+    run go install "$1"
+}
+
+install_cargo_package() {
+    crate=${1%% *}
+    version=${1#* }
+    run cargo install --locked --version "$version" "$crate"
+}
+
+command -v npm >/dev/null 2>&1 || {
+    printf 'npm is required to install Node-based language servers\n' >&2
+    exit 1
+}
+command -v go >/dev/null 2>&1 || {
+    printf 'Go is required to install Go-based language servers\n' >&2
+    exit 1
+}
+command -v cargo >/dev/null 2>&1 || {
+    printf 'Cargo is required to install Rust-based tools\n' >&2
+    exit 1
+}
+command -v rustup >/dev/null 2>&1 || {
+    printf 'rustup is required to install Rust toolchain components\n' >&2
+    exit 1
+}
+
+case "$(uname -s)" in
+    Darwin)
+        command -v brew >/dev/null 2>&1 || {
+            printf 'Homebrew is required on macOS\n' >&2
+            exit 1
+        }
+        run brew bundle --file "$manifest_dir/macos.Brewfile"
+        ;;
+    FreeBSD)
+        for_each_manifest_line "$manifest_dir/freebsd.txt" install_freebsd_package
+        ;;
+    Linux)
+        if command -v pacman >/dev/null 2>&1; then
+            for_each_manifest_line "$manifest_dir/linux.txt" install_arch_package
+        else
+            printf '%s\n' \
+                'Only Arch Linux OS packages are currently declared.' \
+                'Install the equivalents from packages/linux.txt, then rerun with PATH configured.' >&2
+            exit 1
+        fi
+        ;;
+    *)
+        printf 'Unsupported operating system: %s\n' "$(uname -s)" >&2
+        exit 1
+        ;;
+esac
+
+for_each_manifest_line "$manifest_dir/neovim/npm.txt" install_npm_package
+for_each_manifest_line "$manifest_dir/neovim/go.txt" install_go_package
+for_each_manifest_line "$manifest_dir/neovim/cargo.txt" install_cargo_package
+run rustup component add rust-analyzer rustfmt
+
+printf '\nInstallation complete. Run scripts/check-neovim-tools to verify PATH.\n'

@@ -1,0 +1,3 @@
+# crate version
+stylua 2.5.2
+taplo-cli 0.10.0

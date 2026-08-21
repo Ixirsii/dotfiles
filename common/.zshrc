@@ -61,6 +61,14 @@ alias vimdiff="nvim -d"
 # OS-specific setup
 [ -s "$HOME/.config/zsh/os.zsh" ] && source "$HOME/.config/zsh/os.zsh"
 
+# Go-installed commands
+if (( $+commands[go] )); then
+  go_bin="$(go env GOBIN)"
+  [[ -n "$go_bin" ]] || go_bin="$(go env GOPATH)/bin"
+  export PATH="$go_bin:$PATH"
+  unset go_bin
+fi
+
 # Atuin
 eval "$(atuin init zsh)"
 

@@ -1,0 +1,47 @@
+#!/bin/sh
+
+set -eu
+
+script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+repo_dir=$(dirname -- "$script_dir")
+manifest="$repo_dir/packages/neovim/commands.txt"
+missing=0
+go_bin=
+
+if command -v go >/dev/null 2>&1; then
+    go_bin=$(go env GOBIN)
+    [ -n "$go_bin" ] || go_bin="$(go env GOPATH)/bin"
+fi
+
+printf 'System-level Neovim tools:\n'
+while IFS= read -r tool || [ -n "$tool" ]; do
+    case "$tool" in
+        "" | \#*) continue ;;
+    esac
+
+    if path=$(command -v "$tool" 2>/dev/null); then
+        printf '  ok       %-36s %s\n' "$tool" "$path"
+    elif [ -n "$go_bin" ] && [ -x "$go_bin/$tool" ]; then
+        printf '  path     %-36s %s (not on PATH)\n' "$tool" "$go_bin/$tool"
+        missing=1
+    else
+        printf '  missing  %s\n' "$tool"
+        missing=1
+    fi
+done < "$manifest"
+
+if [ -f package.json ]; then
+    printf '\nProject-local JavaScript tools:\n'
+    for tool in eslint prettier tsserver; do
+        if [ -x "node_modules/.bin/$tool" ]; then
+            printf '  ok       %-36s %s\n' "$tool" "$PWD/node_modules/.bin/$tool"
+        else
+            printf '  missing  node_modules/.bin/%s\n' "$tool"
+            missing=1
+        fi
+    done
+else
+    printf '\nProject-local JavaScript checks skipped (no package.json in %s).\n' "$PWD"
+fi
+
+exit "$missing"

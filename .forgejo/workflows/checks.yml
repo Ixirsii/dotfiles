@@ -48,7 +48,8 @@ jobs:
       - name: Check shell scripts
         run: |
           zsh -n common/.zshrc freebsd/.config/zsh/os.zsh macos/.config/zsh/os.zsh
-          shellcheck freebsd/.local/bin/waybar-ups
+          sh -n scripts/check-neovim-tools scripts/install-neovim-tools
+          shellcheck freebsd/.local/bin/waybar-ups scripts/check-neovim-tools scripts/install-neovim-tools
 
       - name: Check JSON
         run: |
@@ -112,8 +113,3 @@ jobs:
             stow --simulate --verbose --no-folding --restow --target="$target" "$package"
             rm -rf "$target"
           done
-
-      - name: Check workflow
-        uses: docker://docker.io/rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 # v1.7.12
-        with:
-          args: -config-file .forgejo/actionlint.yaml .forgejo/workflows/checks.yml

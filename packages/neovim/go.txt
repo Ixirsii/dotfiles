@@ -1,0 +1,6 @@
+# Package paths include the executable subdirectory where required.
+github.com/docker/docker-language-server/cmd/docker-language-server@v0.20.1
+github.com/hyprland-community/hyprls/cmd/hyprls@v0.14.0
+github.com/sqls-server/sqls@v0.2.48
+golang.org/x/tools/cmd/goimports@v0.49.0
+golang.org/x/tools/gopls@v0.23.0

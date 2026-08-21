@@ -1,0 +1,23 @@
+# Executables expected by the Neovim configuration.
+bash-language-server
+docker-language-server
+gofmt
+goimports
+gopls
+hyprls
+lua-language-server
+odinfmt
+ols
+rust-analyzer
+rustfmt
+shfmt
+sqls
+stylua
+tailwindcss-language-server
+taplo
+typescript-language-server
+vscode-css-language-server
+vscode-eslint-language-server
+vscode-html-language-server
+vscode-json-language-server
+yaml-language-server

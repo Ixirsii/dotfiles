@@ -100,10 +100,12 @@ needed when those tools are used.
 - [fastfetch][16]
 - [fd][17]
 - [fzf][18]
+- [Go][53]
 - [lazygit][19]
 - [neovim][20]
 - [Nerd fonts][21]
 - [Node.js][22]
+- [Odin][54]
 - [OpenCode][23]
 - [pnpm][24]
 - [ripgrep][25]
@@ -113,6 +115,61 @@ needed when those tools are used.
 - [wezterm][29]
 - [yazi][30]
 - [Zen browser][31]
+
+#### Neovim development tools
+
+Install the host-level language servers and formatters from the repository's
+checked-in manifests:
+
+```sh
+scripts/install-neovim-tools
+scripts/check-neovim-tools
+```
+
+Preview the installation commands without changing the system:
+
+```sh
+scripts/install-neovim-tools --dry-run
+```
+
+The installer uses FreeBSD `pkg`, a macOS Brewfile, or the Arch Linux package
+manifest for native packages. Version-pinned npm, Go, and Cargo manifests cover
+portable tools, while rustup supplies `rust-analyzer` and `rustfmt`. Other Linux
+distributions must translate `packages/linux.txt` to their native package
+names. OLS and `odinfmt` must be installed manually on FreeBSD because they are
+not currently available from `pkg`.
+
+All executables must be on the `PATH` inherited by Neovim. The configured
+language servers are:
+
+```text
+bash-language-server
+docker-language-server
+gopls
+hyprls
+lua-language-server
+ols
+rust-analyzer
+sqls
+tailwindcss-language-server
+taplo
+typescript-language-server
+vscode-css-language-server
+vscode-eslint-language-server
+vscode-html-language-server
+vscode-json-language-server
+yaml-language-server
+```
+
+The configured formatters are `gofmt`/`goimports`, `odinfmt`, project-local
+`prettier`, `rustfmt`, `shfmt`, `stylua`, and `taplo`. Conform automatically
+prefers `node_modules/.bin/prettier` when it exists. The ESLint language server
+similarly discovers the project's ESLint installation and configuration, so
+diagnostics remain available in Neovim without a global ESLint installation.
+
+`sqls` supports PostgreSQL, MySQL, and SQLite. Database connections can be
+defined outside this repository in `$XDG_CONFIG_HOME/sqls/config.yml`; see the
+[upstream `sqls` connection configuration][52] for the supported DSN formats.
 
 ### FreeBSD
 
@@ -211,3 +268,6 @@ needed when those tools are used.
 [49]: https://github.com/LGUG2Z/komorebi
 [50]: https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6
 [51]: https://github.com/LGUG2Z/whkd
+[52]: https://github.com/sqls-server/sqls#db-configuration
+[53]: https://go.dev
+[54]: https://odin-lang.org
