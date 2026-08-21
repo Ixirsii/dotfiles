@@ -130,7 +130,7 @@ Screenshots will be added under `screenshots/linux/`.
 </details>
 
 <details>
-<summary>Dependencies (3 required, 4 optional)</summary>
+<summary>Dependencies (3 required, 2 optional)</summary>
 
 ### Required
 
@@ -141,8 +141,6 @@ Screenshots will be added under `screenshots/linux/`.
 ### Optional
 
 - [mako][41]
-- [MPD][42]
-- [ncmpcpp][43]
 - [nwg-bar][44]
 
 </details>
@@ -208,11 +206,9 @@ Screenshots will be added under `screenshots/windows/`.
 </details>
 
 <details>
-<summary>Dependencies (3 required)</summary>
+<summary>Dependencies (1 required)</summary>
 
-- [Komorebi][49]
 - [PowerShell][50]
-- [whkd][51]
 
 </details>
 
@@ -317,16 +313,12 @@ defined outside this repository in `$XDG_CONFIG_HOME/sqls/config.yml`; see the
 [39]: https://transmissionbt.com
 [40]: https://github.com/alexays/waybar
 [41]: https://github.com/emersion/mako
-[42]: https://www.musicpd.org
-[43]: https://github.com/ncmpcpp/ncmpcpp
 [44]: https://github.com/nwg-piotr/nwg-bar
 [45]: https://brew.sh
 [46]: https://github.com/FelixKratz/SketchyBar
 [47]: https://github.com/koekeishiya/skhd
 [48]: https://github.com/koekeishiya/yabai
-[49]: https://github.com/LGUG2Z/komorebi
 [50]: https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6
-[51]: https://github.com/LGUG2Z/whkd
 [52]: https://github.com/sqls-server/sqls#db-configuration
 [53]: https://go.dev
 [54]: https://odin-lang.org
