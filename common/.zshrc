@@ -16,6 +16,7 @@ export TERMINAL="wezterm"
 #                                 Zsh options                                  #
 # ############################################################################ #
 
+autoload -Uz add-zsh-hook
 setopt incappendhistory extendedglob hist_ignore_dups
 unsetopt beep nomatch
 
@@ -23,11 +24,11 @@ unsetopt beep nomatch
 DISABLE_AUTO_TITLE="true"
 
 function precmd() {
-  print -Pn "\e]2;%1~\a"
+    print -Pn "\e]2;%1~\a"
 }
 
 function preexec() {
-  print -n -- "\e]2;${(q)1}\a"
+    print -n -- "\e]2;${(q)1}\a"
 }
 
 # History
@@ -62,11 +63,11 @@ alias vimdiff="nvim -d"
 [ -s "$HOME/.config/zsh/os.zsh" ] && source "$HOME/.config/zsh/os.zsh"
 
 # Go-installed commands
-if (( $+commands[go] )); then
-  go_bin="$(go env GOBIN)"
-  [[ -n "$go_bin" ]] || go_bin="$(go env GOPATH)/bin"
-  export PATH="$go_bin:$PATH"
-  unset go_bin
+if (($+commands[go])); then
+    go_bin="$(go env GOBIN)"
+    [[ -n "$go_bin" ]] || go_bin="$(go env GOPATH)/bin"
+    export PATH="$go_bin:$PATH"
+    unset go_bin
 fi
 
 # Atuin
@@ -80,8 +81,8 @@ eval "$(atuin init zsh)"
 
 # pnpm
 case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+*":$PNPM_HOME/bin:"*) ;;
+*) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 
 # SDKMAN
@@ -92,3 +93,18 @@ eval "$(starship init zsh)"
 
 # Zoxide
 eval "$(zoxide init zsh)"
+
+# ############################################################################ #
+#                                    Hooks                                     #
+# ############################################################################ #
+
+function _set_idle_title() {
+    print -Pn '\e]2;%1~\a'
+}
+
+function _set_command_title() {
+    print -n -- $'\e]2;'"${(q)1}"$'\a'
+}
+
+add-zsh-hook precmd _set_idle_title
+add-zsh-hook preexec _set_command_title

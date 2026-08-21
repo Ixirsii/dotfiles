@@ -14,18 +14,18 @@ EOF
 
 dry_run=false
 case "${1-}" in
-    --dry-run)
-        dry_run=true
-        ;;
-    -h | --help)
-        usage
-        exit 0
-        ;;
-    "") ;;
-    *)
-        usage >&2
-        exit 2
-        ;;
+--dry-run)
+    dry_run=true
+    ;;
+-h | --help)
+    usage
+    exit 0
+    ;;
+"") ;;
+*)
+    usage >&2
+    exit 2
+    ;;
 esac
 
 script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
@@ -45,12 +45,13 @@ run() {
 run_as_root() {
     if [ "$(id -u)" -eq 0 ]; then
         run "$@"
-    else
-        command -v sudo >/dev/null 2>&1 || {
-            printf 'sudo is required to install OS packages\n' >&2
-            exit 1
-        }
+    elif command -v doas >/dev/null 2>&1; then
+        run doas "$@"
+    elif command -v sudo >/dev/null 2>&1; then
         run sudo "$@"
+    else
+        printf 'doas or sudo is required to install system-wide packages\n' >&2
+        exit 1
     fi
 }
 
@@ -60,10 +61,10 @@ for_each_manifest_line() {
 
     while IFS= read -r line || [ -n "$line" ]; do
         case "$line" in
-            "" | \#*) continue ;;
+        "" | \#*) continue ;;
         esac
         "$callback" "$line"
-    done < "$manifest"
+    done <"$manifest"
 }
 
 install_freebsd_package() {
@@ -75,7 +76,10 @@ install_arch_package() {
 }
 
 install_npm_package() {
-    run npm install --global "$1"
+    case "$(uname -s)" in
+    FreeBSD) run_as_root npm install --global "$1" ;;
+    *) run npm install --global "$1" ;;
+    esac
 }
 
 install_go_package() {
@@ -106,30 +110,30 @@ command -v rustup >/dev/null 2>&1 || {
 }
 
 case "$(uname -s)" in
-    Darwin)
-        command -v brew >/dev/null 2>&1 || {
-            printf 'Homebrew is required on macOS\n' >&2
-            exit 1
-        }
-        run brew bundle --file "$manifest_dir/macos.Brewfile"
-        ;;
-    FreeBSD)
-        for_each_manifest_line "$manifest_dir/freebsd.txt" install_freebsd_package
-        ;;
-    Linux)
-        if command -v pacman >/dev/null 2>&1; then
-            for_each_manifest_line "$manifest_dir/linux.txt" install_arch_package
-        else
-            printf '%s\n' \
-                'Only Arch Linux OS packages are currently declared.' \
-                'Install the equivalents from packages/linux.txt, then rerun with PATH configured.' >&2
-            exit 1
-        fi
-        ;;
-    *)
-        printf 'Unsupported operating system: %s\n' "$(uname -s)" >&2
+Darwin)
+    command -v brew >/dev/null 2>&1 || {
+        printf 'Homebrew is required on macOS\n' >&2
         exit 1
-        ;;
+    }
+    run brew bundle --file "$manifest_dir/macos.Brewfile"
+    ;;
+FreeBSD)
+    for_each_manifest_line "$manifest_dir/freebsd.txt" install_freebsd_package
+    ;;
+Linux)
+    if command -v pacman >/dev/null 2>&1; then
+        for_each_manifest_line "$manifest_dir/linux.txt" install_arch_package
+    else
+        printf '%s\n' \
+            'Only Arch Linux OS packages are currently declared.' \
+            'Install the equivalents from packages/linux.txt, then rerun with PATH configured.' >&2
+        exit 1
+    fi
+    ;;
+*)
+    printf 'Unsupported operating system: %s\n' "$(uname -s)" >&2
+    exit 1
+    ;;
 esac
 
 for_each_manifest_line "$manifest_dir/neovim/npm.txt" install_npm_package
