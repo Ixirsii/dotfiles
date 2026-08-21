@@ -38,8 +38,17 @@
             "enabled": true,
             "type": "local"
         },
-        "linear": {
+        "github": {
             "enabled": false,
+            "headers": {
+                "Authorization": "Bearer ***REMOVED***"
+            },
+            "type": "remote",
+            "url": "https://api.githubcopilot.com/mcp/",
+            "oauth": false
+        },
+        "linear": {
+            "enabled": true,
             "type": "remote",
             "url": "https://mcp.linear.app/mcp"
         },
@@ -66,6 +75,14 @@
                 "--mcp"
             ],
             "enabled": true,
+            "type": "local"
+        },
+        "semgrep": {
+            "command": [
+                "semgrep",
+                "mcp"
+            ],
+            "enabled": false,
             "type": "local"
         }
     }

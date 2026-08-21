@@ -54,6 +54,19 @@ Apply changes:
 stow --verbose --restow --target="$HOME" macos
 ```
 
+Capture macOS Spaces, display, Dock, WindowServer, and Yabai state:
+
+```sh
+spaces-debug
+```
+
+Capture the broken state, restart Dock and Yabai, then compare the resulting
+state without deleting Spaces:
+
+```sh
+spaces-recover
+```
+
 ### Windows
 
 Manually create links from `windows` module into your home directory
