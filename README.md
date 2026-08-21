@@ -84,6 +84,10 @@ Apply the configuration:
 stow --verbose --restow --target="$HOME" freebsd
 ```
 
+The Hyprland configuration uses Lua modules shared with Linux from
+`common/hypr/`. FreeBSD is the authoritative configuration; Linux desktop
+validation remains pending until a Hyprland VM is available.
+
 <details>
 <summary>Screenshots</summary>
 
@@ -120,6 +124,10 @@ Apply the configuration:
 ```sh
 stow --verbose --restow --target="$HOME" linux
 ```
+
+Linux consumes the shared Lua-based Hyprland configuration from `common/hypr/`.
+The current configuration is validated on FreeBSD; Linux desktop validation is
+pending until a Hyprland VM is available.
 
 <details>
 <summary>Screenshots</summary>

@@ -1,0 +1,1 @@
+../../../common/hypr/hyprland-keybind.lua
