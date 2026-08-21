@@ -3,83 +3,32 @@
 [![Discord](https://img.shields.io/discord/452233740408717313?color=738ADB&label=discord&logo=discord)][1]
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)][2]
 
-## Submodules
+Personal configuration shared across FreeBSD, Linux, macOS, and Windows.
 
-This repository has submodules for tmux and zsh plugins.
-Initialize them with `git submodule update --init --recursive`.
+## Preview
 
-## Stow packages
+<!-- Add the primary screenshot here when it is ready:
+![Desktop preview](screenshots/macos/desktop.png)
+-->
 
-Apply the shared config plus the package for the current OS.
+Additional screenshots are grouped with each operating system below.
 
-### FreeBSD
+## Getting started
 
-Preview changes:
-
-```sh
-stow --simulate --verbose --restow --target="$HOME" freebsd
-```
-
-Apply changes:
+Initialize the tmux and zsh plugin submodules after cloning the repository:
 
 ```sh
-stow --verbose --restow --target="$HOME" freebsd
+git submodule update --init --recursive
 ```
 
-### Linux
+### Common dependencies
 
-Preview changes:
+Required dependencies must be installed for the shared configuration to work.
+Optional dependencies provide configured tools and features but are only needed
+when those tools are used.
 
-```sh
-stow --simulate --verbose --restow --target="$HOME" linux
-```
-
-Apply changes:
-
-```sh
-stow --verbose --restow --target="$HOME" linux
-```
-
-### MacOS
-
-Preview changes:
-
-```sh
-stow --simulate --verbose --restow --target="$HOME" macos
-```
-
-Apply changes:
-
-```sh
-stow --verbose --restow --target="$HOME" macos
-```
-
-Capture macOS Spaces, display, Dock, WindowServer, and Yabai state:
-
-```sh
-spaces-debug
-```
-
-Capture the broken state, restart Dock and Yabai, then compare the resulting
-state without deleting Spaces:
-
-```sh
-spaces-recover
-```
-
-### Windows
-
-Manually create links from `windows` module into your home directory
-
-## Dependencies
-
-Required dependencies must be installed for the corresponding configuration to
-work. Optional dependencies provide configured tools and features but are only
-needed when those tools are used.
-
-### Common
-
-#### Required
+<details>
+<summary>Required dependencies</summary>
 
 - [atuin][3]
 - [fnm][4]
@@ -90,7 +39,10 @@ needed when those tools are used.
 - [zoxide][9]
 - [zsh][10]
 
-#### Optional
+</details>
+
+<details>
+<summary>Optional dependencies</summary>
 
 - [bat][11]
 - [btop++][12]
@@ -116,7 +68,155 @@ needed when those tools are used.
 - [yazi][30]
 - [Zen browser][31]
 
-#### Neovim development tools
+</details>
+
+## FreeBSD
+
+Preview the changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" freebsd
+```
+
+Apply the configuration:
+
+```sh
+stow --verbose --restow --target="$HOME" freebsd
+```
+
+<details>
+<summary>Screenshots</summary>
+
+Screenshots will be added under `screenshots/freebsd/`.
+
+</details>
+
+<details>
+<summary>Dependencies (3 required, 3 optional)</summary>
+
+### Required
+
+- [Hyprland][32]
+- [Transmission][33]
+- [waybar][34]
+
+### Optional
+
+- [Google Fonts][35]
+- [mako][36]
+- [nwg-bar][37]
+
+</details>
+
+## Linux
+
+Preview the changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" linux
+```
+
+Apply the configuration:
+
+```sh
+stow --verbose --restow --target="$HOME" linux
+```
+
+<details>
+<summary>Screenshots</summary>
+
+Screenshots will be added under `screenshots/linux/`.
+
+</details>
+
+<details>
+<summary>Dependencies (3 required, 4 optional)</summary>
+
+### Required
+
+- [Hyprland][38]
+- [Transmission][39]
+- [waybar][40]
+
+### Optional
+
+- [mako][41]
+- [MPD][42]
+- [ncmpcpp][43]
+- [nwg-bar][44]
+
+</details>
+
+## macOS
+
+Preview the changes:
+
+```sh
+stow --simulate --verbose --restow --target="$HOME" macos
+```
+
+Apply the configuration:
+
+```sh
+stow --verbose --restow --target="$HOME" macos
+```
+
+<details>
+<summary>Screenshots</summary>
+
+Screenshots will be added under `screenshots/macos/`.
+
+</details>
+
+<details>
+<summary>Dependencies (4 required)</summary>
+
+- [Homebrew][45]
+- [SketchyBar][46]
+- [skhd][47]
+- [Yabai][48]
+
+</details>
+
+<details>
+<summary>Spaces troubleshooting</summary>
+
+Capture macOS Spaces, display, Dock, WindowServer, and Yabai state:
+
+```sh
+spaces-debug
+```
+
+Capture the broken state, restart Dock and Yabai, then compare the resulting
+state without deleting Spaces:
+
+```sh
+spaces-recover
+```
+
+</details>
+
+## Windows
+
+Manually create links from the `windows` package into your home directory.
+
+<details>
+<summary>Screenshots</summary>
+
+Screenshots will be added under `screenshots/windows/`.
+
+</details>
+
+<details>
+<summary>Dependencies (3 required)</summary>
+
+- [Komorebi][49]
+- [PowerShell][50]
+- [whkd][51]
+
+</details>
+
+## Neovim development tools
 
 Install the host-level language servers and formatters from the repository's
 checked-in manifests:
@@ -131,6 +231,9 @@ Preview the installation commands without changing the system:
 ```sh
 scripts/install-neovim-tools --dry-run
 ```
+
+<details>
+<summary>Tooling details</summary>
 
 The installer uses FreeBSD `pkg`, a macOS Brewfile, or the Arch Linux package
 manifest for native packages. Version-pinned npm, Go, and Cargo manifests cover
@@ -171,51 +274,7 @@ diagnostics remain available in Neovim without a global ESLint installation.
 defined outside this repository in `$XDG_CONFIG_HOME/sqls/config.yml`; see the
 [upstream `sqls` connection configuration][52] for the supported DSN formats.
 
-### FreeBSD
-
-#### Required
-
-- [Hyprland][32]
-- [Transmission][33]
-- [waybar][34]
-
-#### Optional
-
-- [Google Fonts][35]
-- [mako][36]
-- [nwg-bar][37]
-
-### Linux
-
-#### Required
-
-- [Hyprland][38]
-- [Transmission][39]
-- [waybar][40]
-
-#### Optional
-
-- [mako][41]
-- [MPD][42]
-- [ncmpcpp][43]
-- [nwg-bar][44]
-
-### macOS
-
-#### Required
-
-- [Homebrew][45]
-- [SketchyBar][46]
-- [skhd][47]
-- [Yabai][48]
-
-### Windows
-
-#### Required
-
-- [Komorebi][49]
-- [PowerShell][50]
-- [whkd][51]
+</details>
 
 [1]: https://discord.gg/KTgshSbEUU
 [2]: https://opensource.org/license/bsd-3-clause
