@@ -92,12 +92,11 @@ Screenshots will be added under `screenshots/freebsd/`.
 </details>
 
 <details>
-<summary>Dependencies (3 required, 3 optional)</summary>
+<summary>Dependencies (2 required, 3 optional)</summary>
 
 ### Required
 
 - [Hyprland][32]
-- [Transmission][33]
 - [waybar][34]
 
 ### Optional
@@ -130,12 +129,11 @@ Screenshots will be added under `screenshots/linux/`.
 </details>
 
 <details>
-<summary>Dependencies (3 required, 2 optional)</summary>
+<summary>Dependencies (2 required, 2 optional)</summary>
 
 ### Required
 
 - [Hyprland][38]
-- [Transmission][39]
 - [waybar][40]
 
 ### Optional
@@ -304,13 +302,11 @@ defined outside this repository in `$XDG_CONFIG_HOME/sqls/config.yml`; see the
 [30]: https://yazi-rs.github.io
 [31]: https://zen-browser.app
 [32]: https://hypr.land
-[33]: https://transmissionbt.com
 [34]: https://github.com/alexays/waybar
 [35]: https://cgit.freebsd.org/ports/tree/x11-fonts/google-fonts
 [36]: https://github.com/emersion/mako
 [37]: https://github.com/nwg-piotr/nwg-bar
 [38]: https://hypr.land
-[39]: https://transmissionbt.com
 [40]: https://github.com/alexays/waybar
 [41]: https://github.com/emersion/mako
 [44]: https://github.com/nwg-piotr/nwg-bar
