@@ -30,17 +30,13 @@ hl.window_rule({
 
 local workspace_rules = {
     { name = "Ghostty", class = "com.mitchellh.ghostty", workspace = 1 },
-    { name = "Wezterm", class = "org.wezfurlong.wezterm", workspace = 1 },
     { name = "Firefox", class = "firefox", workspace = 2 },
-    { name = "Helium", class = "helium", workspace = 2 },
     { name = "Zen", class = "zen", workspace = 2 },
     { name = "Nautilus", class = "org.gnome.Nautilus", workspace = 3 },
     { name = "Lollypop", class = "org.gnome.Lollypop", workspace = 6 },
     { name = "Plexamp", class = "Plexamp", workspace = 6 },
-    { name = "Proton Pass", class = "Proton Pass", workspace = 7 },
-    { name = "Proton VPN", class = "proton.vpn.app.gtk", workspace = 7 },
-    { name = "Proton Mail", class = "Proton Mail", workspace = 9 },
-    { name = "Legcord", class = "legcord", workspace = 9 },
+    { name = "Legcord", class = "legcord", workspace = 7 },
+    { name = "1Password", class = "^(1Password|1password)$", workspace = 9 },
 }
 
 for _, rule in ipairs(workspace_rules) do

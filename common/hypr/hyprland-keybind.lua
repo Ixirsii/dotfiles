@@ -5,6 +5,7 @@ local programs = require("hyprland-program")
 -- -------------------------------------------------------------------------- --
 
 local main_mod = "SUPER"
+local window_mod = "ALT"
 
 hl.config({
     input = {
@@ -47,16 +48,16 @@ hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot --mode output"))
 hl.bind(main_mod .. " + SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot --mode region"))
 
 -- Focus windows
-hl.bind(main_mod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(main_mod .. " + J", hl.dsp.focus({ direction = "down" }))
-hl.bind(main_mod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(main_mod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(window_mod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(window_mod .. " + J", hl.dsp.focus({ direction = "down" }))
+hl.bind(window_mod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(window_mod .. " + L", hl.dsp.focus({ direction = "right" }))
 
 -- Move windows
-hl.bind(main_mod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
-hl.bind(main_mod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
-hl.bind(main_mod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
-hl.bind(main_mod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
+hl.bind(window_mod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
+hl.bind(window_mod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
+hl.bind(window_mod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
+hl.bind(window_mod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
 
 -- Switch workspaces and move windows to workspaces
 for workspace = 1, 9 do
