@@ -38,6 +38,15 @@
             "enabled": true,
             "type": "local"
         },
+        "github": {
+            "enabled": false,
+            "headers": {
+                "Authorization": "Bearer ***REMOVED***"
+            },
+            "type": "remote",
+            "url": "https://api.githubcopilot.com/mcp/",
+            "oauth": false
+        },
         "linear": {
             "enabled": true,
             "type": "remote",

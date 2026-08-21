@@ -1,0 +1,88 @@
+#!/bin/sh
+
+set -u
+
+root=${SPACES_DEBUG_DIR:-"$HOME/Library/Logs/spaces-debug"}
+timestamp=$(date '+%Y%m%d-%H%M%S')
+bundle="$root/$timestamp"
+summary="$bundle/summary.txt"
+
+mkdir -p "$bundle" || exit 1
+
+capture() {
+    name=$1
+    shift
+
+    if ! "$@" >"$bundle/$name" 2>&1; then
+        printf 'Capture failed: %s\n' "$*" >>"$summary"
+    fi
+}
+
+capture macos.txt sw_vers
+capture displays.txt system_profiler SPDisplaysDataType
+capture display-registry.txt ioreg -r -c AppleDisplay -l
+capture yabai-version.txt yabai --version
+capture skhd-version.txt skhd --version
+capture yabai-displays.json yabai -m query --displays
+capture yabai-spaces.json yabai -m query --spaces
+capture yabai-windows.json yabai -m query --windows
+capture launch-services.txt launchctl list
+capture processes.txt ps -axo pid,lstart,command
+capture mission-control.txt defaults read com.apple.dock
+capture keyboard-shortcuts.txt defaults read com.apple.symbolichotkeys AppleSymbolicHotKeys
+
+if defaults export com.apple.spaces - >"$bundle/spaces-preferences.plist" 2>>"$summary"; then
+    if ! plutil -convert json -o "$bundle/spaces-preferences.json" "$bundle/spaces-preferences.plist" 2>>"$summary"; then
+        printf 'Could not convert the Spaces preferences to JSON.\n' >>"$summary"
+    fi
+else
+    printf 'Could not export the Spaces preferences.\n' >>"$summary"
+fi
+
+/usr/bin/log show --last 1h --style compact \
+    --predicate '(process == "Dock" OR process == "WindowServer" OR process == "yabai" OR process == "skhd") AND (eventMessage CONTAINS[c] "space" OR eventMessage CONTAINS[c] "display" OR eventMessage CONTAINS[c] "error" OR eventMessage CONTAINS[c] "fail" OR eventMessage CONTAINS[c] "timeout")' \
+    >"$bundle/system.log" 2>>"$summary" || printf 'Could not capture the unified log.\n' >>"$summary"
+
+if [ -f /tmp/yabai_ryan.err.log ]; then
+    cp /tmp/yabai_ryan.err.log "$bundle/yabai-stderr.log"
+fi
+
+if [ -f /tmp/yabai_ryan.out.log ]; then
+    cp /tmp/yabai_ryan.out.log "$bundle/yabai-stdout.log"
+fi
+
+{
+    printf 'Captured: %s\n' "$(date)"
+    printf 'Bundle: %s\n\n' "$bundle"
+
+    if [ -s "$bundle/yabai-spaces.json" ]; then
+        focused_space=$(jq -r '[.[] | select(."has-focus") | .id][0] // "none"' "$bundle/yabai-spaces.json")
+        visible_spaces=$(jq -r '[.[] | select(."is-visible") | .id] | map(tostring) | join(",")' "$bundle/yabai-spaces.json")
+        empty_uuids=$(jq -r '[.[] | select(.uuid == "")] | length' "$bundle/yabai-spaces.json")
+        printf 'Yabai focused Space ID: %s\n' "$focused_space"
+        printf 'Yabai visible Space IDs: %s\n' "$visible_spaces"
+        printf 'Yabai Spaces with empty UUIDs: %s\n' "$empty_uuids"
+    else
+        focused_space=none
+        printf 'Yabai Space query unavailable.\n'
+    fi
+
+    if [ -s "$bundle/spaces-preferences.json" ]; then
+        macos_current_spaces=$(jq -r '[."SpacesDisplayConfiguration"."Management Data".Monitors[]? | select(."Current Space" != null) | ."Current Space".ManagedSpaceID] | map(tostring) | join(",")' "$bundle/spaces-preferences.json")
+        configured_displays=$(jq -r '[."SpacesDisplayConfiguration"."Management Data".Monitors[]? | ."Display Identifier"] | map(tostring) | join(",")' "$bundle/spaces-preferences.json")
+        collapsed_spaces=$(jq -r '[."SpacesDisplayConfiguration"."Management Data".Monitors[]? | select(."Collapsed Space" != null)] | length' "$bundle/spaces-preferences.json")
+        printf 'macOS current Space IDs: %s\n' "$macos_current_spaces"
+        printf 'macOS configured displays: %s\n' "$configured_displays"
+        printf 'macOS collapsed display records: %s\n' "$collapsed_spaces"
+
+        if [ "$focused_space" != none ] && [ "$macos_current_spaces" = "$focused_space" ]; then
+            printf 'State agreement: OK\n'
+        else
+            printf 'State agreement: MISMATCH (macOS preferences and Yabai disagree on the current Space)\n'
+        fi
+    else
+        printf 'macOS Spaces preference snapshot unavailable.\n'
+    fi
+} >>"$summary"
+
+printf '%s\n' "$bundle"
