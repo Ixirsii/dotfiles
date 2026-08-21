@@ -116,7 +116,7 @@
         "on-scroll-right": ""
     },
     "custom/system": {
-        "format": "󰣇",
+        "format": "",
         "on-click": "nwg-bar"
     },
     "custom/ups": {
