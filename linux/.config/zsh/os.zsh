@@ -1,6 +1,4 @@
 # Start tmux
-if [[ -x "$(command -v tmux)" && -n "$TTY" && -z "$TMUX" ]]
-then
-  exec tmux new-session -A
+if (( $+commands[tmux] )) && [[ -n $TTY && -z $TMUX ]]; then
+  exec tmux new-session -A -s main
 fi
-
