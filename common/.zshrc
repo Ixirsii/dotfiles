@@ -2,6 +2,8 @@
 #                                 Environment                                  #
 # ############################################################################ #
 
+. "$HOME/.atuin/bin/env"
+
 export BAT_THEME="Catppuccin Mocha"
 export BUN_INSTALL="$HOME/.bun"
 export PNPM_HOME="$HOME/.local/share/pnpm"
