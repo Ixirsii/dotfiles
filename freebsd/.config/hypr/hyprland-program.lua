@@ -1,1 +1,0 @@
-../../../common/hypr/hyprland-program.lua
