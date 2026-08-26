@@ -18,20 +18,11 @@ export TERMINAL="wezterm"
 #                                 Zsh options                                  #
 # ############################################################################ #
 
-autoload -Uz add-zsh-hook
 setopt incappendhistory extendedglob hist_ignore_dups
 unsetopt beep nomatch
 
 # Title
-DISABLE_AUTO_TITLE="true"
-
-function precmd() {
-    print -Pn "\e]2;%1~\a"
-}
-
-function preexec() {
-    print -n -- "\e]2;${(q)1}\a"
-}
+# DISABLE_AUTO_TITLE="true"
 
 # History
 HISTFILE=~/.zsh_history
@@ -99,6 +90,8 @@ eval "$(zoxide init zsh)"
 # ############################################################################ #
 #                                    Hooks                                     #
 # ############################################################################ #
+
+autoload -Uz add-zsh-hook
 
 function _set_idle_title() {
     print -Pn '\e]2;%1~\a'
