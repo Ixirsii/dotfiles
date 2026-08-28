@@ -1,13 +1,14 @@
 # Dotfiles
 
-[![Discord](https://img.shields.io/discord/452233740408717313?color=738ADB&label=discord&logo=discord)][1]
-[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)][2]
+[![Discord](https://img.shields.io/discord/452233740408717313?color=%23b4befe&label=discord&labelColor=%231e1e2e&logo=discord)][1]
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-%2389b4fa?labelColor=%231e1e2e)[2]]
+[![Checks](https://codeberg.org/Ixirsii/dotfiles/badges/workflows/checks.yml/badge.svg?branch=main&event=push&label=checks)][3]
 
 Personal configuration shared across FreeBSD, Linux, macOS, and Windows.
 
 ## Preview
 
-![Desktop preview](screenshots/macos/desktop.png)
+![Desktop preview](screenshots/freebsd/desktop.png)
 
 Additional screenshots are grouped with each operating system below.
 
@@ -86,6 +87,8 @@ stow --verbose --restow --target="$HOME" freebsd
 <summary>Screenshots</summary>
 
 Screenshots will be added under `screenshots/freebsd/`.
+![FreeBSD desktop preview](screenshots/freebsd/desktop.png)
+![Waybar preview](screenshots/freebsd/waybar.png)
 
 </details>
 
@@ -277,6 +280,7 @@ defined outside this repository in `$XDG_CONFIG_HOME/sqls/config.yml`; see the
 
 [1]: https://discord.gg/KTgshSbEUU
 [2]: https://opensource.org/license/bsd-3-clause
+[3]: https://codeberg.org/Ixirsii/dotfiles/actions/workflows/checks.yml
 [3]: https://atuin.sh
 [4]: https://github.com/Schniz/fnm
 [5]: https://git-scm.com

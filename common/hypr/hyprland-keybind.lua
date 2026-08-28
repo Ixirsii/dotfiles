@@ -42,9 +42,9 @@ hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(programs.browser))
 hl.bind(main_mod .. " + F", hl.dsp.exec_cmd(programs.file_manager))
 
 -- Screenshots
-hl.bind(main_mod .. " + PRINT", hl.dsp.exec_cmd("hyprshot --mode window"))
-hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot --mode output"))
-hl.bind(main_mod .. " + SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot --mode region"))
+hl.bind(main_mod .. " + PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" -'))
+hl.bind("PRINT", hl.dsp.exec_cmd("grim"))
+--hl.bind(main_mod .. " + SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot --mode region"))
 
 -- Focus windows
 hl.bind(main_mod .. " + H", hl.dsp.focus({ direction = "left" }))
