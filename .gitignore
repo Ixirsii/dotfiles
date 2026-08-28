@@ -14,6 +14,7 @@ lazy-lock.json
 #                                    Linux                                     #
 # ############################################################################ #
 
+09-Directories.conf
 autostart
 BraveSoftware
 chromium

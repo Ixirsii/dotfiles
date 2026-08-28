@@ -2,8 +2,6 @@
 #                                 Environment                                  #
 # ############################################################################ #
 
-. "$HOME/.atuin/bin/env"
-
 export BAT_THEME="Catppuccin Mocha"
 export BUN_INSTALL="$HOME/.bun"
 export PNPM_HOME="$HOME/.local/share/pnpm"
@@ -31,15 +29,15 @@ SAVEHIST=$HISTSIZE
 
 # Plugins
 # https://github.com/junegunn/fzf-git.sh
-source ~/.config/zsh/fzf-git.sh/fzf-git.sh
+. ~/.config/zsh/fzf-git.sh/fzf-git.sh
 # https://github.com/zsh-users/zsh-autosuggestions
-source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+. ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # https://github.com/catppuccin/zsh-syntax-highlighting.git
-source ~/.config/zsh/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+. ~/.config/zsh/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 # https://github.com/zsh-users/zsh-syntax-highlighting
-source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # https://github.com/MichaelAquilina/zsh-you-should-use
-source ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
+. ~/.config/zsh/zsh-you-should-use/zsh-you-should-use.plugin.zsh
 
 # Aliases
 alias cat="bat"
@@ -53,7 +51,7 @@ alias vimdiff="nvim -d"
 # ############################################################################ #
 
 # OS-specific setup
-[ -s "$HOME/.config/zsh/os.zsh" ] && source "$HOME/.config/zsh/os.zsh"
+[ -s "$HOME/.config/zsh/os.zsh" ] && . "$HOME/.config/zsh/os.zsh"
 
 # Go-installed commands
 if (($+commands[go])); then
@@ -64,10 +62,12 @@ if (($+commands[go])); then
 fi
 
 # Atuin
+[ -s "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
+
 eval "$(atuin init zsh)"
 
 # bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && . "$HOME/.bun/_bun"
 
 # Fast Node Manager
 [ -x "$(command -v fnm)" ] && eval "$(fnm env --use-on-cd)"
@@ -79,7 +79,7 @@ case ":$PATH:" in
 esac
 
 # SDKMAN
-[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && . "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Starship
 eval "$(starship init zsh)"

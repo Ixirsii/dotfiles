@@ -1,0 +1,277 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "display": {
+        "color": {
+            "keys": "blue"
+        },
+        "separator": "",
+        "constants": [
+            // {$1} - horizontal line for inner borders
+            "──────────────────────────────────────────────",
+            // {$2} - move cursor left 47 columns
+            "\u001b[47D",
+            // {$3} - move cursor right 47 columns
+            "\u001b[47C",
+            // {$4} - move cursor right 46 columns
+            "\u001b[46C",
+            // {$5} - horizontal line for outer borders
+            "══════════════════════════════════════════════"
+        ],
+        "brightColor": false
+    },
+    "modules": [
+        {
+            "type": "kernel",
+            "key": "╔═══════════════╦═{$5}╗\u001b[41D",
+            "format": "\u001b[1m{#keys} {1} {2} "
+        },
+        {
+            "type": "os",
+            "key": "║  {icon}  \u001b[s{sysname}\u001b[u\u001b[10C║{$3}║{$2}"
+        },
+        {
+            "type": "locale",
+            "key": "║  {icon}  Locale    ║{$3}║{$2}"
+        },
+        // Hardware section
+        {
+            "type": "custom",
+            "key": "║{#cyan}┌──────────────┬{$1}┐{#keys}║\u001b[37D",
+            "format": "{#bright_cyan} Hardware "
+        },
+        {
+            "type": "chassis",
+            "key": "║{#cyan}│ {icon}  Chassis   │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "memory",
+            "key": "║{#cyan}│ {icon}  RAM       │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "swap",
+            "key": "║{#cyan}│ {icon}  SWAP      │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "cpu",
+            "key": "║{#cyan}│ {icon}  CPU       │{$4}│{#keys}║{$2}",
+            "showPeCoreCount": true
+        },
+        {
+            "type": "gpu",
+            "key": "║{#cyan}│ {icon}  GPU       │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "disk",
+            "key": "║{#cyan}│ {icon}  Disk      │{$4}│{#keys}║{$2}",
+            "format": "{#cyan}{mountpoint} {#default}{size-used} \/ {size-total} ({size-percentage}) - {filesystem}",
+            "hideFolders": "/efi:/boot:/boot/*:/archive:/archive/*:/scratch:/scratch/*:/tank:/tank/*:/tmp:/usr/local/*:/usr/*:/var/*",
+            "showExternal": true,
+            "showHidden": true,
+            "showReadOnly": true,
+            "showRegular": true,
+            "showSubvolumes": true,
+            "showUnknown": true
+        },
+        {
+            "type": "battery",
+            "key": "║{#cyan}│ {icon}  Battery   │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "║{#cyan}└──────────────┴{$1}┘{#keys}║",
+            "format": ""
+        },
+        // Desktop section
+        {
+            "type": "custom",
+            "key": "║{#green}┌──────────────┬{$1}┐{#keys}║\u001b[37D",
+            "format": "{#bright_green} Desktop "
+        },
+        {
+            "type": "de",
+            "key": "║{#green}│ {icon}  Desktop   │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "wm",
+            "key": "║{#green}│ {icon}  Session   │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "display",
+            "key": "║{#green}│ {icon}  Display   │{$4}│{#keys}║{$2}",
+            "compactType": "original-with-refresh-rate"
+        },
+        {
+            "type": "font",
+            "key": "║{#green}│ {icon}  Interface │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "║{#green}└──────────────┴{$1}┘{#keys}║",
+            "format": ""
+        },
+        // Terminal section
+        {
+            "type": "custom",
+            "key": "║{#yellow}┌──────────────┬{$1}┐{#keys}║\u001b[37D",
+            "format": "{#bright_yellow} Terminal "
+        },
+        {
+            "type": "shell",
+            "key": "║{#yellow}│ {icon}  Shell     │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "terminal",
+            "key": "║{#yellow}│ {icon}  Terminal  │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "terminalfont",
+            "key": "║{#yellow}│ {icon}  Term Font │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "packages",
+            "key": "║{#yellow}│ {icon}  Packages  │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "║{#yellow}└──────────────┴{$1}┘{#keys}║",
+            "format": ""
+        },
+        // Development section
+        {
+            "type": "custom",
+            "key": "║{#red}┌──────────────┬{$1}┐{#keys}║\u001b[39D",
+            "format": "{#bright_red} Development "
+        },
+        {
+            "type": "editor",
+            "key": "║{#red}│ {icon}  Editor    │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "command",
+            "keyIcon": "󰊢",
+            "key": "║{#red}│ {icon}  Git       │{$4}│{#keys}║{$2}",
+            "text": "git version",
+            "format": "git {~12}"
+        },
+        {
+            // Posix version
+            "type": "command",
+            "condition": {
+                "!system": "Windows"
+            },
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  Clang     │{$4}│{#keys}║{$2}",
+            "text": "clang --version | sed -n 's/.*version \\([0-9][0-9.]*\\).*/\\1/p'",
+            "format": "clang {}"
+        },
+        {
+            // Windows version
+            "type": "command",
+            "condition": {
+                "system": "Windows"
+            },
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  Clang     │{$4}│{#keys}║{$2}",
+            "text": "clang --version | findstr version",
+            "format": "clang {~-6}"
+        },
+        {
+            "type": "command",
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  Go        │{$4}│{#keys}║{$2}",
+            "text": "go version | cut -d' ' -f3",
+            "format": "go {~2}"
+        },
+        {
+            "type": "command",
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  Bun       │{$4}│{#keys}║{$2}",
+            "text": "bun --version",
+            "format": "bun {1}"
+        },
+        {
+            "type": "command",
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  NodeJS    │{$4}│{#keys}║{$2}",
+            "text": "node --version",
+            "format": "node {~1}"
+        },
+        {
+            "type": "command",
+            "keyIcon": "Ø",
+            "key": "║{#red}│ {icon}  Odin      │{$4}│{#keys}║{$2}",
+            "text": "odin version | cut -d' ' -f3",
+            "format": "odin {}"
+        },
+        {
+            "type": "command",
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  Rust      │{$4}│{#keys}║{$2}",
+            "text": "rustc --version",
+            "format": "rustc {~6,13}"
+        },
+        {
+            "type": "command",
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  Zig       │{$4}│{#keys}║{$2}",
+            "text": "zig version",
+            "format": "zig {}"
+        },
+        {
+            "type": "custom",
+            "key": "║{#red}└──────────────┴{$1}┘{#keys}║",
+            "format": ""
+        },
+        // Uptime section with magenta color theme
+        {
+            "type": "custom",
+            "key": "║{#magenta}┌──────────────┬{$1}┐{#keys}║\u001b[36D",
+            "format": "{#bright_magenta} Uptime "
+        },
+        {
+            "type": "uptime",
+            "key": "║{#magenta}│ {icon}  Uptime    │{$4}│{#keys}║{$2}"
+        },
+        {
+            "type": "title",
+            "key": "║{#magenta}│ {icon}  Login     │{$4}│{#keys}║{$2}",
+            "format": "{user-name}@{host-name}"
+        },
+        {
+            "condition": {
+                "!system": "macOS"
+            },
+            "type": "disk",
+            "keyIcon": "",
+            "key": "║{#magenta}│ {icon}  OS Age    │{$4}│{#keys}║{$2}",
+            "folders": "/",
+            "format": "{create-time:10} [{days} days]"
+        },
+        {
+            "condition": {
+                "system": "macOS"
+            },
+            "type": "disk",
+            "keyIcon": "",
+            "key": "║{#magenta}│ {icon}  OS Age    │{$4}│{#keys}║{$2}",
+            "folders": "/System/Volumes/VM",
+            "format": "{create-time:10} [{days} days]"
+        },
+        {
+            "type": "custom",
+            "key": "║{#magenta}└──────────────┴{$1}┘{#keys}║",
+            "format": ""
+        },
+        {
+            "type": "custom",
+            "key": "╚═════════════════{$5}╝",
+            "format": ""
+        },
+        // Color palette
+        "break",
+        {
+            "type": "custom",
+            "format": " {#90}  {#31}  {#32}  {#33}  {#34}  {#35}  {#36}  {#37}  {#38}  {#39}         {#38}  {#37}  {#36}  {#35}  {#34}  {#33}  {#32}  {#31}  {#90}"
+        }
+    ]
+}
