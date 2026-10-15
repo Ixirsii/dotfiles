@@ -1,8 +1,8 @@
 # Dotfiles
 
-[![Discord](https://img.shields.io/discord/452233740408717313?color=%23b4befe&label=discord&labelColor=%231e1e2e&logo=discord)][1]
-[![License](https://img.shields.io/badge/License-BSD_3--Clause-%2389b4fa?labelColor=%231e1e2e)][2]
-[![Checks](https://codeberg.org/Ixirsii/dotfiles/badges/workflows/checks.yml/badge.svg?branch=main&event=push&label=checks)][3]
+[![Discord](https://img.shields.io/discord/452233740408717313?color=b4befe&label=discord&labelColor=1e1e2e&logo=discord&style=flat)][1]
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-89b4fa?labelColor=1e1e2e&style=flat)][2]
+[![Checks](https://codeberg.org/Ixirsii/dotfiles/badges/workflows/checks.yml/badge.svg?branch=main&event=push&label=checks&labelColor=1e1e2e&style=flat)][3]
 
 Personal configuration shared across FreeBSD, Linux, macOS, and Windows.
 
