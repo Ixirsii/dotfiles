@@ -10,7 +10,7 @@ return {
             auto_integrations = true,
             flavor = "mocha",
             float = {
-                transparent = true,
+                transparent = false,
             },
         })
 

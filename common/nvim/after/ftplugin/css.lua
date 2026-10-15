@@ -1,5 +1,3 @@
--- Tabs
+-- Tab size
 vim.opt_local.shiftwidth = 2
-
--- Marker at 80 characters
-vim.opt.colorcolumn = "80"
+vim.opt_local.tabstop = 2

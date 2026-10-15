@@ -67,7 +67,11 @@ return {
             },
         },
 
-        explorer = {},
+        ---@class snacks.explorer.Config
+        explorer = {
+            replace_netrw = true,
+            trash = true,
+        },
 
         image = {},
 

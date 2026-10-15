@@ -1,2 +1,2 @@
--- Marker at 100 characters
-vim.opt.colorcolumn = "100"
+-- Editor width
+vim.opt.textwidth = 100
