@@ -484,6 +484,32 @@ return {
     },
 
     init = function()
+        local startup_group = vim.api.nvim_create_augroup("UserSnacksStartup", { clear = true })
+        local stdin = false
+        vim.api.nvim_create_autocmd("StdinReadPre", {
+            group = startup_group,
+            once = true,
+            callback = function()
+                stdin = true
+            end,
+        })
+        vim.api.nvim_create_autocmd("VimEnter", {
+            group = startup_group,
+            once = true,
+            callback = vim.schedule_wrap(function()
+                if vim.fn.argc(-1) > 0 or stdin or vim.v.this_session ~= "" then
+                    return
+                end
+                local dashboard = vim.bo.filetype == "snacks_dashboard"
+                local empty = vim.api.nvim_buf_get_name(0) == ""
+                    and vim.bo.buftype == ""
+                    and not vim.bo.modified
+                if dashboard or empty then
+                    Snacks.explorer({ cwd = vim.fn.getcwd() })
+                end
+            end),
+        })
+
         ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
         local progress = vim.defaulttable()
         vim.api.nvim_create_autocmd("LspProgress", {

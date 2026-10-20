@@ -216,6 +216,10 @@ Screenshots will be added under `screenshots/windows/`.
 
 Neovim 0.12 or newer is required for the shared plugin configuration.
 
+Launching `vim` without file arguments opens the Snacks explorer in the current
+directory, alongside the dashboard. Piped input and restored sessions keep their
+normal startup behavior.
+
 Editing and Git keybindings (`<leader>` is Space):
 
 - `[c` / `]c`: previous / next Git hunk.
