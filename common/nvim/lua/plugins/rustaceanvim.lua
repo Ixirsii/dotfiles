@@ -2,12 +2,13 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^9",
     lazy = false,
+    dependencies = { "saghen/blink.cmp" },
     init = function()
         vim.g.rustaceanvim = function()
             return {
                 tools = { test_executor = "neotest" },
                 server = {
-                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                    capabilities = require("blink.cmp").get_lsp_capabilities(),
                     on_attach = function(_, bufnr)
                         local function map(lhs, command, desc)
                             vim.keymap.set("n", lhs, function()

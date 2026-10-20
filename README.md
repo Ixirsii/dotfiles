@@ -220,6 +220,15 @@ Launching `vim` without file arguments opens the Snacks explorer in the current
 directory, alongside the dashboard. Piped input and restored sessions keep their
 normal startup behavior.
 
+Completion uses Blink v1 with LSP, LuaSnip/friendly-snippets, buffer words, and
+file paths. `Ctrl-j` / `Ctrl-k` selects the next / previous suggestion,
+`Ctrl-Space` opens completion or its documentation, `Enter` accepts the selected
+suggestion (or the first if none is selected), and `Ctrl-e` cancels completion.
+`Ctrl-b` / `Ctrl-f` scrolls documentation; `Tab` / `Shift-Tab` moves between
+snippet placeholders. Blink inserts function-call brackets on completion;
+nvim-autopairs handles brackets typed manually. The native fuzzy matcher is
+downloaded automatically when supported, with a Lua fallback otherwise.
+
 Editing and Git keybindings (`<leader>` is Space):
 
 - `[c` / `]c`: previous / next Git hunk.
