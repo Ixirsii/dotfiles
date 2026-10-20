@@ -9,7 +9,6 @@ local servers = {
     "jsonls",
     "lua_ls",
     "ols",
-    "rust_analyzer",
     "sqls",
     "tailwindcss",
     "taplo",

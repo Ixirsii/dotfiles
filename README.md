@@ -214,6 +214,59 @@ Screenshots will be added under `screenshots/windows/`.
 
 ## Neovim development tools
 
+Neovim 0.12 or newer is required for the shared plugin configuration.
+
+Editing and Git keybindings (`<leader>` is Space):
+
+- `[c` / `]c`: previous / next Git hunk.
+- `<leader>hs` / `<leader>hr`: stage (or unstage) / reset a hunk; also works on
+  selected lines in Visual mode. Reset discards those working-tree changes.
+- `<leader>hp` / `<leader>hb` / `<leader>hd`: preview hunk / blame line / diff
+  against the index.
+- `<leader>sr`: open project search and replacement with grug-far. In Visual
+  mode, prefill the search with the selection. Use `:GrugFarWithin` to restrict
+  replacement to the selected range. Grug-far's buffer actions use the default
+  local leader, `\`; its footer shows the available commands. Requires ripgrep
+  14 or newer (15 or newer recommended).
+- `saiw"`: surround a word with double quotes; `sd"`: delete surrounding double
+  quotes; `sr"'`: replace double quotes with single quotes. In Visual mode,
+  select text and press `sa` followed by the desired surrounding character.
+- `cia` / `daa`: change an argument / delete an argument with its separator
+  using mini.ai. `vif` / `vaf` selects inside / around a function call.
+- `<leader>j`: Flash jump. Type some target text, then press its displayed label.
+  `<leader>J`: label and select Tree-sitter nodes around the cursor. Both work
+  in Normal, Visual, and operator-pending modes (for example, `d<leader>j`).
+  Flash uses leader mappings so mini.surround's `s` mappings remain available;
+  the usual `f` / `t` motions and `/` search retain their existing behavior.
+- `<leader>um`: toggle rendered Markdown headings, tables, and code blocks.
+
+Rust uses rustaceanvim to manage rust-analyzer. `<leader>rr` lists runnable
+targets, `<leader>rm` expands a macro, and `<leader>rc` opens `Cargo.toml`.
+Neotest provides Rust tests through rustaceanvim and Go tests through
+neotest-golang; install Rust/Cargo or Go on each host as needed. JavaScript test
+runners require a project-appropriate Neotest adapter before they can be used.
+
+- `<leader>tt` / `<leader>tT`: run the nearest test / current file's tests.
+- `<leader>tl` / `<leader>tr`: rerun the last test / stop a test.
+- `<leader>ts`: toggle the test summary.
+- `<leader>te` / `<leader>tO`: open test output / toggle the output panel.
+
+Tree-sitter highlighting starts for buffers with installed parsers. Tree-sitter
+indentation is enabled where an indentation query is available; other filetypes
+keep their normal indentation. Run `:TSUpdate` after updating Tree-sitter.
+
+Diagnostic keybindings (`<leader>` is Space):
+
+- `<leader>dd`: show diagnostics for the current line.
+- `<leader>db` / `<leader>dp`: toggle a persistent Trouble bottom split for
+  buffer / project diagnostics. Press Enter to jump to a diagnostic while
+  keeping the list open; press `q` in the list to close it.
+- `<leader>sd` / `<leader>sD`: search project / buffer diagnostics in Snacks.
+- `[d` / `]d`: jump to the previous / next diagnostic.
+
+Project diagnostics include all diagnostics reported to Neovim; language servers
+may only report diagnostics for files that have been opened.
+
 Install the host-level language servers and formatters from the repository's
 checked-in manifests:
 

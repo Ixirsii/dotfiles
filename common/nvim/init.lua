@@ -35,41 +35,7 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
-        -- see available code actions, in visual mode will apply to selection
-        keymap.set(
-            { "n", "v" },
-            "<leader>ca",
-            vim.lsp.buf.code_action,
-            { buffer = ev.buf, desc = "See available code actions", silent = true }
-        )
-
-        -- smart rename
-        keymap.set(
-            "n",
-            "<leader>rn",
-            vim.lsp.buf.rename,
-            { buffer = ev.buf, desc = "Smart rename", silent = true }
-        )
-
-        -- show diagnostics for line
-        keymap.set(
-            "n",
-            "<leader>d",
-            vim.diagnostic.open_float,
-            { buffer = ev.buf, desc = "Show line diagnostics", silent = true }
-        )
-
-        -- jump to previous diagnostic in buffer
-        keymap.set("n", "[d", function()
-            vim.diagnostic.jump({ count = -1, float = true })
-        end, { buffer = ev.buf, desc = "Go to previous diagnostic", silent = true })
-
-        -- jump to next diagnostic in buffer
-        keymap.set("n", "]d", function()
-            vim.diagnostic.jump({ count = 1, float = true })
-        end, { buffer = ev.buf, desc = "Go to next diagnostic", silent = true })
-
-        -- show documentation for what is under cursor
+        -- View documentation
         keymap.set(
             "n",
             "K",
@@ -79,13 +45,47 @@ vim.api.nvim_create_autocmd("LspAttach", {
             { buffer = ev.buf, desc = "Show documentation for symbol under cursor", silent = true }
         )
 
-        -- mapping to restart lsp if necessary
+        -- See available code actions
+        keymap.set(
+            { "n", "v" },
+            "<leader>lca",
+            vim.lsp.buf.code_action,
+            { buffer = ev.buf, desc = "See available code actions", silent = true }
+        )
+
+        -- Restart LSP
         keymap.set(
             "n",
-            "<leader>rs",
-            ":LspRestart<CR>",
+            "<leader>lrs",
+            "<cmd>lsp restart<CR>",
             { buffer = ev.buf, desc = "Restart LSP", silent = true }
         )
+
+        -- Rename symbol
+        keymap.set(
+            "n",
+            "<leader>rn",
+            vim.lsp.buf.rename,
+            { buffer = ev.buf, desc = "Smart rename", silent = true }
+        )
+
+        -- Diagnostics for line
+        keymap.set(
+            "n",
+            "<leader>dd",
+            vim.diagnostic.open_float,
+            { buffer = ev.buf, desc = "Show line diagnostics", silent = true }
+        )
+
+        -- Go to previous diagnostic
+        keymap.set("n", "[d", function()
+            vim.diagnostic.jump({ count = -1, float = true })
+        end, { buffer = ev.buf, desc = "Go to previous diagnostic", silent = true })
+
+        -- Go to next diagnostic
+        keymap.set("n", "]d", function()
+            vim.diagnostic.jump({ count = 1, float = true })
+        end, { buffer = ev.buf, desc = "Go to next diagnostic", silent = true })
     end,
 })
 

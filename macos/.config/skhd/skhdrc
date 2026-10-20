@@ -1,42 +1,42 @@
 # Focus windows
-alt - h                 : $HOME/.local/bin/yabai -m window --focus west
-alt - j                 : $HOME/.local/bin/yabai -m window --focus south
-alt - k                 : $HOME/.local/bin/yabai -m window --focus north
-alt - l                 : $HOME/.local/bin/yabai -m window --focus east
+alt - h                 : /opt/homebrew/bin/yabai -m window --focus west
+alt - j                 : /opt/homebrew/bin/yabai -m window --focus south
+alt - k                 : /opt/homebrew/bin/yabai -m window --focus north
+alt - l                 : /opt/homebrew/bin/yabai -m window --focus east
 
 # Swap windows
-alt + shift - h         : $HOME/.local/bin/yabai -m window --swap west
-alt + shift - j         : $HOME/.local/bin/yabai -m window --swap south
-alt + shift - k         : $HOME/.local/bin/yabai -m window --swap north
-alt + shift - l         : $HOME/.local/bin/yabai -m window --swap east
+alt + shift - h         : /opt/homebrew/bin/yabai -m window --swap west
+alt + shift - j         : /opt/homebrew/bin/yabai -m window --swap south
+alt + shift - k         : /opt/homebrew/bin/yabai -m window --swap north
+alt + shift - l         : /opt/homebrew/bin/yabai -m window --swap east
 
 # Manipulate windows
-alt - t                 : $HOME/.local/bin/yabai -m window --toggle float
-alt - d                 : $HOME/.local/bin/yabai -m window --toggle zoom-parent
-alt - f                 : $HOME/.local/bin/yabai -m window --toggle zoom-fullscreen
-alt - e                 : $HOME/.local/bin/yabai -m window --toggle split
+alt - t                 : /opt/homebrew/bin/yabai -m window --toggle float
+alt - d                 : /opt/homebrew/bin/yabai -m window --toggle zoom-parent
+alt - f                 : /opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen
+alt - e                 : /opt/homebrew/bin/yabai -m window --toggle split
 
 # Balance windows
-alt + shift - 0         : $HOME/.local/bin/yabai -m space --balance
+alt + shift - 0         : /opt/homebrew/bin/yabai -m space --balance
 
 # Spaces
-alt - 1                 : $HOME/.local/bin/yabai -m space --focus 1 || /opt/homebrew/bin/skhd -k "ctrl - 1"
-alt - 2                 : $HOME/.local/bin/yabai -m space --focus 2 || /opt/homebrew/bin/skhd -k "ctrl - 2"
-alt - 3                 : $HOME/.local/bin/yabai -m space --focus 3 || /opt/homebrew/bin/skhd -k "ctrl - 3"
-alt - 4                 : $HOME/.local/bin/yabai -m space --focus 4 || /opt/homebrew/bin/skhd -k "ctrl - 4"
-alt - 5                 : $HOME/.local/bin/yabai -m space --focus 5 || /opt/homebrew/bin/skhd -k "ctrl - 5"
-alt - 6                 : $HOME/.local/bin/yabai -m space --focus 6 || /opt/homebrew/bin/skhd -k "ctrl - 6"
-alt - 7                 : $HOME/.local/bin/yabai -m space --focus 7 || /opt/homebrew/bin/skhd -k "ctrl - 7"
-alt - 8                 : $HOME/.local/bin/yabai -m space --focus 8 || /opt/homebrew/bin/skhd -k "ctrl - 8"
-alt - 9                 : $HOME/.local/bin/yabai -m space --focus 9 || /opt/homebrew/bin/skhd -k "ctrl - 9"
+alt - 1                 | ctrl - 1
+alt - 2                 | ctrl - 2
+alt - 3                 | ctrl - 3
+alt - 4                 | ctrl - 4
+alt - 5                 | ctrl - 5
+alt - 6                 | ctrl - 6
+alt - 7                 | ctrl - 7
+alt - 8                 | ctrl - 8
+alt - 9                 | ctrl - 9
 
 # Move windows across Spaces and follow focus
-alt + shift - 1         : $HOME/.local/bin/spaces-move-window 1
-alt + shift - 2         : $HOME/.local/bin/spaces-move-window 2
-alt + shift - 3         : $HOME/.local/bin/spaces-move-window 3
-alt + shift - 4         : $HOME/.local/bin/spaces-move-window 4
-alt + shift - 5         : $HOME/.local/bin/spaces-move-window 5
-alt + shift - 6         : $HOME/.local/bin/spaces-move-window 6
-alt + shift - 7         : $HOME/.local/bin/spaces-move-window 7
-alt + shift - 8         : $HOME/.local/bin/spaces-move-window 8
-alt + shift - 9         : $HOME/.local/bin/spaces-move-window 9
+alt + shift - 1         : /opt/homebrew/bin/yabai -m window --space 1 --focus
+alt + shift - 2         : /opt/homebrew/bin/yabai -m window --space 2 --focus
+alt + shift - 3         : /opt/homebrew/bin/yabai -m window --space 3 --focus
+alt + shift - 4         : /opt/homebrew/bin/yabai -m window --space 4 --focus
+alt + shift - 5         : /opt/homebrew/bin/yabai -m window --space 5 --focus
+alt + shift - 6         : /opt/homebrew/bin/yabai -m window --space 6 --focus
+alt + shift - 7         : /opt/homebrew/bin/yabai -m window --space 7 --focus
+alt + shift - 8         : /opt/homebrew/bin/yabai -m window --space 8 --focus
+alt + shift - 9         : /opt/homebrew/bin/yabai -m window --space 9 --focus

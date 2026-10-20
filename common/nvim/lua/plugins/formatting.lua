@@ -1,3 +1,13 @@
+local function lsp_format(bufnr)
+    for _, formatter in ipairs(require("conform").list_formatters(bufnr)) do
+        if formatter.available and formatter.name ~= "trim_newlines" then
+            return "fallback"
+        end
+    end
+    -- Keep LSP formatting when newline cleanup is the only available formatter.
+    return "first"
+end
+
 return {
     {
         "stevearc/conform.nvim",
@@ -7,7 +17,7 @@ return {
             {
                 "<leader>cf",
                 function()
-                    require("conform").format({ async = true, lsp_format = "fallback" })
+                    require("conform").format({ async = true, lsp_format = lsp_format(0) })
                 end,
                 mode = { "n", "v" },
                 desc = "Format buffer",
@@ -15,9 +25,15 @@ return {
         },
         opts = {
             formatters_by_ft = {
+                ["*"] = { "trim_newlines" },
                 bash = { "shfmt" },
                 css = { "prettier" },
-                go = { "goimports", "gofmt", stop_after_first = true },
+                go = function(bufnr)
+                    if require("conform").get_formatter_info("goimports", bufnr).available then
+                        return { "goimports" }
+                    end
+                    return { "gofmt" }
+                end,
                 html = { "prettier" },
                 javascript = { "prettier" },
                 javascriptreact = { "prettier" },
@@ -36,10 +52,9 @@ return {
                 yaml = { "prettier" },
                 zsh = { "shfmt" },
             },
-            format_on_save = {
-                timeout_ms = 1000,
-                lsp_format = "fallback",
-            },
+            format_on_save = function(bufnr)
+                return { timeout_ms = 1000, lsp_format = lsp_format(bufnr) }
+            end,
         },
     },
 }
