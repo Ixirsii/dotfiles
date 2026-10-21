@@ -42,7 +42,7 @@ SAVEHIST=$HISTSIZE
 # Aliases
 alias cat="bat"
 alias cd="z"
-alias ls="eza -A --color=always --header --long --git --group-directories-first --icons=always"
+alias ls="eza -A --color=always --group --header --long --git --group-directories-first --icons=always"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
