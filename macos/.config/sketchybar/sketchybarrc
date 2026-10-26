@@ -56,6 +56,16 @@ for sid in {1..9}; do
         click_script="skhd -k 'ctrl - $sid'"
 done
 
+sketchybar --add item media e \
+    --set media \
+    drawing=off \
+    icon=􀑪 \
+    label.max_chars=32 \
+    padding_left=16 \
+    scroll_texts=on \
+    script="$PLUGIN_DIR/media.sh" \
+    update_feq=2
+
 sketchybar --add item clock right \
     --set clock \
     icon="󰥔" \
