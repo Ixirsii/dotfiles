@@ -17,8 +17,18 @@ return {
             width = 80,
             preset = {
                 keys = {
-                    { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files()" },
-                    { icon = " ", key = "g", desc = "Search Text", action = ":lua Snacks.picker.grep()" },
+                    {
+                        icon = " ",
+                        key = "f",
+                        desc = "Find File",
+                        action = ":lua Snacks.picker.files()",
+                    },
+                    {
+                        icon = " ",
+                        key = "g",
+                        desc = "Search Text",
+                        action = ":lua Snacks.picker.grep()",
+                    },
                     { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
                     { icon = " ", key = "s", desc = "Restore Session", section = "session" },
                 },
@@ -52,7 +62,13 @@ return {
             sections = {
                 { section = "header" },
                 { section = "keys", padding = 1 },
-                { section = "recent_files", title = "Recent Files", icon = " ", limit = 5, padding = 1 },
+                {
+                    section = "recent_files",
+                    title = "Recent Files",
+                    icon = " ",
+                    limit = 5,
+                    padding = 1,
+                },
                 { section = "projects", title = "Projects", icon = " ", limit = 3, padding = 1 },
                 { section = "startup" },
             },
