@@ -56,9 +56,6 @@ jobs:
             macos/.config/sketchybar/plugins/space.sh \
             macos/.config/sketchybar/plugins/status.sh \
             macos/.config/yabai/yabairc \
-            macos/.local/bin/spaces-debug \
-            macos/.local/bin/spaces-move-window \
-            macos/.local/bin/spaces-recover \
             scripts/check-neovim-tools \
             scripts/install-neovim-tools; do
             sh -n "$file" || exit "$?"
@@ -71,9 +68,6 @@ jobs:
             macos/.config/sketchybar/plugins/status.sh \
             macos/.config/sketchybar/sketchybarrc \
             macos/.config/yabai/yabairc \
-            macos/.local/bin/spaces-debug \
-            macos/.local/bin/spaces-move-window \
-            macos/.local/bin/spaces-recover \
             scripts/check-neovim-tools \
             scripts/install-neovim-tools
 
