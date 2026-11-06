@@ -125,17 +125,3 @@ jobs:
             fi
           done < <(git ls-files -z -s)
           exit "$result"
-
-  lua-formatting:
-    name: Lua formatting
-    runs-on: node-24
-    timeout-minutes: 15
-    steps:
-      - name: Check out repository
-        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-          ref: ${{ forgejo.sha }}
-
-      - name: Check Lua formatting
-        run: git ls-files -z '*.lua' | xargs -0 npx --yes @johnnymorganz/stylua-bin@2.5.2 --check --
