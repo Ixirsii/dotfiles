@@ -27,7 +27,7 @@ jobs:
 
   quality:
     name: Quality
-    runs-on: node-24
+    runs-on: ci-node-24
     timeout-minutes: 15
     steps:
       - name: Check out repository
@@ -39,16 +39,18 @@ jobs:
 
       - name: Install workflow prerequisites
         run: |
-          apt-get -o APT::Cache-Start=100000000 update -q
-          apt-get -o APT::Cache-Start=100000000 install -q -y python3 shellcheck zsh
+          pkg update
+          pkg install -y python311 hs-ShellCheck stylua zsh
 
       - name: Check Lua formatting
-        run: git ls-files -z '*.lua' | xargs -0 npx --yes @johnnymorganz/stylua-bin@2.5.2 --check --
+        run: git ls-files -z '*.lua' | xargs -0 stylua --check --
 
       - name: Check shell scripts
         run: |
-          zsh -n common/.zshrc freebsd/.config/zsh/os.zsh linux/.config/zsh/os.zsh macos/.config/zsh/os.zsh
-          sh -n \
+          for file in common/.zshrc freebsd/.config/zsh/os.zsh linux/.config/zsh/os.zsh macos/.config/zsh/os.zsh; do
+            zsh -n "$file" || exit "$?"
+          done
+          for file in \
             freebsd/.local/bin/waybar-ups \
             macos/.config/sketchybar/colors.sh \
             macos/.config/sketchybar/plugins/space.sh \
@@ -58,10 +60,11 @@ jobs:
             macos/.local/bin/spaces-move-window \
             macos/.local/bin/spaces-recover \
             scripts/check-neovim-tools \
-            scripts/install-neovim-tools
+            scripts/install-neovim-tools; do
+            sh -n "$file" || exit "$?"
+          done
           bash -n macos/.config/sketchybar/sketchybarrc
-          # Disable the Haskell runtime timer tick for runner timer compatibility.
-          shellcheck +RTS -V0 -RTS --exclude=SC1091 \
+          shellcheck --exclude=SC1091 \
             freebsd/.local/bin/waybar-ups \
             macos/.config/sketchybar/colors.sh \
             macos/.config/sketchybar/plugins/space.sh \
@@ -102,7 +105,7 @@ jobs:
 
       - name: Check TOML
         run: |
-          python3 <<'PYTHON'
+          python3.11 <<'PYTHON'
           import pathlib
           import subprocess
           import tomllib
@@ -128,3 +131,17 @@ jobs:
             fi
           done < <(git ls-files -z -s)
           exit "$result"
+
+  lua-formatting:
+    name: Lua formatting
+    runs-on: node-24
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          ref: ${{ forgejo.sha }}
+
+      - name: Check Lua formatting
+        run: git ls-files -z '*.lua' | xargs -0 npx --yes @johnnymorganz/stylua-bin@2.5.2 --check --
