@@ -60,7 +60,8 @@ jobs:
             scripts/check-neovim-tools \
             scripts/install-neovim-tools
           bash -n macos/.config/sketchybar/sketchybarrc
-          shellcheck --exclude=SC1091 \
+          # Disable the Haskell runtime timer tick for runner timer compatibility.
+          shellcheck +RTS -V0 -RTS --exclude=SC1091 \
             freebsd/.local/bin/waybar-ups \
             macos/.config/sketchybar/colors.sh \
             macos/.config/sketchybar/plugins/space.sh \
