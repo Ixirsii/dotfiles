@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case "$1" in
+    reboot)
+        exec /usr/local/bin/hyprshutdown \
+            --post-cmd '/usr/local/bin/doas -n /sbin/shutdown -r now'
+        ;;
+    shutdown)
+        exec /usr/local/bin/hyprshutdown \
+            --post-cmd '/usr/local/bin/doas -n /sbin/shutdown -p now'
+        ;;
+    *) exit 2 ;;
+esac

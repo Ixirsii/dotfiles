@@ -21,12 +21,12 @@
     },
     {
         "label": "Reboot",
-        "exec": "hyprshutdown --post-cmd 'doas shutdown -r now'",
+        "exec": "session-power reboot",
         "icon": "/usr/local/share/nwg-bar/images/system-reboot.svg"
     },
     {
         "label": "Shutdown",
-        "exec": "hyprshutdown --post-cmd 'doas shutdown -p now'",
+        "exec": "session-power shutdown",
         "icon": "/usr/local/share/nwg-bar/images/system-shutdown.svg"
     }
 ]
