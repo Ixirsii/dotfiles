@@ -197,6 +197,10 @@ Screenshots will be added under `screenshots/windows/`.
 ## Neovim development tools
 
 Neovim 0.12 or newer is required for the shared plugin configuration.
+The language-server tools require Node.js 22.22.2 or newer. Install Go,
+Cargo/rustup, and your platform's package manager before running the installer.
+Parser installation also requires a C compiler, `tar`, and `curl`; the installer
+supplies the Tree-sitter CLI (minimum supported version: 0.26.1).
 
 Launching `vim` without file arguments opens the Snacks explorer in the current
 directory, alongside the dashboard. Piped input and restored sessions keep their
@@ -289,8 +293,18 @@ The installer uses FreeBSD `pkg`, a macOS Brewfile, or the Arch Linux package
 manifest for native packages. Version-pinned npm, Go, and Cargo manifests cover
 portable tools, while rustup supplies `rust-analyzer` and `rustfmt`. Other Linux
 distributions must translate `packages/linux.txt` to their native package
-names. OLS and `odinfmt` must be installed manually on FreeBSD because they are
+names, then run `scripts/install-neovim-tools --skip-system-packages` to install
+the portable tools. This option can be combined with `--dry-run`.
+Homebrew and Arch install OLS and `odinfmt` as separate packages.
+OLS and `odinfmt` must be installed manually on FreeBSD because they are
 not currently available from `pkg`.
+
+The checker verifies executable availability, minimum Neovim/Node.js/Tree-sitter
+versions, Rust component execution, and parser build prerequisites. Run it from
+a project or its subdirectories to check local JavaScript libraries; it searches
+for the nearest `package.json` and resolves installed packages through ancestor
+`node_modules` directories. Undeclared, uninstalled JavaScript tools are optional;
+declared tools that cannot be resolved are reported as missing.
 
 All executables must be on the `PATH` inherited by Neovim. The configured
 language servers are:

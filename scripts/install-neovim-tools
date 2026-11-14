@@ -4,16 +4,20 @@ set -eu
 
 usage() {
     cat <<'EOF'
-Usage: scripts/install-neovim-tools [--dry-run]
+Usage: scripts/install-neovim-tools [--dry-run] [--skip-system-packages]
 
 Install the system-level language servers and formatters configured for
 Neovim. JavaScript project libraries such as ESLint, Prettier, and TypeScript
 remain project-local and are not installed by this command.
+Use --skip-system-packages after manually installing native dependencies
+on Linux distributions other than Arch.
 EOF
 }
 
 dry_run=false
-case "${1-}" in
+skip_system_packages=false
+for arg in "$@"; do
+case "$arg" in
 --dry-run)
     dry_run=true
     ;;
@@ -21,12 +25,15 @@ case "${1-}" in
     usage
     exit 0
     ;;
-"") ;;
+--skip-system-packages)
+    skip_system_packages=true
+    ;;
 *)
     usage >&2
     exit 2
     ;;
 esac
+done
 
 script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 repo_dir=$(dirname -- "$script_dir")
@@ -96,6 +103,13 @@ command -v npm >/dev/null 2>&1 || {
     printf 'npm is required to install Node-based language servers\n' >&2
     exit 1
 }
+node -e '
+const [major, minor, patch] = process.versions.node.split(".").map(Number);
+process.exit(major > 22 || (major === 22 && (minor > 22 || (minor === 22 && patch >= 2))) ? 0 : 1);
+' || {
+    printf 'Node.js 22.22.2 or newer is required by the language servers\n' >&2
+    exit 1
+}
 command -v go >/dev/null 2>&1 || {
     printf 'Go is required to install Go-based language servers\n' >&2
     exit 1
@@ -109,6 +123,7 @@ command -v rustup >/dev/null 2>&1 || {
     exit 1
 }
 
+if ! "$skip_system_packages"; then
 case "$(uname -s)" in
 Darwin)
     command -v brew >/dev/null 2>&1 || {
@@ -126,7 +141,7 @@ Linux)
     else
         printf '%s\n' \
             'Only Arch Linux OS packages are currently declared.' \
-            'Install the equivalents from packages/linux.txt, then rerun with PATH configured.' >&2
+            'Install the equivalents from packages/linux.txt, then rerun with --skip-system-packages.' >&2
         exit 1
     fi
     ;;
@@ -135,10 +150,15 @@ Linux)
     exit 1
     ;;
 esac
+fi
 
 for_each_manifest_line "$manifest_dir/neovim/npm.txt" install_npm_package
 for_each_manifest_line "$manifest_dir/neovim/go.txt" install_go_package
 for_each_manifest_line "$manifest_dir/neovim/cargo.txt" install_cargo_package
 run rustup component add rust-analyzer rustfmt
 
-printf '\nInstallation complete. Run scripts/check-neovim-tools to verify PATH.\n'
+if "$dry_run"; then
+    printf '\nPreview complete; no packages were installed.\n'
+else
+    printf '\nInstallation complete. Run scripts/check-neovim-tools to verify dependencies.\n'
+fi

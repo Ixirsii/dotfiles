@@ -1,4 +1,5 @@
 # Arch Linux package names. Other distributions are intentionally not guessed.
 lua-language-server
 ols
+odinfmt
 shfmt
