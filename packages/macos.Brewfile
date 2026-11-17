@@ -1,3 +1,4 @@
+brew "dotnet@10"
 brew "lua-language-server"
 brew "ols"
 brew "odinfmt"

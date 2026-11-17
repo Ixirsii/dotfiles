@@ -31,6 +31,7 @@ return {
             treesitter.install({
                 "bash",
                 "c",
+                "c_sharp",
                 "cpp",
                 "css",
                 "desktop",

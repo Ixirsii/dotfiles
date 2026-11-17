@@ -3,14 +3,13 @@
 # ############################################################################ #
 
 export BAT_THEME="Catppuccin Mocha"
-export BUN_INSTALL="$HOME/.bun"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export SDKMAN_DIR="$HOME/.sdkman"
 
 export BROWSER="zen"
 export EDITOR="nvim"
-export PATH="$HOME/.local/bin:$PATH:$HOME/.cargo/bin:$BUN_INSTALL/bin"
-export TERMINAL="wezterm"
+export PATH="$HOME/.local/bin:$PATH:$HOME/.cargo/bin:$HOME/.dotnet/tools"
+export TERMINAL="ghostty"
 
 # ############################################################################ #
 #                                 Zsh options                                  #

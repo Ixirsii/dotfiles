@@ -1,6 +1,7 @@
 # Executables expected by the Neovim configuration.
 bash-language-server
 docker-language-server
+dotnet
 gofmt
 goimports
 gopls
@@ -8,6 +9,7 @@ hyprls
 lua-language-server
 odinfmt
 ols
+roslyn-language-server
 rust-analyzer
 rustfmt
 shfmt

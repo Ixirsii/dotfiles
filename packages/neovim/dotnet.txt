@@ -1,0 +1,2 @@
+# Global .NET tools: package ID followed by pinned version.
+roslyn-language-server 5.13.0-1.26514.10

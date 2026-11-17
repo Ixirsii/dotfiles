@@ -99,6 +99,13 @@ install_cargo_package() {
     run cargo install --locked --version "$version" "$crate"
 }
 
+install_dotnet_package() {
+    package=${1%% *}
+    version=${1#* }
+    run dotnet tool install --global --allow-roll-forward --allow-downgrade \
+        --version "$version" "$package"
+}
+
 command -v npm >/dev/null 2>&1 || {
     printf 'npm is required to install Node-based language servers\n' >&2
     exit 1
@@ -156,6 +163,12 @@ for_each_manifest_line "$manifest_dir/neovim/npm.txt" install_npm_package
 for_each_manifest_line "$manifest_dir/neovim/go.txt" install_go_package
 for_each_manifest_line "$manifest_dir/neovim/cargo.txt" install_cargo_package
 run rustup component add rust-analyzer rustfmt
+
+if "$dry_run" || command -v dotnet >/dev/null 2>&1; then
+    for_each_manifest_line "$manifest_dir/neovim/dotnet.txt" install_dotnet_package
+else
+    printf '\n.NET tools skipped: install a .NET 10+ SDK, then rerun this installer.\n' >&2
+fi
 
 if "$dry_run"; then
     printf '\nPreview complete; no packages were installed.\n'

@@ -245,6 +245,13 @@ Neotest provides Rust tests through rustaceanvim and Go tests through
 neotest-golang; install Rust/Cargo or Go on each host as needed. JavaScript test
 runners require a project-appropriate Neotest adapter before they can be used.
 
+C# uses Roslyn for completion, diagnostics, navigation, refactoring, and
+formatting (on save or with `<leader>cf`), plus the `c_sharp` Tree-sitter parser.
+Install a .NET 10+ SDK for Roslyn and the SDK required by your project.
+Open a `.cs` file in a project or solution; use `:Roslyn target` to choose
+between multiple solutions. Neotest's existing test shortcuts also support
+C# xUnit, NUnit, and MSTest projects through neotest-vstest.
+
 - `<leader>tt` / `<leader>tT`: run the nearest test / current file's tests.
 - `<leader>tl` / `<leader>tr`: rerun the last test / stop a test.
 - `<leader>ts`: toggle the test summary.
@@ -299,6 +306,17 @@ Homebrew and Arch install OLS and `odinfmt` as separate packages.
 OLS and `odinfmt` must be installed manually on FreeBSD because they are
 not currently available from `pkg`.
 
+The macOS and Arch manifests install the .NET SDK. On FreeBSD, install a
+compatible community .NET SDK manually; C# support there has not been
+runtime-tested. The installer skips .NET tools when `dotnet` is unavailable.
+Pinned global .NET tools are listed in `packages/neovim/dotnet.txt`.
+Ensure `~/.dotnet/tools` is on Neovim's `PATH` (included in the shared Zsh config);
+restart your shell after updating it. The macOS Zsh configuration also sets
+Homebrew's `dotnet@10` path and `DOTNET_ROOT` so global tools can find its runtime.
+For other shells, add `$(brew --prefix dotnet@10)/bin` to `PATH` and set
+`DOTNET_ROOT` to `$(brew --prefix dotnet@10)/libexec`.
+Run `:Lazy sync` and `:TSUpdate` to install the new plugins and parser.
+
 The checker verifies executable availability, minimum Neovim/Node.js/Tree-sitter
 versions, Rust component execution, and parser build prerequisites. Run it from
 a project or its subdirectories to check local JavaScript libraries; it searches
@@ -316,6 +334,7 @@ gopls
 hyprls
 lua-language-server
 ols
+roslyn-language-server
 rust-analyzer
 sqls
 tailwindcss-language-server

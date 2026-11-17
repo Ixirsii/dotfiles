@@ -7,12 +7,14 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "mrcjkb/rustaceanvim",
         { "fredrikaverpil/neotest-golang", version = "^2" },
+        "nsidorenco/neotest-vstest",
     },
     opts = function()
         return {
             adapters = {
                 require("rustaceanvim.neotest"),
                 require("neotest-golang")({}),
+                require("neotest-vstest"),
             },
         }
     end,
