@@ -81,6 +81,18 @@
         "disabled": true,
         "type": "local",
       },
+      "docker": {
+        "type": "local",
+        "command": [
+          "/opt/homebrew/bin/uvx",
+          "--python",
+          "3.14",
+          "docker-mcp-server"
+        ],
+        "environment": {
+          "DOCKER_HOST": "unix:///Users/ryan/.orbstack/run/docker.sock"
+        }
+      },
     },
   },
 }
