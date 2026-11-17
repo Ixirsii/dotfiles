@@ -37,6 +37,7 @@
           "npx",
           "-y",
           "@mozilla/firefox-devtools-mcp@latest",
+          "--headless",
           "--firefox-path",
           "/Applications/Firefox.app/Contents/MacOS/firefox",
         ],
@@ -44,13 +45,9 @@
         "type": "local",
       },
       "github": {
-        "disabled": true,
-        "headers": {
-          "Authorization": "Bearer {env:GITHUB_TOKEN}",
-        },
-        "type": "remote",
-        "url": "https://api.githubcopilot.com/mcp/",
-        "oauth": false,
+        "command": ["github-mcp-server", "stdio"],
+        "disabled": false,
+        "type": "local",
       },
       "linear": {
         "disabled": false,
