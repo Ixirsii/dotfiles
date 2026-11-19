@@ -1,8 +1,8 @@
 # Dotfiles
 
-[![Discord](https://img.shields.io/discord/452233740408717313?color=b4befe&label=discord&labelColor=1e1e2e&logo=discord&style=flat)][1]
-[![License](https://img.shields.io/badge/License-BSD_3--Clause-89b4fa?labelColor=1e1e2e&style=flat)][2]
-[![Checks](https://codeberg.org/Ixirsii/dotfiles/badges/workflows/checks.yml/badge.svg?branch=main&event=push&label=checks&labelColor=1e1e2e&style=flat)][3]
+[![Discord][badge-discord]][link-discord]
+[![License][badge-bsd-3]][link-bsd-3]
+[![Checks][badge-workflow-checks]][link-workflow-checks]
 
 Personal configuration shared across FreeBSD, Linux, macOS, and Windows.
 
@@ -29,43 +29,43 @@ when those tools are used.
 <details>
 <summary>Required dependencies</summary>
 
-- [atuin][3]
-- [fnm][4]
-- [Git][5]
-- [GnuPG][6]
-- [GNU Stow][7]
-- [starship][8]
-- [zoxide][9]
-- [zsh][10]
+- [atuin][atuin]
+- [fnm][fnm]
+- [Git][git]
+- [GnuPG][gnupg]
+- [GNU Stow][gnu-stow]
+- [starship][starship]
+- [zoxide][zoxide]
+- [zsh][zsh]
 
 </details>
 
 <details>
 <summary>Optional dependencies</summary>
 
-- [bat][11]
-- [btop++][12]
-- [bun (deprecated)][13]
-- [delta][14]
-- [eza][15]
-- [fastfetch][16]
-- [fd][17]
-- [fzf][18]
-- [Go][53]
-- [lazygit][19]
-- [neovim][20]
-- [Nerd fonts][21]
-- [Node.js][22]
-- [Odin][54]
-- [OpenCode][23]
-- [pnpm][24]
-- [ripgrep][25]
-- [rustup (and cargo)][26]
-- [SDKMAN][27]
-- [tmux][28]
-- [wezterm][29]
-- [yazi][30]
-- [Zen browser][31]
+- [bat][bat]
+- [btop++][btop]
+- [bun (deprecated)][bun]
+- [delta][delta]
+- [eza][eza]
+- [fastfetch][fastfetch]
+- [fd][fd]
+- [fzf][fzf]
+- [Go][go]
+- [lazygit][lazygit]
+- [neovim][neovim]
+- [Nerd fonts][nerd-fonts]
+- [Node.js][nodejs]
+- [Odin][odin]
+- [OpenCode][opencode]
+- [pnpm][pnpm]
+- [ripgrep][ripgrep]
+- [rustup (and cargo)][rustup]
+- [SDKMAN][sdkman]
+- [tmux][tmux]
+- [wezterm][wezterm]
+- [yazi][yazi]
+- [Zen browser][zen-browser]
 
 </details>
 
@@ -97,14 +97,14 @@ Screenshots will be added under `screenshots/freebsd/`.
 
 ### Required
 
-- [Hyprland][32]
-- [waybar][34]
+- [Hyprland][hyprland]
+- [waybar][waybar]
 
 ### Optional
 
-- [Google Fonts][35]
-- [mako][36]
-- [nwg-bar][37]
+- [Google Fonts][google-fonts]
+- [mako][mako]
+- [nwg-bar][nwg-bar]
 
 </details>
 
@@ -134,13 +134,13 @@ Screenshots will be added under `screenshots/linux/`.
 
 ### Required
 
-- [Hyprland][38]
-- [waybar][40]
+- [Hyprland][hyprland]
+- [waybar][waybar]
 
 ### Optional
 
-- [mako][41]
-- [nwg-bar][44]
+- [mako][mako]
+- [nwg-bar][nwg-bar]
 
 </details>
 
@@ -169,10 +169,10 @@ stow --verbose --restow --target="$HOME" macos
 <details>
 <summary>Dependencies (4 required)</summary>
 
-- [Homebrew][45]
-- [SketchyBar][46]
-- [skhd][47]
-- [Yabai][48]
+- [Homebrew][homebrew]
+- [SketchyBar][sketchybar]
+- [skhd][skhd]
+- [Yabai][yabai]
 
 </details>
 
@@ -190,7 +190,7 @@ Screenshots will be added under `screenshots/windows/`.
 <details>
 <summary>Dependencies (1 required)</summary>
 
-- [PowerShell][50]
+- [PowerShell][powershell]
 
 </details>
 
@@ -355,56 +355,55 @@ diagnostics remain available in Neovim without a global ESLint installation.
 
 `sqls` supports PostgreSQL, MySQL, and SQLite. Database connections can be
 defined outside this repository in `$XDG_CONFIG_HOME/sqls/config.yml`; see the
-[upstream `sqls` connection configuration][52] for the supported DSN formats.
+[upstream `sqls` connection configuration][sqls-configuration] for the supported DSN formats.
 
 </details>
 
-[1]: https://discord.gg/KTgshSbEUU
-[2]: https://opensource.org/license/bsd-3-clause
-[3]: https://codeberg.org/Ixirsii/dotfiles/actions/workflows/checks.yml
-[3]: https://atuin.sh
-[4]: https://github.com/Schniz/fnm
-[5]: https://git-scm.com
-[6]: https://gnupg.org
-[7]: https://www.gnu.org/software/stow/
-[8]: https://starship.rs
-[9]: https://github.com/ajeetdsouza/zoxide
-[10]: https://www.zsh.org
-[11]: https://github.com/sharkdp/bat
-[12]: https://github.com/aristocratos/btop
-[13]: https://bun.com
-[14]: https://github.com/dandavison/delta
-[15]: https://github.com/eza-community/eza
-[16]: https://github.com/fastfetch-cli/fastfetch
-[17]: https://github.com/sharkdp/fd
-[18]: https://github.com/junegunn/fzf
-[19]: https://lazygit.dev
-[20]: https://neovim.io
-[21]: https://www.nerdfonts.com
-[22]: https://nodejs.org
-[23]: https://opencode.ai
-[24]: https://pnpm.io
-[25]: https://github.com/BurntSushi/ripgrep
-[26]: https://rustup.rs
-[27]: https://sdkman.io
-[28]: https://github.com/tmux/tmux
-[29]: https://wezterm.org/index.html
-[30]: https://yazi-rs.github.io
-[31]: https://zen-browser.app
-[32]: https://hypr.land
-[34]: https://github.com/alexays/waybar
-[35]: https://cgit.freebsd.org/ports/tree/x11-fonts/google-fonts
-[36]: https://github.com/emersion/mako
-[37]: https://github.com/nwg-piotr/nwg-bar
-[38]: https://hypr.land
-[40]: https://github.com/alexays/waybar
-[41]: https://github.com/emersion/mako
-[44]: https://github.com/nwg-piotr/nwg-bar
-[45]: https://brew.sh
-[46]: https://github.com/FelixKratz/SketchyBar
-[47]: https://github.com/koekeishiya/skhd
-[48]: https://github.com/koekeishiya/yabai
-[50]: https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6
-[52]: https://github.com/sqls-server/sqls#db-configuration
-[53]: https://go.dev
-[54]: https://odin-lang.org
+[badge-discord]: https://img.shields.io/discord/452233740408717313?color=b4befe&label=discord&labelColor=1e1e2e&logo=discord&style=flat
+[link-discord]: https://discord.gg/KTgshSbEUU
+[badge-bsd-3]: https://img.shields.io/badge/License-BSD_3--Clause-89b4fa?labelColor=1e1e2e&logo=bsd&logoColor=white&style=flat
+[link-bsd-3]: https://opensource.org/license/bsd-3-clause
+[badge-workflow-checks]: https://git.9dev.tech/Ixirsii/dotfiles/badges/workflows/checks.yml/badge.svg?branch=main&event=push&label=Build&labelColor=1e1e2e&style=flat&logo=forgejo&logoColor=white
+[link-workflow-checks]: https://git.9dev.tech/Ixirsii/dotfiles/actions/workflows/checks.yml
+[atuin]: https://atuin.sh
+[fnm]: https://github.com/Schniz/fnm
+[git]: https://git-scm.com
+[gnupg]: https://gnupg.org
+[gnu-stow]: https://www.gnu.org/software/stow/
+[starship]: https://starship.rs
+[zoxide]: https://github.com/ajeetdsouza/zoxide
+[zsh]: https://www.zsh.org
+[bat]: https://github.com/sharkdp/bat
+[btop]: https://github.com/aristocratos/btop
+[bun]: https://bun.com
+[delta]: https://github.com/dandavison/delta
+[eza]: https://github.com/eza-community/eza
+[fastfetch]: https://github.com/fastfetch-cli/fastfetch
+[fd]: https://github.com/sharkdp/fd
+[fzf]: https://github.com/junegunn/fzf
+[lazygit]: https://lazygit.dev
+[neovim]: https://neovim.io
+[nerd-fonts]: https://www.nerdfonts.com
+[nodejs]: https://nodejs.org
+[opencode]: https://opencode.ai
+[pnpm]: https://pnpm.io
+[ripgrep]: https://github.com/BurntSushi/ripgrep
+[rustup]: https://rustup.rs
+[sdkman]: https://sdkman.io
+[tmux]: https://github.com/tmux/tmux
+[wezterm]: https://wezterm.org/index.html
+[yazi]: https://yazi-rs.github.io
+[zen-browser]: https://zen-browser.app
+[hyprland]: https://hypr.land
+[waybar]: https://github.com/alexays/waybar
+[google-fonts]: https://cgit.freebsd.org/ports/tree/x11-fonts/google-fonts
+[mako]: https://github.com/emersion/mako
+[nwg-bar]: https://github.com/nwg-piotr/nwg-bar
+[homebrew]: https://brew.sh
+[sketchybar]: https://github.com/FelixKratz/SketchyBar
+[skhd]: https://github.com/koekeishiya/skhd
+[yabai]: https://github.com/koekeishiya/yabai
+[powershell]: https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6
+[sqls-configuration]: https://github.com/sqls-server/sqls#db-configuration
+[go]: https://go.dev
+[odin]: https://odin-lang.org
