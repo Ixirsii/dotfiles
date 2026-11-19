@@ -363,7 +363,7 @@ defined outside this repository in `$XDG_CONFIG_HOME/sqls/config.yml`; see the
 [link-discord]: https://discord.gg/KTgshSbEUU
 [badge-bsd-3]: https://img.shields.io/badge/License-BSD_3--Clause-89b4fa?labelColor=1e1e2e&logo=bsd&logoColor=white&style=flat
 [link-bsd-3]: https://opensource.org/license/bsd-3-clause
-[badge-workflow-checks]: https://git.9dev.tech/Ixirsii/dotfiles/badges/workflows/checks.yml/badge.svg?branch=main&event=push&label=Build&labelColor=1e1e2e&style=flat&logo=forgejo&logoColor=white
+[badge-workflow-checks]: https://git.9dev.tech/Ixirsii/dotfiles/badges/workflows/checks.yml/badge.svg?branch=main&event=push&label=Checks&labelColor=1e1e2e&style=flat&logo=forgejo&logoColor=white
 [link-workflow-checks]: https://git.9dev.tech/Ixirsii/dotfiles/actions/workflows/checks.yml
 [atuin]: https://atuin.sh
 [fnm]: https://github.com/Schniz/fnm
