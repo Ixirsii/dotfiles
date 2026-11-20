@@ -18,6 +18,22 @@
   "default_agent": "plan",
   "shell": "/bin/zsh",
   "formatter": true,
+  "permissions": [
+    // Spotify's OAuth grant includes writes; expose only playlist reads.
+    { "action": "spotify_*", "resource": "*", "effect": "deny" },
+    { "action": "spotify_list_playlists", "resource": "*", "effect": "allow" },
+    { "action": "spotify_get_playlist", "resource": "*", "effect": "allow" },
+    { "action": "spotify_get_playlist_tracks", "resource": "*", "effect": "allow" },
+    // Plex enables writes as a group; only permit playlist creation, with approval.
+    { "action": "plex_*", "resource": "*", "effect": "deny" },
+    { "action": "plex_get_libraries", "resource": "*", "effect": "allow" },
+    { "action": "plex_get_library_items", "resource": "*", "effect": "allow" },
+    { "action": "plex_search_media", "resource": "*", "effect": "allow" },
+    { "action": "plex_get_media_details", "resource": "*", "effect": "allow" },
+    { "action": "plex_get_playlists", "resource": "*", "effect": "allow" },
+    { "action": "plex_get_playlist_items", "resource": "*", "effect": "allow" },
+    { "action": "plex_create_playlist", "resource": "*", "effect": "ask" },
+  ],
   "mcp": {
     "servers": {
       "chrome-devtools": {
@@ -63,6 +79,16 @@
         "type": "remote",
         "url": "https://mcp.linear.app/mcp",
       },
+      "plex": {
+        "type": "local",
+        "command": ["npx", "-y", "plex-mcp-server@1.9.2", "--transport", "stdio"],
+        "disabled": true,
+        "environment": {
+          "PLEX_URL": "{file:~/.config/opencode-media/plex-url}",
+          "PLEX_TOKEN": "{file:~/.config/opencode-media/plex-token}",
+          "PLEX_ENABLE_MUTATIVE_OPS": "true",
+        },
+      },
       "porkbun": {
         "command": [
           "/bin/sh",
@@ -89,6 +115,18 @@
         "command": ["semgrep", "mcp"],
         "disabled": true,
         "type": "local",
+      },
+      "spotify": {
+        "type": "local",
+        "command": ["uvx", "--python", "3.12", "spotify-mcp-jamiew@0.9.2"],
+        "disabled": true,
+        // Spotipy stores its OAuth token cache in the working directory.
+        "cwd": "{env:HOME}/.config/opencode-media",
+        "environment": {
+          "SPOTIFY_CLIENT_ID": "{file:~/.config/opencode-media/spotify-client-id}",
+          "SPOTIFY_CLIENT_SECRET": "{file:~/.config/opencode-media/spotify-client-secret}",
+          "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8888",
+        },
       },
       "docker": {
         "type": "local",
