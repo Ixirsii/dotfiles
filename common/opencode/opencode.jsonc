@@ -8,6 +8,9 @@
     "general": {
       "model": "openai/gpt-6.2-sol#medium",
     },
+    "plan": {
+      "model": "openai/gpt-6.2-astra#xhigh",
+    },
     "title": {
       "model": "openai/gpt-6-luna#none",
     },
@@ -23,7 +26,11 @@
     { "action": "spotify_*", "resource": "*", "effect": "deny" },
     { "action": "spotify_list_playlists", "resource": "*", "effect": "allow" },
     { "action": "spotify_get_playlist", "resource": "*", "effect": "allow" },
-    { "action": "spotify_get_playlist_tracks", "resource": "*", "effect": "allow" },
+    {
+      "action": "spotify_get_playlist_tracks",
+      "resource": "*",
+      "effect": "allow",
+    },
     // Plex enables writes as a group; only permit playlist creation, with approval.
     { "action": "plex_*", "resource": "*", "effect": "deny" },
     { "action": "plex_get_libraries", "resource": "*", "effect": "allow" },
@@ -81,7 +88,13 @@
       },
       "plex": {
         "type": "local",
-        "command": ["npx", "-y", "plex-mcp-server@1.9.2", "--transport", "stdio"],
+        "command": [
+          "npx",
+          "-y",
+          "plex-mcp-server@1.9.2",
+          "--transport",
+          "stdio",
+        ],
         "disabled": true,
         "environment": {
           "PLEX_URL": "{file:~/.config/opencode-media/plex-url}",
