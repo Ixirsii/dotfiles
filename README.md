@@ -161,8 +161,9 @@ stow --verbose --restow --target="$HOME" macos
 <details>
 <summary>Screenshots</summary>
 
-![macOS desktop preview](screenshots/macos/desktop.png)
 ![SketchyBar preview](screenshots/macos/sketchybar.png)
+
+![macOS desktop preview](screenshots/macos/desktop.png)
 
 </details>
 
