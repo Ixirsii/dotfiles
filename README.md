@@ -158,6 +158,9 @@ Apply the configuration:
 stow --verbose --restow --target="$HOME" macos
 ```
 
+In SketchyBar, a pause marker beside the battery percentage (`80% ⏸`) means
+the Mac is plugged in but the battery is not charging.
+
 <details>
 <summary>Screenshots</summary>
 
