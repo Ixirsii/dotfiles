@@ -210,6 +210,15 @@ Launching `vim` without file arguments opens the Snacks explorer in the current
 directory, alongside the dashboard. Piped input and restored sessions keep their
 normal startup behavior.
 
+File icons use mini.icons and require a Nerd Font with version 3.0 or newer
+glyphs for their default appearance.
+
+The Slimline status line shows the file path relative to the Git root when
+available. `+`, `~`, and `-` count added, changed, and deleted lines in the
+current buffer. `fmt:` identifies an available formatter (excluding basic
+newline cleanup); attached language servers appear beside the file type.
+Encoding and line endings appear only when they differ from UTF-8 and LF.
+
 Completion uses Blink v1 with LSP, LuaSnip/friendly-snippets, buffer words, and
 file paths. `Ctrl-j` / `Ctrl-k` selects the next / previous suggestion,
 `Ctrl-Space` opens completion or its documentation, `Enter` accepts the selected
@@ -226,6 +235,14 @@ Editing and Git keybindings (`<leader>` is Space):
   selected lines in Visual mode. Reset discards those working-tree changes.
 - `<leader>hp` / `<leader>hb` / `<leader>hd`: preview hunk / blame line / diff
   against the index.
+- `<leader>gD`: open Diffview Plus for a repository-wide side-by-side diff;
+  select a file with Enter and close the view with `:DiffviewClose`. During a
+  merge or rebase, select a conflicted file to open the merge view. In the
+  conflict, use `[x` / `]x` to navigate and `<leader>co` / `<leader>ct` /
+  `<leader>ca` to choose ours / theirs / both. Save the result and stage the
+  resolved file; press `g?` for more actions. During a rebase, Git's ours and
+  theirs refer to the branch being rebased onto and the replayed commit,
+  respectively.
 - `<leader>sr`: open project search and replacement with grug-far. In Visual
   mode, prefill the search with the selection. Use `:GrugFarWithin` to restrict
   replacement to the selected range. Grug-far's buffer actions use the default

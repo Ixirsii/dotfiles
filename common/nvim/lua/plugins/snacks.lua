@@ -6,7 +6,7 @@ return {
     lazy = false,
     priority = 1000,
 
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-mini/mini.icons" },
 
     ---@type snacks.Config
     opts = {
@@ -123,9 +123,7 @@ return {
 
         statuscolumn = { enabled = true },
 
-        terminal = {
-            shell = "pwsh.exe",
-        },
+        terminal = vim.fn.has("win32") == 1 and { shell = "pwsh.exe" } or {},
 
         words = {},
     },
