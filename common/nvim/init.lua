@@ -156,3 +156,4 @@ vim.diagnostic.config({
 
 require("config.filetypes")
 require("config.lazy")
+vim.cmd.colorscheme("catppuccin-nvim")

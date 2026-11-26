@@ -1,7 +1,5 @@
-local function path()
-    local git = vim.b.gitsigns_status_dict
-    local relative = git and git.root and vim.fs.relpath(git.root, vim.api.nvim_buf_get_name(0))
-    return (relative and relative:gsub("%%", "%%%%") or "%f") .. "%m%r"
+local function escape(text)
+    return (tostring(text):gsub("%%", "%%%%"))
 end
 
 local function file_options()
@@ -15,8 +13,17 @@ local function file_options()
     end
     local endings = { dos = "CRLF", mac = "CR" }
     table.insert(parts, endings[vim.bo.fileformat])
-    table.insert(parts, vim.bo.expandtab and ("spaces:" .. vim.fn.shiftwidth()) or ("tabs:" .. vim.bo.tabstop))
+    table.insert(
+        parts,
+        vim.bo.expandtab and ("spaces:" .. vim.fn.shiftwidth()) or ("tabs:" .. vim.bo.tabstop)
+    )
     return table.concat(parts, " ")
+end
+
+local function path()
+    local git = vim.b.gitsigns_status_dict
+    local relative = git and git.root and vim.fs.relpath(git.root, vim.api.nvim_buf_get_name(0))
+    return (relative and relative:gsub("%%", "%%%%") or "%f") .. "%m%r"
 end
 
 local function update_formatter(buf)
@@ -29,15 +36,14 @@ local function update_formatter(buf)
             table.insert(names, formatter.name)
         end
     end
-    if #names == 0 and #vim.lsp.get_clients({ bufnr = buf, method = "textDocument/formatting" }) > 0 then
+    if
+        #names == 0
+        and #vim.lsp.get_clients({ bufnr = buf, method = "textDocument/formatting" }) > 0
+    then
         table.insert(names, "LSP")
     end
     vim.b[buf].statusline_formatter = "fmt:" .. (#names > 0 and table.concat(names, ",") or "none")
     vim.cmd.redrawstatus()
-end
-
-local function escape(text)
-    return (tostring(text):gsub("%%", "%%%%"))
 end
 
 local function width()
@@ -47,32 +53,41 @@ end
 -- Use named segments so their separators can blend into adjacent backgrounds.
 local colors = {}
 local function setup_highlights()
+    -- pink, mauve, red, peach, yellow, green, teal, sky, sapphire, blue, lavender
     local palette = require("catppuccin.palettes").get_palette()
     colors = {
-        base = palette.base,
-        normal = palette.blue,
-        insert = palette.green,
-        visual = palette.mauve,
-        replace = palette.red,
+        base = palette.mantle,
+
         command = palette.peach,
-        git = palette.yellow,
-        file = palette.peach,
+        insert = palette.green,
+        normal = palette.blue,
+        replace = palette.sapphire,
+        terminal = palette.teal,
+        visual = palette.mauve,
+
+        git = palette.pink,
+
+        file = palette.surface0,
+
         diagnostic = palette.red,
         search = palette.yellow,
-        type = palette.sapphire,
-        format = palette.green,
-        options = palette.surface0,
-        cursor = palette.mauve,
+        type = palette.green,
+        format = palette.sapphire,
+        options = palette.lavender,
+        cursor = palette.pink,
     }
     for name, bg in pairs(colors) do
         if name ~= "base" then
-            local strong = vim.tbl_contains({ "normal", "insert", "visual", "replace", "command" }, name)
+            local strong =
+                vim.tbl_contains({ "normal", "insert", "visual", "replace", "command" }, name)
+
             vim.api.nvim_set_hl(0, "StatusSegment" .. name, {
-                fg = name == "options" and palette.text or palette.crust,
+                fg = name == "file" and palette.text or palette.crust,
                 bg = bg,
                 bold = strong,
             })
         end
+
         for next_name, next_bg in pairs(colors) do
             vim.api.nvim_set_hl(0, "StatusEdge" .. name .. next_name, { fg = bg, bg = next_bg })
         end
@@ -83,13 +98,21 @@ local function segments(items)
     if #items == 0 then
         return ""
     end
+
     local result = "%#StatusEdge" .. items[1][1] .. "base#"
+
     for i, item in ipairs(items) do
         local name, text = item[1], item[2]
         result = result .. "%#StatusSegment" .. name .. "# " .. text .. " "
         local next_name = items[i + 1] and items[i + 1][1] or "base"
-        result = result .. "%#StatusEdge" .. name .. next_name .. "#" .. (next_name == "base" and "" or "")
+        result = result
+            .. "%#StatusEdge"
+            .. name
+            .. next_name
+            .. "#"
+            .. (next_name == "base" and "" or "")
     end
+
     return result .. "%#Slimline#"
 end
 
@@ -97,8 +120,14 @@ local function left()
     local first = vim.fn.mode():sub(1, 1)
     local formats = require("slimline").config.configs.mode.format
     local mode = (formats[first] or formats.U).verbose
-    local color = ({ i = "insert", v = "visual", V = "visual", ["\22"] = "visual", R = "replace", c = "command" })[first]
-        or "normal"
+    local color = ({
+        i = "insert",
+        v = "visual",
+        V = "visual",
+        ["\22"] = "visual",
+        R = "replace",
+        c = "command",
+    })[first] or "normal"
     local items = { { color, escape(mode) } }
     local recording = vim.fn.reg_recording()
     if recording ~= "" then
@@ -125,7 +154,8 @@ end
 local function right()
     local items = {}
     if vim.v.hlsearch == 1 and vim.fn.getreg("/") ~= "" then
-        local ok, search = pcall(vim.fn.searchcount, { recompute = true, maxcount = 999, timeout = 20 })
+        local ok, search =
+            pcall(vim.fn.searchcount, { recompute = true, maxcount = 999, timeout = 20 })
         if ok and search.total and search.total > 0 then
             table.insert(items, { "search", " " .. search.current .. "/" .. search.total })
         end
@@ -133,7 +163,11 @@ local function right()
     local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
     if errors + warnings > 0 then
-        table.insert(items, { "diagnostic", (errors > 0 and " " .. errors .. " " or "") .. (warnings > 0 and " " .. warnings or "") })
+        table.insert(items, {
+            "diagnostic",
+            (errors > 0 and " " .. errors .. " " or "")
+                .. (warnings > 0 and " " .. warnings or ""),
+        })
     end
     local ft = vim.bo.filetype
     if ft ~= "" then
@@ -144,7 +178,10 @@ local function right()
                 table.insert(clients, escape(client.name))
             end
         end
-        table.insert(items, { "type", icon .. " " .. escape(ft) .. (#clients > 0 and " " .. table.concat(clients, ",") or "") })
+        table.insert(items, {
+            "type",
+            icon .. " " .. escape(ft) .. (#clients > 0 and " " .. table.concat(clients, ",") or ""),
+        })
     end
     if width() >= 100 and vim.b.statusline_formatter then
         table.insert(items, { "format", escape(vim.b.statusline_formatter) })
@@ -159,7 +196,9 @@ end
 
 return {
     "sschleemilch/slimline.nvim",
+
     dependencies = { "nvim-mini/mini.icons", "lewis6991/gitsigns.nvim", "stevearc/conform.nvim" },
+
     opts = {
         components = {
             left = { left },
@@ -168,6 +207,7 @@ return {
         },
         configs = { mode = { verbose = true } },
     },
+
     config = function(_, opts)
         local slimline = require("slimline")
         slimline.setup(opts)
